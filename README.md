@@ -32,6 +32,7 @@ Operational documents:
 - `FIRST_PRINCIPLES_BUILD.md`: first-principles build plan and v0.2 order.
 - `SECURITY_AUDIT_2026-06-14.md`: current public-surface audit.
 - `RELEASE_CHECKLIST.md`: pre-release and post-release checks.
+- `REMOTE_SETUP.md`: private remote and Cloudflare Pages setup steps.
 - `runbooks/`: private-operational runbooks for DNS, deploy, mail auth, and emergency access.
 
 Release artifacts:

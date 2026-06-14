@@ -146,6 +146,7 @@ Verifier:
 - [x] Add audit report and first private runbooks.
 - [x] Initialize local Git source repository.
 - [x] Add repeatable audit, package, and live-verification scripts.
+- [x] Add remote repository setup procedure.
 - [x] Refresh `encryptedguru-v0.1-site.zip` with current local files.
 - [x] Confirm DKIM and DMARC.
 - [ ] Confirm live `security.txt` after next deployment.
