@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Infrastructure - EncryptedGuru</title>
+    <meta name="description" content="EncryptedGuru infrastructure architecture notes.">
+    <meta name="theme-color" content="#050706">
+    <link rel="canonical" href="https://www.encryptedguru.com/infrastructure/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="Infrastructure - EncryptedGuru">
+    <meta property="og:description" content="EncryptedGuru infrastructure architecture notes.">
+    <meta property="og:url" content="https://www.encryptedguru.com/infrastructure/">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
+    <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand-logo" src="/logo.png" alt="" aria-hidden="true"><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/docs/">Docs</a>
+        <a href="/labs/">Labs</a>
+        <a aria-current="page" href="/infrastructure/">Infrastructure</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title">
+        <p class="eyebrow">Architecture</p>
+        <h1>Infrastructure</h1>
+        <p>Small systems, clear boundaries, documented recovery.</p>
+      </section>
+
+      <section class="section article" id="sovereign-network">
+        <p class="eyebrow">Network principle</p>
+        <h2>Personal Sovereign Network Principles</h2>
+        <p>
+          A sovereign personal network should make identity, access, routing, and data movement explicit.
+          The first design target is not maximum complexity. It is the ability to recover from mistakes.
+        </p>
+        <ul class="clean-list">
+          <li>Separate personal devices, lab systems, public services, and management paths.</li>
+          <li>Prefer private access for admin surfaces and public access only for intentional endpoints.</li>
+          <li>Record DNS, IAM, billing, recovery, and deployment decisions as runbooks.</li>
+          <li>Test topology and routing concepts in simulation before applying them to live systems.</li>
+          <li>Keep emergency access independent from experimental routing paths.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Reserved namespace</p>
+          <h2>Planned subdomains</h2>
+        </div>
+        <div class="stack-list">
+          <div><strong>docs.encryptedguru.com</strong><span>Knowledge base and runbooks.</span></div>
+          <div><strong>lab.encryptedguru.com</strong><span>Experiment logs and simulation notes.</span></div>
+          <div><strong>status.encryptedguru.com</strong><span>Future service health and incident notes.</span></div>
+          <div><strong>console.encryptedguru.com</strong><span>Future private control surface; never public by default.</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru v0.1</span>
+      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

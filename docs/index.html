@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Docs - EncryptedGuru</title>
+    <meta name="description" content="EncryptedGuru knowledge base and operating notes.">
+    <meta name="theme-color" content="#050706">
+    <link rel="canonical" href="https://www.encryptedguru.com/docs/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="Docs - EncryptedGuru">
+    <meta property="og:description" content="EncryptedGuru knowledge base and operating notes.">
+    <meta property="og:url" content="https://www.encryptedguru.com/docs/">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
+    <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand-logo" src="/logo.png" alt="" aria-hidden="true"><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a aria-current="page" href="/docs/">Docs</a>
+        <a href="/labs/">Labs</a>
+        <a href="/infrastructure/">Infrastructure</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title">
+        <p class="eyebrow">Knowledge base</p>
+        <h1>Docs</h1>
+        <p>Notes for systems that can be rebuilt, audited, and explained.</p>
+      </section>
+
+      <section class="section article" id="infrastructure-v01">
+        <p class="eyebrow">Baseline</p>
+        <h2>EncryptedGuru Infrastructure v0.1</h2>
+        <p>
+          The initial system uses Google Workspace for identity, encryptedguru.com for naming,
+          Google Cloud for deployable infrastructure, and NVIDIA DSX Air for network simulation.
+          The first objective is not scale. The first objective is clarity.
+        </p>
+        <ul class="clean-list">
+          <li>Every service should have a named owner, purpose, and recovery path.</li>
+          <li>Every public endpoint should be documented before it becomes important.</li>
+          <li>Secrets should not appear in notebooks, screenshots, logs, or public repositories.</li>
+          <li>Automation should remain observable and reversible.</li>
+          <li>Public pages should stay static unless dynamic behavior has a clear operational purpose.</li>
+        </ul>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Runbook</p>
+        <h2>First operating rules</h2>
+        <ul class="clean-list">
+          <li>Use domain-based email for infrastructure accounts.</li>
+          <li>Keep billing, operations, contact, and security aliases separate.</li>
+          <li>Use static public pages before adding dynamic systems.</li>
+          <li>Simulate network changes before deploying them to real infrastructure.</li>
+          <li>Keep marketing, analytics, and tracking disabled until there is a clear reason.</li>
+          <li>Prefer boring recovery over clever architecture.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru v0.1</span>
+      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

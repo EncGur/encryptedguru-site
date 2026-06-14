@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Labs - EncryptedGuru</title>
+    <meta name="description" content="EncryptedGuru lab notes and experiments.">
+    <meta name="theme-color" content="#050706">
+    <link rel="canonical" href="https://www.encryptedguru.com/labs/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="Labs - EncryptedGuru">
+    <meta property="og:description" content="EncryptedGuru lab notes and experiments.">
+    <meta property="og:url" content="https://www.encryptedguru.com/labs/">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
+    <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand-logo" src="/logo.png" alt="" aria-hidden="true"><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/docs/">Docs</a>
+        <a aria-current="page" href="/labs/">Labs</a>
+        <a href="/infrastructure/">Infrastructure</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title">
+        <p class="eyebrow">Experiments</p>
+        <h1>Labs</h1>
+        <p>Controlled environments for learning before deployment.</p>
+      </section>
+
+      <section class="section article" id="dsx-air">
+        <p class="eyebrow">Active lab</p>
+        <h2>NVIDIA DSX Air Trial Log</h2>
+        <p>
+          DSX Air is used as a simulation environment for network topology, routing, segmentation,
+          and data center operations. It is not treated as a production VPS.
+        </p>
+        <div class="grid three">
+          <article class="tile">
+            <h3>Resource discipline</h3>
+            <p>Run one demo at a time, record resource usage, and stop simulations when not studying them.</p>
+          </article>
+          <article class="tile">
+            <h3>First track</h3>
+            <p>Cumulus Linux, EVPN, VLAN, MLAG, and centralized routing best practices.</p>
+          </article>
+          <article class="tile">
+            <h3>Output</h3>
+            <p>Topology notes, configuration summaries, and migration lessons for real infrastructure.</p>
+          </article>
+          <article class="tile">
+            <h3>Safety rule</h3>
+            <p>No lab result is trusted until the failure mode and rollback path are documented.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru v0.1</span>
+      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>
