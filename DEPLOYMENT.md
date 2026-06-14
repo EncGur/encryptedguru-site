@@ -22,6 +22,18 @@ Cloudflare Pages source-control files:
 - `_headers`: security headers and cache policy.
 - `_redirects`: apex and HTTP redirect policy.
 
+Before release:
+
+```sh
+./scripts/audit-source.sh
+```
+
+After release:
+
+```sh
+./scripts/verify-live.sh
+```
+
 ## DNS baseline
 
 Keep Google Workspace records intact:

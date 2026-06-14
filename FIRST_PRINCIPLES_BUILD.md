@@ -144,7 +144,9 @@ Verifier:
 - [x] Add a deployment release checklist.
 - [x] Add source-controlled Cloudflare `_headers` and `_redirects`.
 - [x] Add audit report and first private runbooks.
+- [x] Initialize local Git source repository.
+- [x] Add repeatable audit, package, and live-verification scripts.
 - [x] Refresh `encryptedguru-v0.1-site.zip` with current local files.
 - [x] Confirm DKIM and DMARC.
 - [ ] Confirm live `security.txt` after next deployment.
-- [ ] Initialize or locate the private Git repository source of truth.
+- [ ] Create or attach private Git remote source of truth.

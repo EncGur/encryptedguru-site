@@ -37,3 +37,11 @@ Operational documents:
 Release artifacts:
 
 - `encryptedguru-v0.1-site.zip` is a local handoff artifact and is not tracked by Git.
+
+Local commands:
+
+```sh
+./scripts/audit-source.sh
+./scripts/package-release.sh
+./scripts/verify-live.sh
+```
