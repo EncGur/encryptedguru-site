@@ -7,7 +7,20 @@ Current local state:
 - Branch: `main`
 - Initial commit: `91292dc Initialize EncryptedGuru static site`
 - Latest build-process commit: `ad2a4d3 Add repeatable release verification scripts`
+- Latest remote-setup commit: `125c8b8 Document remote repository setup`
 - Release zip is generated locally and ignored by Git.
+
+## Current Remote Blockers
+
+- No existing `encryptedguru` or `encryptedguru-site` repository was found through the GitHub connector.
+- The local `gh` CLI is not installed.
+- The GitHub connector available in this session can operate on installed repositories but does not expose repository creation.
+- SSH host verification for `github.com` has been fixed in `~/.ssh/known_hosts`.
+- SSH authentication currently fails with `Permission denied (publickey)`.
+- The current local public key has been exported outside the repository to:
+  - `/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-ssh-public-key.txt`
+
+Do not commit private keys or SSH setup files into this repository.
 
 ## Required Remote
 
@@ -34,6 +47,22 @@ If HTTPS is preferred:
 git remote add origin https://github.com/cbdtaeff/encryptedguru-site.git
 git push -u origin main
 ```
+
+## SSH Key Setup
+
+If using SSH, add the public key from:
+
+```text
+/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-ssh-public-key.txt
+```
+
+to GitHub account SSH keys, then verify:
+
+```sh
+ssh -T git@github.com
+```
+
+Expected result should greet the `cbdtaeff` GitHub account or another intended account.
 
 ## Cloudflare Pages
 
