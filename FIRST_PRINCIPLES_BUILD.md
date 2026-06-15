@@ -148,6 +148,8 @@ Verifier:
 - [x] Add repeatable audit, package, and live-verification scripts.
 - [x] Add remote repository setup procedure.
 - [x] Diagnose GitHub push blockers and export current public SSH key outside the repository.
+- [x] Generate dedicated GitHub SSH key and configure isolated `github-cbdtaeff` alias.
+- [x] Set local `origin` to the intended private repository URL.
 - [x] Refresh `encryptedguru-v0.1-site.zip` with current local files.
 - [x] Confirm DKIM and DMARC.
 - [ ] Confirm live `security.txt` after next deployment.

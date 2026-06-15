@@ -17,8 +17,12 @@ Current local state:
 - The GitHub connector available in this session can operate on installed repositories but does not expose repository creation.
 - SSH host verification for `github.com` has been fixed in `~/.ssh/known_hosts`.
 - SSH authentication currently fails with `Permission denied (publickey)`.
-- The current local public key has been exported outside the repository to:
-  - `/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-ssh-public-key.txt`
+- A dedicated GitHub SSH key has been generated outside the repository:
+  - Private key: `~/.ssh/id_ed25519_github_cbdtaeff`
+  - Public key export: `/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-cbdtaeff-public-key.txt`
+- SSH alias `github-cbdtaeff` has been added to `~/.ssh/config`.
+- Local `origin` is already set to:
+  - `git@github-cbdtaeff:cbdtaeff/encryptedguru-site.git`
 
 Do not commit private keys or SSH setup files into this repository.
 
@@ -37,7 +41,6 @@ Recommended: `encryptedguru-site`, because it describes the artifact without cla
 After creating the private repository, run from this folder:
 
 ```sh
-git remote add origin git@github.com:cbdtaeff/encryptedguru-site.git
 git push -u origin main
 ```
 
@@ -53,13 +56,13 @@ git push -u origin main
 If using SSH, add the public key from:
 
 ```text
-/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-ssh-public-key.txt
+/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-cbdtaeff-public-key.txt
 ```
 
 to GitHub account SSH keys, then verify:
 
 ```sh
-ssh -T git@github.com
+ssh -T github-cbdtaeff
 ```
 
 Expected result should greet the `cbdtaeff` GitHub account or another intended account.
