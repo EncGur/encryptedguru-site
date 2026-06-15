@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NVIDIA DSX Air Trial Log - EncryptedGuru</title>
+    <meta name="description" content="Sanitized NVIDIA DSX Air trial log for network simulation, topology discipline, and rollback learning.">
+    <meta name="theme-color" content="#050706">
+    <link rel="canonical" href="https://www.encryptedguru.com/labs/dsx-air/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="NVIDIA DSX Air Trial Log - EncryptedGuru">
+    <meta property="og:description" content="Sanitized NVIDIA DSX Air trial log for network simulation, topology discipline, and rollback learning.">
+    <meta property="og:url" content="https://www.encryptedguru.com/labs/dsx-air/">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
+    <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand-logo" src="/logo.png" alt="" aria-hidden="true"><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/docs/">Docs</a>
+        <a aria-current="page" href="/labs/">Labs</a>
+        <a href="/infrastructure/">Infrastructure</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title">
+        <p class="eyebrow">Trial log</p>
+        <h1>NVIDIA DSX Air</h1>
+        <p>Network simulation notes for learning before production infrastructure changes.</p>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Purpose</p>
+        <h2>Use simulation to make topology decisions safer.</h2>
+        <p>
+          DSX Air is treated as a learning and validation environment, not as a production VPS. The
+          trial exists to understand how data center networking concepts behave before they become
+          expensive or risky in live infrastructure.
+        </p>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>Question</h3>
+            <p>How should personal lab, management, public service, and recovery paths be separated?</p>
+          </article>
+          <article class="tile compact">
+            <h3>Method</h3>
+            <p>Run one topology at a time, record assumptions, change one variable, and capture rollback.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Output</h3>
+            <p>Publish sanitized lessons; keep raw configs, screenshots, account details, and private topology offline.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Experiment queue</p>
+          <h2>Start with primitives, not architecture theater.</h2>
+        </div>
+        <div class="verification-list">
+          <div>
+            <span>01</span>
+            <strong>Inventory</strong>
+            <p>Record the lab topology, node roles, image types, resource limits, and stop condition.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Baseline reachability</strong>
+            <p>Confirm management access, link state, IP addressing, and basic routing before adding overlays.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>Segmentation</strong>
+            <p>Model separate user, lab, public-service, and management paths with explicit trust boundaries.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <strong>Failure drill</strong>
+            <p>Break one dependency deliberately, document blast radius, recovery steps, and time to restore.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">First track</p>
+        <h2>Cumulus Linux and EVPN foundations</h2>
+        <p>
+          The first network track stays close to primitives: switch roles, VLAN boundaries, routing
+          intent, MLAG behavior, and EVPN/VXLAN concepts. The point is to understand what each layer
+          is responsible for before composing them into a larger design.
+        </p>
+        <ul class="clean-list">
+          <li>Document what problem each layer solves before configuring it.</li>
+          <li>Separate underlay reachability from overlay policy in the notes.</li>
+          <li>Record the failure mode for every convenience feature.</li>
+          <li>Do not publish raw device configs until secrets, addresses, and environment details are reduced.</li>
+        </ul>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Current status</p>
+        <h2>Trial state as of 2026-06-15</h2>
+        <div class="stack-list">
+          <div>
+            <strong>Public status</strong>
+            <span>Sanitized trial plan published; no private topology or credentials exposed.</span>
+          </div>
+          <div>
+            <strong>Next private action</strong>
+            <span>Capture a minimal topology inventory and define the first baseline reachability test.</span>
+          </div>
+          <div>
+            <strong>Stop condition</strong>
+            <span>Stop the lab when resource usage, account state, or topology ownership becomes unclear.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru v0.1</span>
+      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

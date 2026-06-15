@@ -36,6 +36,7 @@ Operational documents:
 - `CLOUDFLARE_PAGES_SETUP.md`: exact Cloudflare Pages connection and verification path.
 - `POST_DEPLOYMENT_RECORD_2026-06-15.md`: production cutover and verification record.
 - `runbooks/`: private-operational runbooks for DNS, deploy, mail auth, and emergency access.
+- `runbooks/DSX_AIR_LAB_RUNBOOK.md`: private DSX Air lab execution discipline.
 
 Release artifacts:
 
