@@ -22,7 +22,7 @@ Current local state:
   - Public key export: `/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-cbdtaeff-public-key.txt`
 - SSH alias `github-cbdtaeff` has been added to `~/.ssh/config`.
 - Local `origin` is already set to:
-  - `git@github-cbdtaeff:cbdtaeff/encryptedguru-site.git`
+  - `git@github-cbdtaeff:EncGur/encryptedguru-site.git`
 
 Do not commit private keys or SSH setup files into this repository.
 
@@ -47,7 +47,7 @@ git push -u origin main
 If HTTPS is preferred:
 
 ```sh
-git remote add origin https://github.com/cbdtaeff/encryptedguru-site.git
+git remote add origin https://github.com/EncGur/encryptedguru-site.git
 git push -u origin main
 ```
 
