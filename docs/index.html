@@ -45,8 +45,9 @@
         <h2>EncryptedGuru Infrastructure v0.1</h2>
         <p>
           The initial system uses Google Workspace for identity, encryptedguru.com for naming,
-          Google Cloud for deployable infrastructure, and NVIDIA DSX Air for network simulation.
-          The first objective is not scale. The first objective is clarity.
+          Cloudflare Pages for the public static site, Google Cloud for deployable infrastructure,
+          and NVIDIA DSX Air for network simulation. The first objective is not scale. The first
+          objective is clarity.
         </p>
         <ul class="clean-list">
           <li>Every service should have a named owner, purpose, and recovery path.</li>
@@ -55,6 +56,30 @@
           <li>Automation should remain observable and reversible.</li>
           <li>Public pages should stay static unless dynamic behavior has a clear operational purpose.</li>
         </ul>
+      </section>
+
+      <section class="section article" id="production-verification">
+        <p class="eyebrow">Verification</p>
+        <h2>Production Verification</h2>
+        <p>
+          Public infrastructure is treated as valid only after live checks pass from outside the
+          deployment environment. The current production checks verify the canonical redirect, security
+          headers, security.txt freshness, sitemap contents, and Google Workspace DNS records.
+        </p>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>Web path</h3>
+            <p>encryptedguru.com redirects to www.encryptedguru.com, and the canonical host returns 200.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Security surface</h3>
+            <p>Headers, security.txt, and static hosting behavior are checked after deployment.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Mail identity</h3>
+            <p>MX, SPF, DMARC, and DKIM are verified so web changes do not break account operations.</p>
+          </article>
+        </div>
       </section>
 
       <section class="section article">
@@ -67,6 +92,22 @@
           <li>Simulate network changes before deploying them to real infrastructure.</li>
           <li>Keep marketing, analytics, and tracking disabled until there is a clear reason.</li>
           <li>Prefer boring recovery over clever architecture.</li>
+        </ul>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Change control</p>
+        <h2>How public changes ship</h2>
+        <p>
+          A release starts with a small written intent, then source review, then deployment, then live
+          verification. The goal is to make every change reversible, explainable, and boring enough to
+          repeat under pressure.
+        </p>
+        <ul class="clean-list">
+          <li>Keep public pages static unless a dynamic system earns its operational cost.</li>
+          <li>Commit content, headers, redirects, and runbooks together when behavior changes.</li>
+          <li>Record production cutovers so future failures start with known facts.</li>
+          <li>Stop immediately if DNS, mail authentication, or account recovery becomes ambiguous.</li>
         </ul>
       </section>
     </main>

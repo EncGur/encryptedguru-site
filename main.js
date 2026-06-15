@@ -7,6 +7,8 @@ if (canvas && !reduceMotion.matches) {
   let width = 0;
   let height = 0;
   let points = [];
+  let animationFrame = 0;
+  let running = false;
 
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -29,6 +31,8 @@ if (canvas && !reduceMotion.matches) {
   }
 
   function draw() {
+    if (!running) return;
+
     ctx.clearRect(0, 0, width, height);
 
     for (const point of points) {
@@ -67,10 +71,29 @@ if (canvas && !reduceMotion.matches) {
       ctx.fill();
     }
 
-    requestAnimationFrame(draw);
+    animationFrame = requestAnimationFrame(draw);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    animationFrame = requestAnimationFrame(draw);
+  }
+
+  function stop() {
+    running = false;
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
   }
 
   resize();
-  draw();
+  start();
   window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stop();
+    } else {
+      start();
+    }
+  });
 }
