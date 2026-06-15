@@ -34,6 +34,7 @@ Operational documents:
 - `RELEASE_CHECKLIST.md`: pre-release and post-release checks.
 - `REMOTE_SETUP.md`: private remote and Cloudflare Pages setup steps.
 - `CLOUDFLARE_PAGES_SETUP.md`: exact Cloudflare Pages connection and verification path.
+- `POST_DEPLOYMENT_RECORD_2026-06-15.md`: production cutover and verification record.
 - `runbooks/`: private-operational runbooks for DNS, deploy, mail auth, and emergency access.
 
 Release artifacts:

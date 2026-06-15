@@ -43,6 +43,26 @@ curl -I https://www.encryptedguru.com/
 
 6. Verify mail by sending and receiving a test message through the affected alias.
 
+## Read-Only Web Record Procedure
+
+If Cloudflare refuses to edit a web record with a read-only or managed-record
+message, treat DNS as the symptom, not the root cause.
+
+Check in this order:
+
+1. Workers & Pages project custom domains.
+2. Worker custom domains.
+3. Workers Routes.
+4. Ordinary DNS records.
+
+Known prior example:
+
+- `encryptedguru.com` and `www.encryptedguru.com` were attached to Worker
+  `sparkling-cake-ec49`.
+- Cloudflare represented those Worker custom domains as read-only DNS records.
+- The fix was to remove those custom domains from the Worker, then attach them
+  to the Pages project `encryptedguru-site`.
+
 ## Rollback
 
 Restore the prior record values captured in preflight. Verify with `dig @1.1.1.1` and `dig @8.8.8.8`.

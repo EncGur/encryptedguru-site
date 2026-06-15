@@ -9,14 +9,26 @@ Purpose: connect the private GitHub repository to Cloudflare Pages and make `mai
 - Production branch: `main`
 - Latest synchronized commit at setup time: `6586be4 Record completed GitHub synchronization`
 
-## Current Cloudflare Blocker
+## Current Cloudflare State
 
-Cloudflare dashboard is not logged in in the active Chrome session. The page shows:
+Cloudflare Pages is connected and serving production from the private GitHub
+repository.
 
-- `Sign in to Cloudflare`
-- `Verify you are human`
+Production state:
 
-Complete Cloudflare login and human verification manually before continuing.
+- Pages project: `encryptedguru-site`
+- Pages preview: `https://encryptedguru-site.pages.dev/`
+- Canonical production URL: `https://www.encryptedguru.com/`
+- Apex redirect: `https://encryptedguru.com/` to
+  `https://www.encryptedguru.com/`
+
+Historical blocker:
+
+- `www.encryptedguru.com` initially could not be attached because an old Worker
+  custom domain created a read-only DNS record.
+- Old Worker: `sparkling-cake-ec49`
+- Fix: remove `encryptedguru.com` and `www.encryptedguru.com` from that Worker's
+  `Domains` tab, then attach them to the Pages project.
 
 ## Create Pages Project
 
@@ -59,6 +71,10 @@ Canonical direction:
 
 The source-controlled `_redirects` file already represents this policy.
 
+If Cloudflare shows `Unable to edit this record as this has been configured as
+read only`, inspect Workers & Pages before changing DNS. A Worker custom domain
+or another managed Cloudflare product may own the record.
+
 ## Expected Source-Control Behavior
 
 Cloudflare Pages should read:
@@ -88,6 +104,12 @@ Expected:
 - Security headers are present.
 - Live `/.well-known/security.txt` includes:
   - `Expires: 2027-06-14T00:00:00Z`
+
+Last known strict verification:
+
+- Date: 2026-06-15
+- Result: passed
+- Record: `POST_DEPLOYMENT_RECORD_2026-06-15.md`
 
 ## Stop Conditions
 
