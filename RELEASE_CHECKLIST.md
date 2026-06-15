@@ -40,6 +40,7 @@ Use this before publishing a new static-site release.
 - [ ] Deploy through Cloudflare Pages or the current static host.
 - [ ] Record the deployed commit or package hash.
 - [ ] Keep `encryptedguru-v0.1-site.zip` only as a handoff artifact.
+- [ ] If using Cloudflare Pages, confirm settings match `CLOUDFLARE_PAGES_SETUP.md`.
 
 ## Post-Release
 

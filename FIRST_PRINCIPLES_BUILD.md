@@ -152,6 +152,7 @@ Verifier:
 - [x] Set local `origin` to the intended private repository URL.
 - [x] Create private GitHub repository `EncGur/encryptedguru-site`.
 - [x] Push local `main` to GitHub and track `origin/main`.
+- [x] Document Cloudflare Pages setup path and current login blocker.
 - [x] Add GitHub Actions static audit workflow.
 - [x] Add strict post-deploy verification and remote-readiness scripts.
 - [x] Record expected pre-deploy gate failures.
