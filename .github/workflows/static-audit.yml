@@ -1,0 +1,20 @@
+name: Static audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Audit source
+        run: ./scripts/audit-source.sh
+
+      - name: Package release
+        run: ./scripts/package-release.sh

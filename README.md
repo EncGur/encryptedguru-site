@@ -45,4 +45,6 @@ Local commands:
 ./scripts/audit-source.sh
 ./scripts/package-release.sh
 ./scripts/verify-live.sh
+./scripts/verify-live.sh --strict-post-deploy
+./scripts/check-remote-ready.sh
 ```

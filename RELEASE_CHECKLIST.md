@@ -5,6 +5,7 @@ Use this before publishing a new static-site release.
 ## Preflight
 
 - [ ] Run `./scripts/audit-source.sh`.
+- [ ] Run `./scripts/check-remote-ready.sh` after the GitHub repo and SSH key are configured.
 - [ ] Confirm no secrets, tokens, private URLs, billing data, recovery codes, or unreduced screenshots are present.
 - [ ] Confirm all public email addresses are intentional and active.
 - [ ] Confirm `/.well-known/security.txt` is valid and `Expires` is in the future.
@@ -42,8 +43,5 @@ Use this before publishing a new static-site release.
 
 ## Post-Release
 
-- [ ] Verify `https://www.encryptedguru.com/`.
-- [ ] Verify `https://encryptedguru.com/` redirects to `https://www.encryptedguru.com/`.
-- [ ] Verify `https://www.encryptedguru.com/.well-known/security.txt`.
-- [ ] Verify `https://www.encryptedguru.com/sitemap.xml`.
+- [ ] Run `./scripts/verify-live.sh --strict-post-deploy`.
 - [ ] Record any DNS or deployment changes in the project notes.

@@ -107,3 +107,10 @@ Verifier:
 Do not expand product surface until the private repository and deployment source of truth are established.
 
 Local source-control initialization was started after this audit. The remote private repository still needs to be created or attached before Cloudflare Pages can use Git commits as the release identity.
+
+Current gate status:
+
+- Source audit passes locally.
+- Normal live verification passes.
+- Strict post-deploy verification intentionally fails until the local `security.txt` update is deployed.
+- Remote readiness intentionally fails until the dedicated GitHub public key is added to GitHub and the private repository exists.

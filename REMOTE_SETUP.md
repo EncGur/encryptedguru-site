@@ -91,17 +91,23 @@ Before push:
 
 ```sh
 ./scripts/audit-source.sh
+./scripts/check-remote-ready.sh
 ```
 
 After deployment:
 
 ```sh
-./scripts/verify-live.sh
+./scripts/verify-live.sh --strict-post-deploy
 ```
 
 Expected post-deploy difference:
 
 - Live `/.well-known/security.txt` should include `Expires: 2027-06-14T00:00:00Z`.
+
+Current expected failures before remote setup:
+
+- `./scripts/check-remote-ready.sh` fails with `Permission denied (publickey)` until the dedicated public key is added to GitHub.
+- `./scripts/verify-live.sh --strict-post-deploy` fails until the current local source is deployed and live `security.txt` includes `Expires`.
 
 ## Rollback
 
