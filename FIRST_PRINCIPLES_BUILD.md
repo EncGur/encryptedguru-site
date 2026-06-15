@@ -150,6 +150,8 @@ Verifier:
 - [x] Diagnose GitHub push blockers and export current public SSH key outside the repository.
 - [x] Generate dedicated GitHub SSH key and configure isolated `github-cbdtaeff` alias.
 - [x] Set local `origin` to the intended private repository URL.
+- [x] Create private GitHub repository `EncGur/encryptedguru-site`.
+- [x] Push local `main` to GitHub and track `origin/main`.
 - [x] Add GitHub Actions static audit workflow.
 - [x] Add strict post-deploy verification and remote-readiness scripts.
 - [x] Record expected pre-deploy gate failures.

@@ -113,4 +113,4 @@ Current gate status:
 - Source audit passes locally.
 - Normal live verification passes.
 - Strict post-deploy verification intentionally fails until the local `security.txt` update is deployed.
-- Remote readiness intentionally fails until the dedicated GitHub public key is added to GitHub and the private repository exists.
+- Remote readiness passes after adding the dedicated GitHub public key and creating `EncGur/encryptedguru-site`.
