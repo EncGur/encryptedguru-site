@@ -36,6 +36,7 @@ Operational documents:
 - `REMOTE_SETUP.md`: private remote and Cloudflare Pages setup steps.
 - `CLOUDFLARE_PAGES_SETUP.md`: exact Cloudflare Pages connection and verification path.
 - `POST_DEPLOYMENT_RECORD_2026-06-15.md`: production cutover and verification record.
+- `POST_DEPLOYMENT_RECORD_2026-07-29.md`: v0.2 Monero release, public-boundary remediation, and live verification record.
 - `MONERO_SOURCE_AUDIT_2026-07-29.md`: source, license, stale-content, and current-doc audit for `/monero/`.
 - `runbooks/`: private-operational runbooks for DNS, deploy, mail auth, and emergency access.
 - `runbooks/DSX_AIR_LAB_RUNBOOK.md`: private DSX Air lab execution discipline.
