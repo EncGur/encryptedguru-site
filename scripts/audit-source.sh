@@ -5,6 +5,8 @@ cd "$(dirname "$0")/.."
 
 required_files="
 index.html
+404.html
+monero/index.html
 styles.css
 main.js
 robots.txt
@@ -17,6 +19,8 @@ DEPLOYMENT.md
 RELEASE_CHECKLIST.md
 FIRST_PRINCIPLES_BUILD.md
 SECURITY_AUDIT_2026-06-14.md
+MONERO_SOURCE_AUDIT_2026-07-29.md
+scripts/build-site.sh
 "
 
 for file in $required_files; do
@@ -33,6 +37,16 @@ grep -q '^Expires: ' .well-known/security.txt || {
 
 grep -q 'https://www.encryptedguru.com/' sitemap.xml || {
   echo "sitemap.xml missing canonical www URL" >&2
+  exit 1
+}
+
+grep -q 'https://www.encryptedguru.com/monero/' sitemap.xml || {
+  echo "sitemap.xml missing Monero page" >&2
+  exit 1
+}
+
+grep -q 'Mastering Monero' monero/index.html || {
+  echo "Monero page missing primary source attribution" >&2
   exit 1
 }
 

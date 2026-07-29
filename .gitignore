@@ -4,4 +4,5 @@
 # Local preview/runtime noise
 .cache/
 tmp/
+dist/
 *.log

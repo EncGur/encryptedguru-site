@@ -156,7 +156,7 @@ Verifier:
 - [x] Add GitHub Actions static audit workflow.
 - [x] Add strict post-deploy verification and remote-readiness scripts.
 - [x] Record expected pre-deploy gate failures.
-- [x] Refresh `encryptedguru-v0.1-site.zip` with current local files.
+- [x] Replace the repository-root package with the allowlisted `encryptedguru-v0.2-site.zip` build.
 - [x] Confirm DKIM and DMARC.
 - [ ] Confirm live `security.txt` after next deployment.
 - [ ] Create or attach private Git remote source of truth.

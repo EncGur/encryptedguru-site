@@ -4,8 +4,8 @@
 
 1. Create a private Git repository for this folder.
 2. Connect the repository to Cloudflare Pages.
-3. Set the build command to empty.
-4. Set the output directory to `/`.
+3. Set the build command to `sh scripts/build-site.sh`.
+4. Set the output directory to `dist`.
 5. Add custom domains:
    - `encryptedguru.com`
    - `www.encryptedguru.com`
@@ -19,8 +19,11 @@ the apex redirecting to `www`. If this changes, update canonical tags,
 
 Cloudflare Pages source-control files:
 
+- `scripts/build-site.sh`: copies only approved public assets into `dist/`.
 - `_headers`: security headers and cache policy.
 - `_redirects`: apex and HTTP redirect policy.
+- `404.html`: disables Pages' implicit single-page-app fallback and restores real
+  not-found responses.
 
 Before release:
 
@@ -55,8 +58,10 @@ Add web hosting records only after confirming the hosting provider's exact targe
 ## Security posture
 
 - No secrets in the static site.
-- No forms in v0.1.
+- No forms in v0.2.
 - No tracking scripts.
 - Keep `/.well-known/security.txt` published.
 - Use private repository by default.
 - Keep `_headers` and `_redirects` reviewed in source control.
+- Never deploy the repository root; operational Markdown and scripts are source
+  artifacts, not public site assets.

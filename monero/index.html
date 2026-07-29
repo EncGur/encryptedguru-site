@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Monero - EncryptedGuru</title>
+    <meta name="description" content="First-principles notes on Monero, financial privacy, self-custody, fungibility, and operational verification.">
+    <meta name="theme-color" content="#050706">
+    <link rel="canonical" href="https://www.encryptedguru.com/monero/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="Monero - EncryptedGuru">
+    <meta property="og:description" content="Financial privacy as infrastructure: durable lessons from Mastering Monero, corrected against current official documentation.">
+    <meta property="og:url" content="https://www.encryptedguru.com/monero/">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
+    <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand-logo" src="/logo.png" alt="" aria-hidden="true"><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a aria-current="page" href="/monero/">Monero</a>
+        <a href="/docs/">Docs</a>
+        <a href="/labs/">Labs</a>
+        <a href="/infrastructure/">Infrastructure</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title monero-title">
+        <p class="eyebrow">Sovereign money</p>
+        <h1>Monero</h1>
+        <p>Financial privacy is not concealment for its own sake. It is control over who can map your identity, balances, relationships, and behavior.</p>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Primary reading</p>
+          <h2>Mastering Monero, First Edition</h2>
+        </div>
+        <div class="source-note">
+          <dl>
+            <div><dt>Author</dt><dd>SerHack and the Monero Community</dd></div>
+            <div><dt>Edition</dt><dd>First edition, December 2018</dd></div>
+            <div><dt>PDF release</dt><dd>April 18, 2019</dd></div>
+            <div><dt>Reading mode</dt><dd>Principles first; current commands require re-verification</dd></div>
+          </dl>
+          <p>
+            This page is an original synthesis of the book, not a replacement for it. The book's text is
+            licensed CC BY-NC-SA 4.0. No cover art or book illustrations are reproduced here.
+          </p>
+          <a class="text-link" href="https://masteringmonero.com/book/Mastering%20Monero%20First%20Edition%20by%20SerHack%20and%20Monero%20Community.pdf">Read the original PDF</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">First principles</p>
+          <h2>What remains durable after the software changes.</h2>
+        </div>
+        <div class="grid four">
+          <article class="tile">
+            <span class="tile-kicker">01</span>
+            <h3>Privacy by default</h3>
+            <p>A privacy system is strongest when ordinary use does not create a visibly weaker transaction class.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">02</span>
+            <h3>Fungibility</h3>
+            <p>Money works better when equal units remain interchangeable instead of inheriting public transaction histories.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">03</span>
+            <h3>Self-custody</h3>
+            <p>Control follows the private spend authority. Backups and recovery are therefore part of the security model.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">04</span>
+            <h3>Verify, do not trust</h3>
+            <p>Open code, independently checked software, and a validated node path reduce hidden third-party assumptions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Privacy stack</p>
+          <h2>Transaction privacy is a composition of protections.</h2>
+        </div>
+        <div class="verification-list">
+          <div>
+            <span>01</span>
+            <strong>Sender</strong>
+            <p>Ring signatures obscure which eligible output was actually spent, providing plausible deniability for the source.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Recipient</strong>
+            <p>One-time stealth addresses prevent a published receiving address from appearing directly on the blockchain.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>Amount</strong>
+            <p>Ring Confidential Transactions conceal values while allowing the network to verify balance and prevent inflation.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <strong>Network metadata</strong>
+            <p>Dandelion++ helps at the node layer, but it is not complete IP protection. Stronger network privacy requires an intentional Tor or I2P path.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Trust boundaries</p>
+          <h2>Keys and nodes answer different security questions.</h2>
+        </div>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>Spend authority</h3>
+            <p>The mnemonic or private spend key can recreate spending control. Keep it offline, private, and recoverable.</p>
+          </article>
+          <article class="tile compact">
+            <h3>View authority</h3>
+            <p>A private view key reveals incoming transaction visibility. Treat disclosure as a deliberate privacy decision.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Node path</h3>
+            <p>A remote node cannot spend funds, but it can observe connection metadata and affect availability. A validated local node reduces that reliance.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">2026 correction layer</p>
+          <h2>The book is foundational, not operationally current.</h2>
+        </div>
+        <div class="stack-list">
+          <div>
+            <strong>Kovri is historical</strong>
+            <span>The first edition presents Kovri as the future network privacy layer. The official Kovri repository is now archived; current documentation describes Dandelion++ and optional Tor/I2P.</span>
+          </div>
+          <div>
+            <strong>Interfaces and parameters move</strong>
+            <span>Wallet screens, RPC examples, address conventions, ring parameters, integrations, versions, fees, and storage estimates must be checked against current official documentation.</span>
+          </div>
+          <div>
+            <strong>Privacy is not absolute</strong>
+            <span>Protocol privacy does not neutralize endpoint compromise, exposed seeds, malicious software, exchange records, timing correlation, or careless network use.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Operating rules</p>
+        <h2>EncryptedGuru Monero discipline</h2>
+        <ul class="clean-list">
+          <li>Download wallet software only from official channels and verify the signed hash list before extraction.</li>
+          <li>Learn and test on stagenet before using mainnet value.</li>
+          <li>Prefer a fresh subaddress for each expected payment when the wallet supports the workflow.</li>
+          <li>Never place a mnemonic, spend key, view key, wallet file, or recovery detail in chat, screenshots, repositories, or clipboard history.</li>
+          <li>Treat remote nodes and block explorers as metadata observers; do not disclose transaction identifiers and private view material casually.</li>
+          <li>Re-check current official documentation before following any command from a 2018 first edition.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Reading path</p>
+          <h2>Use the book in layers.</h2>
+        </div>
+        <div class="link-list">
+          <a href="https://masteringmonero.com/book/Mastering%20Monero%20First%20Edition%20by%20SerHack%20and%20Monero%20Community.pdf">
+            <span>Chapters 1-3: purpose, custody, and privacy concepts</span>
+            <small>Best starting point for the enduring mental model</small>
+          </a>
+          <a href="https://docs.getmonero.org/technical-specs/">
+            <span>Current technical specification</span>
+            <small>Use for present-day privacy components and protocol parameters</small>
+          </a>
+          <a href="https://docs.getmonero.org/running-node/">
+            <span>Current node documentation</span>
+            <small>Use for local-node configuration and network privacy</small>
+          </a>
+          <a href="https://docs.getmonero.org/infrastructure/networks/">
+            <span>Mainnet, stagenet, and testnet</span>
+            <small>Use stagenet for learning without real value</small>
+          </a>
+          <a href="https://docs.getmonero.org/interacting/verify-monero-binaries/">
+            <span>Verify Monero binaries</span>
+            <small>Authenticate the signed hashes before running downloaded software</small>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru v0.2</span>
+      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

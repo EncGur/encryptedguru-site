@@ -1,17 +1,18 @@
-# EncryptedGuru v0.1
+# EncryptedGuru v0.2
 
 Static site for encryptedguru.com.
 
 Purpose:
 
 - Public identity for EncryptedGuru.
-- Documentation entry point for infrastructure, cloud, network, and AI workflow notes.
+- Documentation entry point for Monero, infrastructure, cloud, network, and AI workflow notes.
 - Minimal public surface: no forms, no analytics, no newsletter, no database.
 
 Local preview:
 
 ```sh
-python3 -m http.server 4173
+./scripts/build-site.sh
+python3 -m http.server 4173 --directory dist
 ```
 
 Open:
@@ -35,17 +36,20 @@ Operational documents:
 - `REMOTE_SETUP.md`: private remote and Cloudflare Pages setup steps.
 - `CLOUDFLARE_PAGES_SETUP.md`: exact Cloudflare Pages connection and verification path.
 - `POST_DEPLOYMENT_RECORD_2026-06-15.md`: production cutover and verification record.
+- `MONERO_SOURCE_AUDIT_2026-07-29.md`: source, license, stale-content, and current-doc audit for `/monero/`.
 - `runbooks/`: private-operational runbooks for DNS, deploy, mail auth, and emergency access.
 - `runbooks/DSX_AIR_LAB_RUNBOOK.md`: private DSX Air lab execution discipline.
 
 Release artifacts:
 
-- `encryptedguru-v0.1-site.zip` is a local handoff artifact and is not tracked by Git.
+- `dist/` is the allowlisted public build and is not tracked by Git.
+- `encryptedguru-v0.2-site.zip` is a local handoff artifact and is not tracked by Git.
 
 Local commands:
 
 ```sh
 ./scripts/audit-source.sh
+./scripts/build-site.sh
 ./scripts/package-release.sh
 ./scripts/verify-live.sh
 ./scripts/verify-live.sh --strict-post-deploy

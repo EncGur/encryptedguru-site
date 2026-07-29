@@ -298,6 +298,10 @@ h3 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grid.five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .grid.three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -359,6 +363,52 @@ h3 {
 .link-list small {
   color: var(--muted);
   line-height: 1.45;
+}
+
+.source-note {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.source-note dl {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.source-note dl div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.source-note dt,
+.source-note dd {
+  margin: 0;
+}
+
+.source-note dt {
+  color: var(--muted);
+}
+
+.source-note dd {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.source-note p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.text-link {
+  width: fit-content;
+  color: var(--green-strong);
+  border-bottom: 1px solid var(--green);
+  font-weight: 700;
 }
 
 .link-list {
@@ -455,6 +505,7 @@ h3 {
   }
 
   .grid.four,
+  .grid.five,
   .grid.three,
   .split,
   .hero-status {
@@ -462,6 +513,11 @@ h3 {
   }
 
   .verification-list div {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .source-note dl div {
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }
@@ -476,6 +532,12 @@ h3 {
 
   .site-footer {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 861px) and (max-width: 1120px) {
+  .grid.five {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

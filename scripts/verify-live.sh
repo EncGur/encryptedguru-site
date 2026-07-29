@@ -12,7 +12,8 @@ fi
 tmp_headers="$(mktemp)"
 tmp_security="$(mktemp)"
 tmp_sitemap="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap"' EXIT
+tmp_monero="$(mktemp)"
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_monero"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -24,6 +25,21 @@ curl -sS --max-time 20 "https://$www/.well-known/security.txt" | tee "$tmp_secur
 echo
 echo "== sitemap =="
 curl -sS --max-time 20 "https://$www/sitemap.xml" | tee "$tmp_sitemap" | sed -n '1,80p'
+
+echo
+echo "== Monero knowledge page =="
+curl -sS --max-time 20 "https://$www/monero/" | tee "$tmp_monero" | sed -n '1,20p'
+
+echo
+echo "== Public surface boundary =="
+unknown_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/__encryptedguru-boundary-check__")"
+markdown_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/REMOTE_SETUP.md")"
+runbook_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/runbooks/CLOUDFLARE_PAGES_DEPLOY_RUNBOOK.md")"
+script_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/scripts/verify-live.sh")"
+printf 'Unknown route: %s\n' "$unknown_status"
+printf 'Source Markdown: %s\n' "$markdown_status"
+printf 'Private runbook: %s\n' "$runbook_status"
+printf 'Source script: %s\n' "$script_status"
 
 echo
 echo "== DNS =="
@@ -83,6 +99,23 @@ if [ "$strict" -eq 1 ]; then
     echo "live sitemap missing canonical homepage" >&2
     exit 1
   }
+
+  grep -q 'https://www.encryptedguru.com/monero/' "$tmp_sitemap" || {
+    echo "live sitemap missing Monero page" >&2
+    exit 1
+  }
+
+  grep -q '<h1>Monero</h1>' "$tmp_monero" || {
+    echo "live Monero page missing expected heading" >&2
+    exit 1
+  }
+
+  for status in "$unknown_status" "$markdown_status" "$runbook_status" "$script_status"; do
+    test "$status" = "404" || {
+      echo "live public surface still exposes an unpublished route" >&2
+      exit 1
+    }
+  done
 
   echo "strict live verification passed"
 fi

@@ -6,8 +6,8 @@ Purpose: publish the static site with a reproducible release path and a tested r
 
 - Source lives in a private Git repository.
 - Cloudflare Pages project is connected to that repository.
-- Build command is empty.
-- Output directory is `/`.
+- Build command is `sh scripts/build-site.sh`.
+- Output directory is `dist`.
 - Custom domains are attached:
   - `encryptedguru.com`
   - `www.encryptedguru.com`
@@ -15,9 +15,10 @@ Purpose: publish the static site with a reproducible release path and a tested r
 ## Pre-Deploy
 
 1. Run the release checklist.
-2. Confirm `security.txt` has a future `Expires` value.
-3. Confirm `_headers` and `_redirects` are present.
-4. Confirm no secrets are present:
+2. Run `./scripts/build-site.sh` and inspect the allowlisted `dist/` output.
+3. Confirm `security.txt` has a future `Expires` value.
+4. Confirm `_headers`, `_redirects`, and `404.html` are present in `dist/`.
+5. Confirm no secrets are present:
 
 ```sh
 find . -type f \( -name '*.html' -o -name '*.txt' -o -name '*.xml' -o -name '*.md' -o -name '*.js' -o -name '*.css' -o -name '*.webmanifest' \) -print0 | xargs -0 grep -nEi "secret|token|password|private key|api[_-]?key|bearer|BEGIN (RSA|OPENSSH|PRIVATE)" || true
@@ -44,6 +45,8 @@ Expected:
 - Homepage returns `200`.
 - Security headers are present.
 - `security.txt` includes `Expires`.
+- `/monero/` returns `200`.
+- unknown routes and source-only files return `404`.
 
 ## Rollback
 

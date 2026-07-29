@@ -51,9 +51,9 @@ Expected path:
 6. Framework preset:
    - None
 7. Build command:
-   - empty
+   - `sh scripts/build-site.sh`
 8. Build output directory:
-   - `/`
+   - `dist`
 9. Environment variables:
    - none
 10. Deploy.
@@ -81,6 +81,7 @@ Cloudflare Pages should read:
 
 - `_headers`
 - `_redirects`
+- `404.html`
 
 This should preserve:
 
@@ -88,6 +89,8 @@ This should preserve:
 - security headers
 - cache policy
 - `security.txt` content type
+- real `404` responses for unpublished routes
+- exclusion of source Markdown, runbooks, scripts, and Git metadata
 
 ## Post-Deploy Verification
 
@@ -102,6 +105,8 @@ Expected:
 - Apex redirects to `https://www.encryptedguru.com/`.
 - Final homepage response is `200`.
 - Security headers are present.
+- `/monero/` returns `200` with the expected heading.
+- unpublished source paths and unknown routes return `404`.
 - Live `/.well-known/security.txt` includes:
   - `Expires: 2027-06-14T00:00:00Z`
 
@@ -115,6 +120,7 @@ Last known strict verification:
 
 - Cloudflare asks for credentials, 2FA, or human verification.
 - GitHub authorization asks for broader account permissions than repository access to `EncGur/encryptedguru-site`.
-- Build output directory cannot be set to `/`.
+- Build command cannot run `sh scripts/build-site.sh` or the output directory
+  cannot be set to `dist`.
 - Deployment preview does not include `_headers` or `_redirects`.
 - Custom domain setup would overwrite Google Workspace MX, SPF, DKIM, or DMARC records.

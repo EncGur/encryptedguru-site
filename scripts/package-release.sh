@@ -3,12 +3,11 @@ set -eu
 
 cd "$(dirname "$0")/.."
 
-./scripts/audit-source.sh
+./scripts/build-site.sh
 
-rm -f encryptedguru-v0.1-site.zip
-zip -qr encryptedguru-v0.1-site.zip . \
-  -x '.git/*' \
-  -x 'encryptedguru-v0.1-site.zip'
+archive="encryptedguru-v0.2-site.zip"
+rm -f "$archive"
+(cd dist && zip -qr "../$archive" .)
 
-unzip -t encryptedguru-v0.1-site.zip >/dev/null
-shasum -a 256 encryptedguru-v0.1-site.zip
+unzip -t "$archive" >/dev/null
+shasum -a 256 "$archive"
