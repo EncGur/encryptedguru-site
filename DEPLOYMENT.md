@@ -22,6 +22,8 @@ Cloudflare Pages source-control files:
 - `scripts/build-site.sh`: copies only approved public assets into `dist/`.
 - `_headers`: security headers and cache policy.
 - `_redirects`: apex and HTTP redirect policy.
+- `_routes.json` and `functions/[[path]].js`: return a non-cacheable `404` for
+  source-only paths without invoking Functions for normal static routes.
 - `404.html`: disables Pages' implicit single-page-app fallback and restores real
   not-found responses.
 
@@ -65,3 +67,5 @@ Add web hosting records only after confirming the hosting provider's exact targe
 - Keep `_headers` and `_redirects` reviewed in source control.
 - Never deploy the repository root; operational Markdown and scripts are source
   artifacts, not public site assets.
+- Keep the source-route Function limited by `_routes.json`; expanding it to
+  `/*` would convert normal static requests into metered Function requests.

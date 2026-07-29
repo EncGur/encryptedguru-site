@@ -14,6 +14,7 @@ sitemap.xml
 .well-known/security.txt
 _headers
 _redirects
+_routes.json
 README.md
 DEPLOYMENT.md
 RELEASE_CHECKLIST.md
@@ -21,6 +22,7 @@ FIRST_PRINCIPLES_BUILD.md
 SECURITY_AUDIT_2026-06-14.md
 MONERO_SOURCE_AUDIT_2026-07-29.md
 scripts/build-site.sh
+functions/[[path]].js
 "
 
 for file in $required_files; do
@@ -47,6 +49,16 @@ grep -q 'https://www.encryptedguru.com/monero/' sitemap.xml || {
 
 grep -q 'Mastering Monero' monero/index.html || {
   echo "Monero page missing primary source attribution" >&2
+  exit 1
+}
+
+grep -q '"/scripts/\*"' _routes.json || {
+  echo "_routes.json missing source-script guard" >&2
+  exit 1
+}
+
+grep -q 'status: 404' 'functions/[[path]].js' || {
+  echo "Pages Function source guard is missing its 404 response" >&2
   exit 1
 }
 

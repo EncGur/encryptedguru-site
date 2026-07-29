@@ -43,6 +43,8 @@ Operational documents:
 Release artifacts:
 
 - `dist/` is the allowlisted public build and is not tracked by Git.
+- `functions/[[path]].js` returns `404` only for source-only routes selected by
+  `_routes.json`; normal static pages do not invoke the Function.
 - `encryptedguru-v0.2-site.zip` is a local handoff artifact and is not tracked by Git.
 
 Local commands:

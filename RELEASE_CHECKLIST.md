@@ -13,6 +13,7 @@ Use this before publishing a new static-site release.
 - [ ] Confirm `robots.txt` and `sitemap.xml` match the intended public surface.
 - [ ] Confirm canonical URLs use `https://www.encryptedguru.com/`.
 - [ ] Confirm `_headers` and `_redirects` match the intended Cloudflare behavior.
+- [ ] Confirm `_routes.json` invokes the source guard only for unpublished paths.
 - [ ] Confirm Cloudflare uses build command `sh scripts/build-site.sh` and output directory `dist`.
 
 ## Local Verification
@@ -49,4 +50,5 @@ Use this before publishing a new static-site release.
 
 - [ ] Run `./scripts/verify-live.sh --strict-post-deploy`.
 - [ ] Confirm source Markdown, runbooks, and shell scripts return `404`.
+- [ ] Confirm a blocked source path returns `Cache-Control: no-store`.
 - [ ] Record any DNS or deployment changes in the project notes.

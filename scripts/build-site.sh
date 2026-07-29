@@ -22,7 +22,8 @@ for file in \
   robots.txt \
   sitemap.xml \
   _headers \
-  _redirects
+  _redirects \
+  _routes.json
 do
   cp "$file" "$output/"
 done
@@ -50,5 +51,6 @@ test -f "$output/index.html"
 test -f "$output/404.html"
 test -f "$output/monero/index.html"
 test -f "$output/.well-known/security.txt"
+test -f "$output/_routes.json"
 
 printf 'public build ready: %s files in %s/\n' "$(find "$output" -type f | wc -l | tr -d ' ')" "$output"

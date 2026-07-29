@@ -81,6 +81,7 @@ Cloudflare Pages should read:
 
 - `_headers`
 - `_redirects`
+- `_routes.json`
 - `404.html`
 
 This should preserve:
@@ -91,6 +92,7 @@ This should preserve:
 - `security.txt` content type
 - real `404` responses for unpublished routes
 - exclusion of source Markdown, runbooks, scripts, and Git metadata
+- a non-cacheable `404` guard for source-only routes, including stale CDN objects
 
 ## Post-Deploy Verification
 
@@ -123,4 +125,5 @@ Last known strict verification:
 - Build command cannot run `sh scripts/build-site.sh` or the output directory
   cannot be set to `dist`.
 - Deployment preview does not include `_headers` or `_redirects`.
+- `_routes.json` expands Function execution beyond source-only paths.
 - Custom domain setup would overwrite Google Workspace MX, SPF, DKIM, or DMARC records.

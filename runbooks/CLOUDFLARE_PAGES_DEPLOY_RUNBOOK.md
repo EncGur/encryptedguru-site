@@ -17,7 +17,7 @@ Purpose: publish the static site with a reproducible release path and a tested r
 1. Run the release checklist.
 2. Run `./scripts/build-site.sh` and inspect the allowlisted `dist/` output.
 3. Confirm `security.txt` has a future `Expires` value.
-4. Confirm `_headers`, `_redirects`, and `404.html` are present in `dist/`.
+4. Confirm `_headers`, `_redirects`, `_routes.json`, and `404.html` are present in `dist/`.
 5. Confirm no secrets are present:
 
 ```sh
@@ -47,6 +47,7 @@ Expected:
 - `security.txt` includes `Expires`.
 - `/monero/` returns `200`.
 - unknown routes and source-only files return `404`.
+- normal HTML routes remain static and are excluded from Function invocation.
 
 ## Rollback
 

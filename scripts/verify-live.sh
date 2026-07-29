@@ -13,7 +13,8 @@ tmp_headers="$(mktemp)"
 tmp_security="$(mktemp)"
 tmp_sitemap="$(mktemp)"
 tmp_monero="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_monero"' EXIT
+tmp_boundary_headers="$(mktemp)"
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_monero" "$tmp_boundary_headers"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -33,7 +34,7 @@ curl -sS --max-time 20 "https://$www/monero/" | tee "$tmp_monero" | sed -n '1,20
 echo
 echo "== Public surface boundary =="
 unknown_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/__encryptedguru-boundary-check__")"
-markdown_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/REMOTE_SETUP.md")"
+markdown_status="$(curl -sS -D "$tmp_boundary_headers" -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/REMOTE_SETUP.md")"
 runbook_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/runbooks/CLOUDFLARE_PAGES_DEPLOY_RUNBOOK.md")"
 script_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/scripts/verify-live.sh")"
 printf 'Unknown route: %s\n' "$unknown_status"
@@ -116,6 +117,16 @@ if [ "$strict" -eq 1 ]; then
       exit 1
     }
   done
+
+  grep -qi '^cache-control: no-store' "$tmp_boundary_headers" || {
+    echo "source-route guard is cacheable" >&2
+    exit 1
+  }
+
+  grep -qi '^x-robots-tag: noindex' "$tmp_boundary_headers" || {
+    echo "source-route guard is missing noindex" >&2
+    exit 1
+  }
 
   echo "strict live verification passed"
 fi
