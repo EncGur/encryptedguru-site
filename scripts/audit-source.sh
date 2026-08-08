@@ -79,8 +79,8 @@ if find . \
     -name '*.webmanifest' -o \
     -name '_headers' -o \
     -name '_redirects' \
-  \) -print0 | xargs -0 grep -nEi 'password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|BEGIN (RSA|OPENSSH|PRIVATE)' ; then
-  echo "potential secret pattern found" >&2
+  \) -print0 | xargs -0 grep -nEi 'password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|BEGIN (RSA|OPENSSH|PRIVATE)|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|\.env([=:. ]|$)' ; then
+  echo "potential secret or machine-specific pattern found" >&2
   exit 1
 fi
 

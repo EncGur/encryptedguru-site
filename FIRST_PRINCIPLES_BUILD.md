@@ -2,6 +2,12 @@
 
 Generated: 2026-06-14
 
+> Status note (2026-08-08): this is a historical build plan. The repository is
+> now public and open source at `EncGur/encryptedguru-site`; the steps below
+> that describe creating a private repository are superseded. The current
+> boundary is defined in `README.md` and `SECURITY.md`. Operational runbooks
+> are no longer part of the public repository.
+
 ## Core Thesis
 
 EncryptedGuru should be a small, inspectable public boundary for a personal sovereign systems lab.
@@ -148,7 +154,7 @@ Verifier:
 - [x] Add repeatable audit, package, and live-verification scripts.
 - [x] Add remote repository setup procedure.
 - [x] Diagnose GitHub push blockers and export current public SSH key outside the repository.
-- [x] Generate dedicated GitHub SSH key and configure isolated `github-cbdtaeff` alias.
+- [x] Generate dedicated GitHub SSH key and configure an isolated SSH alias.
 - [x] Set local `origin` to the intended private repository URL.
 - [x] Create private GitHub repository `EncGur/encryptedguru-site`.
 - [x] Push local `main` to GitHub and track `origin/main`.

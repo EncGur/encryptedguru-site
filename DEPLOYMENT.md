@@ -2,7 +2,7 @@
 
 ## Recommended path: Cloudflare Pages
 
-1. Create a private Git repository for this folder.
+1. Keep the source in the public GitHub repository `EncGur/encryptedguru-site`.
 2. Connect the repository to Cloudflare Pages.
 3. Set the build command to `sh scripts/build-site.sh`.
 4. Set the output directory to `dist`.
@@ -63,7 +63,8 @@ Add web hosting records only after confirming the hosting provider's exact targe
 - No forms in v0.2.
 - No tracking scripts.
 - Keep `/.well-known/security.txt` published.
-- Use private repository by default.
+- The source repository is public; operational runbooks and account-recovery
+  material stay in a private operational repository.
 - Keep `_headers` and `_redirects` reviewed in source control.
 - Never deploy the repository root; operational Markdown and scripts are source
   artifacts, not public site assets.

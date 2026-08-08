@@ -3,26 +3,22 @@ set -eu
 
 cd "$(dirname "$0")/.."
 
-expected_remote="git@github-cbdtaeff:EncGur/encryptedguru-site.git"
+expected_suffix="EncGur/encryptedguru-site.git"
 
 actual_remote="$(git remote get-url origin 2>/dev/null || true)"
-if [ "$actual_remote" != "$expected_remote" ]; then
-  echo "origin is not set to expected remote" >&2
-  echo "expected: $expected_remote" >&2
-  echo "actual:   ${actual_remote:-<missing>}" >&2
-  exit 1
-fi
-
-ssh -T github-cbdtaeff >/tmp/encryptedguru-ssh-check.out 2>&1 || true
-if ! grep -q "successfully authenticated" /tmp/encryptedguru-ssh-check.out; then
-  cat /tmp/encryptedguru-ssh-check.out >&2
-  echo "GitHub SSH authentication is not ready. Add the exported public key to GitHub first." >&2
-  exit 1
-fi
+case "${actual_remote:-}" in
+  *"$expected_suffix") ;;
+  *)
+    echo "origin is not set to the EncryptedGuru public repository" >&2
+    echo "expected any URL ending in: $expected_suffix" >&2
+    echo "actual:   ${actual_remote:-<missing>}" >&2
+    exit 1
+    ;;
+esac
 
 if ! git ls-remote origin >/tmp/encryptedguru-ls-remote.out 2>&1; then
   cat /tmp/encryptedguru-ls-remote.out >&2
-  echo "Remote repository is not reachable. Create EncGur/encryptedguru-site or check permissions." >&2
+  echo "Remote repository is not reachable. Check network access or GitHub authentication." >&2
   exit 1
 fi
 

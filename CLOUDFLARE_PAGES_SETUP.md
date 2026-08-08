@@ -1,17 +1,17 @@
 # Cloudflare Pages Setup
 
-Purpose: connect the private GitHub repository to Cloudflare Pages and make `main` the production deployment source.
+Purpose: connect the public GitHub repository to Cloudflare Pages and make `main` the production deployment source.
 
 ## Current GitHub Source
 
 - Repository: `https://github.com/EncGur/encryptedguru-site`
-- Visibility: private
+- Visibility: public
 - Production branch: `main`
 - Latest synchronized commit at setup time: `6586be4 Record completed GitHub synchronization`
 
 ## Current Cloudflare State
 
-Cloudflare Pages is connected and serving production from the private GitHub
+Cloudflare Pages is connected and serving production from the public GitHub
 repository.
 
 Production state:

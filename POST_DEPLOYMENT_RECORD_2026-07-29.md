@@ -3,6 +3,10 @@
 Purpose: record the EncryptedGuru v0.2 release, its Monero source boundary, and
 the production checks completed after deployment.
 
+> Status note (2026-08-08): the repository is now public and open source. The
+> public/private boundary described in this record has been redesigned; see
+> `README.md` and `SECURITY.md`.
+
 ## Released State
 
 - Source repository: `https://github.com/EncGur/encryptedguru-site`

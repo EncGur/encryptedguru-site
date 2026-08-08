@@ -81,6 +81,16 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  grep -qi '^strict-transport-security:' "$tmp_headers" || {
+    echo "missing strict-transport-security header" >&2
+    exit 1
+  }
+
+  grep -qi '^content-security-policy:' "$tmp_headers" || {
+    echo "missing content-security-policy header" >&2
+    exit 1
+  }
+
   grep -qi '^x-frame-options: DENY' "$tmp_headers" || {
     echo "missing x-frame-options header" >&2
     exit 1
