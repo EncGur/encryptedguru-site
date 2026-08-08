@@ -3,6 +3,12 @@
 Date: 2026-06-14
 Scope: public static site, DNS evidence, email-authentication evidence, release hygiene.
 
+> Status note (2026-08-08): this is a historical audit record. Since then the
+> repository `EncGur/encryptedguru-site` has been made public and open source,
+> and the public/private boundary has been redesigned: operational runbooks are
+> no longer part of the public repository. See `README.md`, `SECURITY.md`, and
+> the 2026-08-08 public-transition audit for the current state.
+
 ## Executive Result
 
 The public site is suitable as a small static trust surface. The main engineering gap is not an exposed vulnerability in the current site; it is operational reproducibility. The source folder is not a Git repository, and Cloudflare behavior was not fully represented as source-controlled deployment files before this audit.

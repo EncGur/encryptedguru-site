@@ -3,6 +3,10 @@
 Purpose: record the production cutover state for `encryptedguru.com` after the
 Cloudflare Pages migration.
 
+> Status note (2026-08-08): this is a historical record. The repository is now
+> public and open source; see `README.md` and `SECURITY.md` for the current
+> public/private boundary.
+
 ## Production State
 
 - Source repository: `https://github.com/EncGur/encryptedguru-site`

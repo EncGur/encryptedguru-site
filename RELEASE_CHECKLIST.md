@@ -6,7 +6,7 @@ Use this before publishing a new static-site release.
 
 - [ ] Run `./scripts/audit-source.sh`.
 - [ ] Run `./scripts/build-site.sh` and confirm only public assets exist in `dist/`.
-- [ ] Run `./scripts/check-remote-ready.sh` after the GitHub repo and SSH key are configured.
+- [ ] Run `./scripts/check-remote-ready.sh` after the GitHub repo and credentials are configured.
 - [ ] Confirm no secrets, tokens, private URLs, billing data, recovery codes, or unreduced screenshots are present.
 - [ ] Confirm all public email addresses are intentional and active.
 - [ ] Confirm `/.well-known/security.txt` is valid and `Expires` is in the future.
@@ -34,12 +34,14 @@ Use this before publishing a new static-site release.
 - [ ] Confirm security headers remain enabled:
   - `x-content-type-options: nosniff`
   - `x-frame-options: DENY`
+  - `strict-transport-security`
   - `referrer-policy: strict-origin-when-cross-origin`
   - `permissions-policy`
+  - `content-security-policy`
 
 ## Release
 
-- [ ] Commit changes to the private source repository.
+- [ ] Commit changes to the public source repository.
 - [ ] Run `./scripts/package-release.sh` if a handoff zip is needed.
 - [ ] Deploy through Cloudflare Pages or the current static host.
 - [ ] Record the deployed commit or package hash.
@@ -51,4 +53,5 @@ Use this before publishing a new static-site release.
 - [ ] Run `./scripts/verify-live.sh --strict-post-deploy`.
 - [ ] Confirm source Markdown, runbooks, and shell scripts return `404`.
 - [ ] Confirm a blocked source path returns `Cache-Control: no-store`.
+- [ ] Confirm `runbooks/` and private operational material are not present in the public repository.
 - [ ] Record any DNS or deployment changes in the project notes.

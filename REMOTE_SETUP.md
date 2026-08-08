@@ -1,86 +1,62 @@
 # Remote Repository Setup
 
-Purpose: attach this local Git source to a private remote repository and make commits the deployment identity.
+Purpose: attach a local Git source to the public EncryptedGuru repository and make commits the deployment identity.
 
 Current local state:
 
 - Branch: `main`
 - Initial commit: `91292dc Initialize EncryptedGuru static site`
-- Latest build-process commit: `ad2a4d3 Add repeatable release verification scripts`
-- Latest remote-setup commit: `125c8b8 Document remote repository setup`
-- GitHub sync commit: `e2b05e9 Update remote owner after GitHub sync`
 - Release zip is generated locally and ignored by Git.
 
 ## Current Remote State
 
-- Private repository exists:
+- The repository is public:
   - `https://github.com/EncGur/encryptedguru-site`
 - Local `main` tracks `origin/main`.
 - Remote readiness check passes:
   - `./scripts/check-remote-ready.sh`
-- The local `gh` CLI is not installed.
-- The GitHub connector available in this session can operate on installed repositories but does not expose repository creation.
-- SSH host verification for `github.com` has been fixed in `~/.ssh/known_hosts`.
-- SSH authentication succeeds through alias `github-cbdtaeff`.
-- A dedicated GitHub SSH key has been generated outside the repository:
-  - Private key: `~/.ssh/id_ed25519_github_cbdtaeff`
-  - Public key export: `/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-cbdtaeff-public-key.txt`
-- SSH alias `github-cbdtaeff` has been added to `~/.ssh/config`.
-- Local `origin` is already set to:
-  - `git@github-cbdtaeff:EncGur/encryptedguru-site.git`
+- The repository is connected to Cloudflare Pages, which deploys the `main`
+  branch to `https://www.encryptedguru.com/`.
 
-Do not commit private keys or SSH setup files into this repository.
-
-## Required Remote
-
-Create a private repository named one of:
-
-- `encryptedguru-site`
-- `encryptedguru.com`
-- `encryptedguru`
-
-Recommended: `encryptedguru-site`, because it describes the artifact without claiming to contain every future system.
+Do not commit private keys or SSH setup files into this repository. This
+repository is public: never commit credentials, local paths, SSH key
+filenames, or account-recovery details.
 
 ## Attach Remote
 
-After creating the private repository, run from this folder:
+If this repository is not yet cloned locally:
 
 ```sh
-git push -u origin main
+git clone git@github.com:EncGur/encryptedguru-site.git
 ```
 
 If HTTPS is preferred:
 
 ```sh
-git remote add origin https://github.com/EncGur/encryptedguru-site.git
+git clone https://github.com/EncGur/encryptedguru-site.git
+```
+
+To push from an existing clone, verify the remote:
+
+```sh
+git remote -v
 git push -u origin main
 ```
 
-## SSH Key Setup
+## Authentication
 
-If using SSH, add the public key from:
-
-```text
-/Users/esmp/Documents/Codex/2026-05-20/encryptedguru-github-cbdtaeff-public-key.txt
-```
-
-to GitHub account SSH keys, then verify:
-
-```sh
-ssh -T github-cbdtaeff
-```
-
-Expected result should greet the `EncGur` GitHub account.
+Use standard GitHub authentication (SSH key or HTTPS token) configured outside
+this repository. Do not place key material or token files in the working tree.
 
 ## Cloudflare Pages
 
-Connect Cloudflare Pages to the private repository.
+Connect Cloudflare Pages to the public repository.
 
 Settings:
 
 - Production branch: `main`
-- Build command: empty
-- Output directory: `/`
+- Build command: `sh scripts/build-site.sh`
+- Output directory: `dist`
 - Custom domains:
   - `encryptedguru.com`
   - `www.encryptedguru.com`
@@ -104,15 +80,6 @@ After deployment:
 ```sh
 ./scripts/verify-live.sh --strict-post-deploy
 ```
-
-Expected post-deploy difference:
-
-- Live `/.well-known/security.txt` should include `Expires: 2027-06-14T00:00:00Z`.
-
-Current expected failures before remote setup:
-
-- `./scripts/check-remote-ready.sh` fails with `Permission denied (publickey)` until the dedicated public key is added to GitHub.
-- `./scripts/verify-live.sh --strict-post-deploy` fails until the current local source is deployed and live `security.txt` includes `Expires`.
 
 ## Rollback
 

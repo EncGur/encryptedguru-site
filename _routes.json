@@ -4,7 +4,14 @@
     "/*.md",
     "/scripts/*",
     "/runbooks/*",
-    "/.git*"
+    "/.git*",
+    "/.env*",
+    "/functions/*",
+    "/*.zip",
+    "/*.log",
+    "/*.bak",
+    "/*.pem",
+    "/*.key"
   ],
   "exclude": []
 }
