@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 
 ./scripts/build-site.sh
 
-archive="encryptedguru-v0.2-site.zip"
+archive="encryptedguru-v0.3-site.zip"
 rm -f "$archive"
 
 # Deterministic archive: derive every entry timestamp from the Git commit time

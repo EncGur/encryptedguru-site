@@ -5,7 +5,7 @@ Static site for encryptedguru.com.
 Purpose:
 
 - Public identity for EncryptedGuru.
-- Documentation entry point for Monero, infrastructure, cloud, network, and AI workflow notes.
+- Documentation entry point for Monero, infrastructure, cloud, network, AI workflow notes, and engineering projects.
 - Minimal public surface: no forms, no analytics, no newsletter, no database.
 
 The source repository is public and open source:
@@ -72,7 +72,7 @@ are maintained in a private operational repository.
 - `dist/` is the allowlisted public build and is not tracked by Git.
 - `functions/[[path]].js` returns `404` only for source-only routes selected by
   `_routes.json`; normal static pages do not invoke the Function.
-- `encryptedguru-v0.2-site.zip` is a local handoff artifact and is not tracked by Git.
+- `encryptedguru-v0.3-site.zip` is a local handoff artifact and is not tracked by Git.
 
 ## Local commands
 

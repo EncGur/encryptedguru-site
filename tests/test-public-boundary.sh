@@ -42,15 +42,17 @@ run_audit_with() {
   )
 }
 
-mkdir -p "$tmp/scripts" "$tmp/.well-known" "$tmp/functions" "$tmp/monero"
+mkdir -p "$tmp/scripts" "$tmp/.well-known" "$tmp/functions" "$tmp/monero" "$tmp/projects/gmcp"
 cp scripts/audit-source.sh scripts/build-site.sh "$tmp/scripts/"
 cp .well-known/security.txt "$tmp/.well-known/security.txt"
 cp sitemap.xml "$tmp/sitemap.xml"
 cp monero/index.html "$tmp/monero/index.html"
+cp projects/index.html "$tmp/projects/index.html"
+cp projects/gmcp/index.html "$tmp/projects/gmcp/index.html"
 cp _routes.json _redirects index.html 404.html styles.css main.js _headers robots.txt README.md DEPLOYMENT.md RELEASE_CHECKLIST.md FIRST_PRINCIPLES_BUILD.md SECURITY_AUDIT_2026-06-14.md MONERO_SOURCE_AUDIT_2026-07-29.md "$tmp/"
 cp 'functions/[[path]].js' "$tmp/functions/[[path]].js"
 
-check_passes "clean tree" run_audit_with index.html "clean"
+check_passes "clean tree" run_audit_with README.md "clean"
 
 check_fails "GitHub PAT ghp_" run_audit_with README.md "token ghp_abcdefghijklmnopqrstuvwxyz1234567890"
 check_fails "github_pat_ token" run_audit_with README.md "token github_pat_1234567890abcdefghijklmnopqrstuvwxyz"

@@ -1,0 +1,114 @@
+#!/usr/bin/env sh
+set -eu
+
+cd "$(dirname "$0")/.."
+
+failures=0
+
+ok() {
+  desc="$1"
+  shift
+  if "$@" >/dev/null 2>&1; then
+    echo "ok: $desc"
+  else
+    echo "FAIL: $desc" >&2
+    failures=$((failures + 1))
+  fi
+}
+
+./scripts/build-site.sh >/dev/null
+
+# The Projects section must build into dist/.
+ok "dist/projects/index.html exists" test -f dist/projects/index.html
+ok "dist/projects/gmcp/index.html exists" test -f dist/projects/gmcp/index.html
+
+# Every internal href on every page that carries the primary navigation must
+# resolve to a real file inside dist/.
+pages="index.html 404.html monero/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html"
+
+for page in $pages; do
+  if [ ! -f "$page" ]; then
+    echo "FAIL: missing page $page" >&2
+    failures=$((failures + 1))
+    continue
+  fi
+done
+
+broken=0
+for page in $pages; do
+  for href in $(grep -oE 'href="[^"]*"' "$page" | sed -E 's/^href="//; s/"$//' | sort -u); do
+    case "$href" in
+      \#*) continue ;;
+      http:*|https:*|mailto:*|tel:*) continue ;;
+      /*)
+        target="${href%%#*}"
+        target="${target%%\?*}"
+        case "$target" in
+          */) rel="${target#/}index.html" ;;
+          *)  rel="${target#/}" ;;
+        esac
+        if [ ! -f "dist/$rel" ]; then
+          echo "FAIL: $page links to $href (missing dist/$rel)" >&2
+          broken=$((broken + 1))
+        fi
+        ;;
+    esac
+  done
+done
+if [ "$broken" -gt 0 ]; then
+  echo "FAIL: $broken broken internal links" >&2
+  failures=$((failures + 1))
+else
+  echo "ok: every internal href on the updated pages resolves to a real file"
+fi
+
+# The sitemap must carry both new canonical URLs.
+ok "sitemap.xml has Projects index URL" grep -q 'https://www.encryptedguru.com/projects/</loc>' sitemap.xml
+ok "sitemap.xml has GMCP project URL" grep -q 'https://www.encryptedguru.com/projects/gmcp/</loc>' sitemap.xml
+
+# The new pages must carry the canonical tags matching the sitemap.
+ok "projects/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/' projects/index.html
+ok "projects/gmcp/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/gmcp/' projects/gmcp/index.html
+
+# Every page carrying the primary navigation must link to the Projects hub.
+for page in $pages; do
+  if ! grep -q 'href="/projects/"' "$page"; then
+    echo "FAIL: $page missing Projects navigation link" >&2
+    failures=$((failures + 1))
+  fi
+done
+
+# Public-boundary leak patterns must stay absent from the new pages.
+leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html || true)"
+if [ -n "$leaks" ]; then
+  echo "FAIL: leak patterns found in new pages:" >&2
+  echo "$leaks" >&2
+  failures=$((failures + 1))
+else
+  echo "ok: no public-boundary leak patterns in new pages"
+fi
+
+# The GMCP page must describe RED dispatch as at-most-once, never exactly-once.
+# Exactly-once may appear only as an explicit disclaimer, never as a guarantee.
+if grep -qi 'exactly-once' projects/gmcp/index.html; then
+  if grep -qi 'exactly-once semantics are not claimed\|no false exactly-once' projects/gmcp/index.html; then
+    echo "ok: GMCP page disclaims exactly-once semantics"
+  else
+    echo "FAIL: GMCP page claims exactly-once semantics" >&2
+    failures=$((failures + 1))
+  fi
+else
+  echo "ok: GMCP page avoids exactly-once mentions"
+fi
+if grep -qi 'at-most-once' projects/gmcp/index.html; then
+  echo "ok: GMCP page states at-most-once dispatch"
+else
+  echo "FAIL: GMCP page missing at-most-once statement" >&2
+  failures=$((failures + 1))
+fi
+
+if [ "$failures" -gt 0 ]; then
+  echo "projects tests failed: $failures" >&2
+  exit 1
+fi
+echo "projects tests passed"

@@ -7,6 +7,8 @@ required_files="
 index.html
 404.html
 monero/index.html
+projects/index.html
+projects/gmcp/index.html
 styles.css
 main.js
 robots.txt
@@ -44,6 +46,21 @@ grep -q 'https://www.encryptedguru.com/' sitemap.xml || {
 
 grep -q 'https://www.encryptedguru.com/monero/' sitemap.xml || {
   echo "sitemap.xml missing Monero page" >&2
+  exit 1
+}
+
+grep -q 'https://www.encryptedguru.com/projects/</loc>' sitemap.xml || {
+  echo "sitemap.xml missing Projects index" >&2
+  exit 1
+}
+
+grep -q 'https://www.encryptedguru.com/projects/gmcp/</loc>' sitemap.xml || {
+  echo "sitemap.xml missing GMCP project page" >&2
+  exit 1
+}
+
+grep -q 'href="/projects/"' index.html || {
+  echo "homepage missing Projects navigation link" >&2
   exit 1
 }
 

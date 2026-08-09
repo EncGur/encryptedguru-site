@@ -9,10 +9,10 @@ trap 'rm -rf "$tmp"' EXIT
 failures=0
 
 sha_a="$(./scripts/package-release.sh | tail -1 | awk '{print $1}')"
-cp encryptedguru-v0.2-site.zip "$tmp/a.zip"
+cp encryptedguru-v0.3-site.zip "$tmp/a.zip"
 
 sha_b="$(./scripts/package-release.sh | tail -1 | awk '{print $1}')"
-cp encryptedguru-v0.2-site.zip "$tmp/b.zip"
+cp encryptedguru-v0.3-site.zip "$tmp/b.zip"
 
 if [ "$sha_a" != "$sha_b" ]; then
   echo "FAIL: package is not reproducible" >&2

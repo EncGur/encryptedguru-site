@@ -20,7 +20,7 @@ Use this before publishing a new static-site release.
 
 - [ ] Start local preview with `python3 -m http.server 4173 --directory dist`.
 - [ ] Open `http://127.0.0.1:4173/`.
-- [ ] Check homepage, Monero, docs, labs, infrastructure, contact, and `security.txt`.
+- [ ] Check homepage, Monero, docs, projects, labs, infrastructure, contact, and `security.txt`.
 - [ ] Check mobile width for navigation and text fit.
 - [ ] Check that external-facing links and mail links are correct.
 - [ ] Check an unknown route returns `404` rather than the homepage.
@@ -45,7 +45,7 @@ Use this before publishing a new static-site release.
 - [ ] Run `./scripts/package-release.sh` if a handoff zip is needed.
 - [ ] Deploy through Cloudflare Pages or the current static host.
 - [ ] Record the deployed commit or package hash.
-- [ ] Keep `encryptedguru-v0.2-site.zip` only as a handoff artifact.
+- [ ] Keep `encryptedguru-v0.3-site.zip` only as a handoff artifact.
 - [ ] If using Cloudflare Pages, confirm settings match `CLOUDFLARE_PAGES_SETUP.md`.
 
 ## Post-Release

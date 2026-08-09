@@ -22,6 +22,9 @@ jobs:
       - name: Public-boundary regression tests
         run: ./tests/test-public-boundary.sh
 
+      - name: Projects regression tests
+        run: ./tests/test-projects.sh
+
       - name: Reproducible-package test
         run: ./tests/test-reproducible-package.sh
 
