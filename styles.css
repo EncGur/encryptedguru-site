@@ -144,13 +144,12 @@ a {
 
 .home-page .hero {
   position: relative;
-  grid-template-columns: minmax(0, 1.06fr) minmax(300px, 0.74fr);
-  gap: clamp(2rem, 6vw, 7rem);
+  grid-template-columns: minmax(0, 1fr);
   min-height: 100svh;
   padding-top: 9rem;
   padding-bottom: 4.5rem;
   overflow: hidden;
-  align-items: end;
+  align-items: center;
   isolation: isolate;
 }
 
@@ -159,8 +158,8 @@ a {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(circle at 24% 58%, rgba(155, 214, 107, 0.17), transparent 28rem),
-    linear-gradient(90deg, rgba(5, 6, 5, 0.9) 0%, rgba(5, 6, 5, 0.46) 55%, rgba(5, 6, 5, 0.22) 100%);
+    radial-gradient(circle at 18% 45%, rgba(155, 214, 107, 0.17), transparent 28rem),
+    radial-gradient(circle at 84% 18%, rgba(210, 165, 116, 0.08), transparent 24rem);
   content: "";
 }
 
@@ -266,58 +265,6 @@ h3 {
   color: #10120e;
   background: var(--green-strong);
   border-color: var(--green-strong);
-}
-
-.hero-visual {
-  position: relative;
-  z-index: 0;
-  min-height: clamp(420px, 62vh, 700px);
-  overflow: hidden;
-  border: 1px solid rgba(246, 244, 235, 0.2);
-  border-radius: 2rem;
-  background: #1b201a;
-  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.42);
-  transform: translateY(-1rem);
-}
-
-.hero-visual::before {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    radial-gradient(circle at 58% 30%, transparent 0 22%, rgba(10, 12, 10, 0.18) 62%, rgba(5, 6, 5, 0.72) 100%),
-    linear-gradient(180deg, rgba(10, 12, 10, 0.04), rgba(10, 12, 10, 0.58));
-  content: "";
-}
-
-.hero-visual img {
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-  display: block;
-  object-fit: cover;
-  object-position: center 28%;
-  filter: saturate(0.78) contrast(1.04);
-  transform: scale(1.04);
-}
-
-.hero-visual-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(135deg, rgba(155, 214, 107, 0.14), transparent 42%);
-  mix-blend-mode: screen;
-}
-
-.hero-visual-caption {
-  position: absolute;
-  right: 1.2rem;
-  bottom: 1.1rem;
-  z-index: 3;
-  color: rgba(247, 244, 235, 0.72);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
 }
 
 .hero-status {
@@ -690,7 +637,6 @@ h3 {
 
   .home-page .hero {
     grid-template-columns: 1fr;
-    gap: 3rem;
     min-height: auto;
     padding-top: 10rem;
     padding-bottom: 5rem;
@@ -698,13 +644,6 @@ h3 {
 
   .home-page .hero::after {
     bottom: 1.5rem;
-  }
-
-  .hero-visual {
-    width: min(100%, 620px);
-    min-height: 360px;
-    margin-left: auto;
-    transform: none;
   }
 
   .plasma-title,
@@ -767,11 +706,6 @@ h3 {
 @media (max-width: 360px) {
   h1 {
     overflow-wrap: anywhere;
-  }
-
-  .hero-visual {
-    min-height: 300px;
-    border-radius: 1.4rem;
   }
 
   .plasma-title .page-title-visual,
