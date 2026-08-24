@@ -14,13 +14,13 @@ for file in \
   404.html \
   styles.css \
   main.js \
-  logo.png \
+  eg-mark.png \
+  eg-mark-32.png \
+  eg-mark.ico \
+  eg-mark-180.png \
   og-home.png \
   monero-hero.png \
   plasma-hero.jpg \
-  favicon.ico \
-  favicon-32x32.png \
-  apple-touch-icon.png \
   site.webmanifest \
   robots.txt \
   sitemap.xml \
@@ -57,6 +57,13 @@ test -f "$output/plasma/index.html"
 test -f "$output/go/plasma-one/index.html"
 test -f "$output/recommendations/index.html"
 test -f "$output/og-home.png"
+test -f "$output/eg-mark.png"
+test -f "$output/eg-mark-32.png"
+test -f "$output/eg-mark.ico"
+test -f "$output/eg-mark-180.png"
+test ! -e "$output/logo.png"
+test ! -e "$output/favicon-32x32.png"
+test ! -e "$output/apple-touch-icon.png"
 test -f "$output/projects/index.html"
 test -f "$output/projects/gmcp/index.html"
 test -f "$output/.well-known/security.txt"
