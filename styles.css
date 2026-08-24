@@ -583,6 +583,33 @@ h3 {
   min-height: 170px;
 }
 
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0.9rem;
+}
+
+.recommendation-card .tile-kicker {
+  margin-bottom: 2.2rem;
+}
+
+.recommendation-card p {
+  margin: 0;
+}
+
+.recommendation-card .button {
+  width: fit-content;
+  margin-top: auto;
+}
+
+.recommendation-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
 .tile p {
   margin: 0;
   color: var(--muted);
