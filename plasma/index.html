@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plasma - EncryptedGuru</title>
+    <meta name="description" content="First-principles notes on Plasma's stablecoin payment network, Plasma One, community signals, and the separate question of XPL value capture.">
+    <meta name="theme-color" content="#050706">
+    <link rel="canonical" href="https://www.encryptedguru.com/plasma/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="Plasma - EncryptedGuru">
+    <meta property="og:description" content="A source-separated reading of Plasma the network, Plasma One the product, and XPL the token.">
+    <meta property="og:url" content="https://www.encryptedguru.com/plasma/">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
+    <link rel="icon" href="/favicon.ico?v=4" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand-logo" src="/logo.png" alt="" aria-hidden="true"><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/monero/">Monero</a>
+        <a aria-current="page" href="/plasma/">Plasma</a>
+        <a href="/docs/">Docs</a>
+        <a href="/projects/">Projects</a>
+        <a href="/labs/">Labs</a>
+        <a href="/infrastructure/">Infrastructure</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title">
+        <p class="eyebrow">Stablecoin rails / research note</p>
+        <h1>Plasma</h1>
+        <p>Plasma the network, Plasma One the product, and XPL the token are related—but they are not the same claim. This page keeps the layers separate and checks each one against its strongest available source.</p>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Current reading</p>
+          <h2>A payment rail is not automatically a product, and a product is not automatically token value capture.</h2>
+        </div>
+        <div class="source-note">
+          <dl>
+            <div><dt>Network</dt><dd>Plasma, a stablecoin-first EVM blockchain</dd></div>
+            <div><dt>Product</dt><dd>Plasma One, the consumer-facing account and card surface</dd></div>
+            <div><dt>Community signal</dt><dd>@e4symp, observed 2026-08-24</dd></div>
+            <div><dt>Reading rule</dt><dd>Official documentation before social claims; current terms before action</dd></div>
+          </dl>
+          <p>This is research and systems documentation, not investment, banking, card-availability, or financial advice. Eligibility, geography, fees, rates, custody, and third-party providers can change.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://www.plasma.org/network">Read official network overview</a>
+            <a class="button secondary" href="https://docs.plasma.org/docs/get-started/why-build-on-plasma/overview">Open developer docs</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">First principles</p>
+          <h2>What the official network material supports.</h2>
+        </div>
+        <div class="grid four">
+          <article class="tile">
+            <span class="tile-kicker">01</span>
+            <h3>Stablecoin-first rail</h3>
+            <p>Plasma's official documentation frames the chain as a payments-focused Layer 1 built around stablecoin use cases, not as a general-purpose slogan detached from a payment workload.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">02</span>
+            <h3>Familiar execution</h3>
+            <p>The docs describe full EVM compatibility and standard Ethereum tooling, so developers can approach the network with Solidity, Hardhat, Foundry, and familiar wallets.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">03</span>
+            <h3>Fee abstraction</h3>
+            <p>Official docs describe a restricted paymaster for sponsored USD₮ transfers and approved alternative gas tokens. “Free” is route- and eligibility-dependent, not a universal promise.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">04</span>
+            <h3>Privacy is scoped</h3>
+            <p>Confidential payments are described as an opt-in module under development. A roadmap or design goal is not the same as a shipped guarantee.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Architecture</p>
+          <h2>The useful mental model is a stack of distinct trust boundaries.</h2>
+        </div>
+        <div class="verification-list">
+          <div>
+            <span>01</span>
+            <strong>Consensus and execution</strong>
+            <p>The official docs describe PlasmaBFT and a Reth-based EVM execution layer. That is an architecture claim; uptime, decentralization, and real-world performance still require independent monitoring.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Stablecoin contracts</strong>
+            <p>Protocol-maintained contracts can simplify payment flows, but paymaster scope, identity checks, rate limits, contract controls, and funding assumptions remain part of the security model.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>Application layer</strong>
+            <p>Wallets, cards, accounts, bridges, issuers, and on- or off-ramps add their own custody, compliance, counterparty, and regional constraints.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <strong>Human decision</strong>
+            <p>Never connect a wallet, bridge funds, sign approvals, or buy a token because a social post sounds confident. Verify the exact domain, chain, contract, amount, and recipient first.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Plasma One</p>
+        <h2>The consumer product adds a different set of assumptions.</h2>
+        <p>The official Plasma One site presents a stablecoin account for spending, saving, and earning, with card and transfer surfaces. It also describes local-currency funding and withdrawals, subject to product and geography constraints.</p>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>Card surface</h3>
+            <p>A card makes a stablecoin balance usable at merchants, but issuance, Visa acceptance, limits, and regional availability are product and partner questions.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Account surface</h3>
+            <p>A global dollar account can simplify movement between local currency and stablecoins, but an account interface does not make the balance a bank deposit.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Earn surface</h3>
+            <p>Plasma's business disclosures describe variable third-party DeFi access and material smart-contract, liquidity, counterparty, and market risks. Yield is not guaranteed.</p>
+          </article>
+        </div>
+        <p class="source-note"><strong>Official disclosure boundary:</strong> Plasma states that it is not a bank, that stablecoin balances are not bank deposits, and that eligibility and third-party service arrangements vary. Read the current <a class="text-link" href="https://www.plasma.org/business">business disclosures</a> before relying on any product claim.</p>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Community signal</p>
+          <h2>What @e4symp is useful for—and what it cannot prove.</h2>
+        </div>
+        <div class="stack-list">
+          <div>
+            <strong>Observed identity</strong>
+            <span>The public profile describes itself as “Stablecoin rails / @Plasma Maxi” and links to Plasma.org. That establishes the account's stated affiliation and viewpoint, not an official corporate role.</span>
+          </div>
+          <div>
+            <strong>Invite post — 2026-08-24</strong>
+            <span>The account publicly shared “Use code: EGEGEG” for a Plasma One invite and wrote “Physical Card Soon.” This is a community distribution signal. It is not an official terms page or a guarantee of availability.</span>
+          </div>
+          <div>
+            <strong>Founding-member culture</strong>
+            <span>The pinned post discusses a Plasma One Founding Member box and product taste. It is useful evidence of community identity and enthusiasm, not evidence of network security, adoption, or token value capture.</span>
+          </div>
+          <div>
+            <strong>Brand entrypoint</strong>
+            <span>EncryptedGuru's referral entrypoint is <a class="text-link" href="https://encryptedguru.com/plasma">encryptedguru.com/plasma</a>. The code remains explicitly attributed to the public post above.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Network / product / token</p>
+          <h2>Three separate research questions.</h2>
+        </div>
+        <div class="grid three">
+          <article class="tile">
+            <span class="tile-kicker">01</span>
+            <h3>Does the network work?</h3>
+            <p>Check finality, fees, stablecoin volume, bridge dependencies, uptime, validator structure, contract risk, and real user flows. A chain description is only the starting hypothesis.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">02</span>
+            <h3>Does the product retain users?</h3>
+            <p>Check card delivery, geographic eligibility, spending reliability, support, custody boundaries, transfer completion, and whether rewards survive after costs and restrictions.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">03</span>
+            <h3>Where could XPL capture value?</h3>
+            <p>The official docs identify XPL as the chain currency and describe ways to abstract gas. Network usage therefore does not by itself prove demand for, or value capture by, the token.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Operating rules</p>
+        <h2>EncryptedGuru Plasma discipline</h2>
+        <ul class="clean-list">
+          <li>Use the official Plasma domains and current documentation for chain IDs, RPC endpoints, contract addresses, tokenomics, and product terms.</li>
+          <li>Keep Plasma the network, Plasma One the product, and XPL the token as separate labels in research notes and decisions.</li>
+          <li>Treat community invite codes, founder culture, card announcements, cashback, and yield as claims requiring current product verification.</li>
+          <li>Do not sign transactions, bridge assets, approve spenders, or connect a wallet until the exact chain, domain, contract, amount, and recipient have been independently checked.</li>
+          <li>Never enter a seed phrase, private key, recovery code, or payment credential into a site reached from a social post.</li>
+          <li>Re-check official terms before acting; product availability, regional rules, fees, rewards, and third-party providers can change.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Source path</p>
+          <h2>Read the primary material in layers.</h2>
+        </div>
+        <div class="link-list">
+          <a href="https://www.plasma.org/network">
+            <span>Plasma network overview</span>
+            <small>Official product and network framing for stablecoin payments</small>
+          </a>
+          <a href="https://docs.plasma.org/docs/get-started/why-build-on-plasma/overview">
+            <span>Why build on Plasma</span>
+            <small>Official documentation for EVM compatibility and stablecoin-native features</small>
+          </a>
+          <a href="https://docs.plasma.org/docs/get-started/xpl/tokenomics">
+            <span>XPL tokenomics</span>
+            <small>Read current token documentation separately from product adoption</small>
+          </a>
+          <a href="https://www.plasma.org/business">
+            <span>Plasma business disclosures</span>
+            <small>Custody, banking, eligibility, yield, card, and third-party risk boundaries</small>
+          </a>
+          <a href="https://x.com/e4symp/status/2091829636108026276">
+            <span>@e4symp invite post — Aug 24, 2026</span>
+            <small>Community source for the EGEGEG referral code; not an official terms page</small>
+          </a>
+          <a href="https://x.com/e4symp">
+            <span>@e4symp public profile</span>
+            <small>Community perspective and current public posting context</small>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru v0.3</span>
+      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a> / <a href="https://github.com/EncGur/encryptedguru-site">source</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

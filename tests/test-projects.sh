@@ -21,10 +21,11 @@ ok() {
 # The Projects section must build into dist/.
 ok "dist/projects/index.html exists" test -f dist/projects/index.html
 ok "dist/projects/gmcp/index.html exists" test -f dist/projects/gmcp/index.html
+ok "dist/plasma/index.html exists" test -f dist/plasma/index.html
 
 # Every internal href on every page that carries the primary navigation must
 # resolve to a real file inside dist/.
-pages="index.html 404.html monero/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html"
+pages="index.html 404.html monero/index.html plasma/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html"
 
 for page in $pages; do
   if [ ! -f "$page" ]; then
@@ -65,10 +66,16 @@ fi
 # The sitemap must carry both new canonical URLs.
 ok "sitemap.xml has Projects index URL" grep -q 'https://www.encryptedguru.com/projects/</loc>' sitemap.xml
 ok "sitemap.xml has GMCP project URL" grep -q 'https://www.encryptedguru.com/projects/gmcp/</loc>' sitemap.xml
+ok "sitemap.xml has Plasma URL" grep -q 'https://www.encryptedguru.com/plasma/</loc>' sitemap.xml
 
 # The new pages must carry the canonical tags matching the sitemap.
 ok "projects/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/' projects/index.html
 ok "projects/gmcp/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/gmcp/' projects/gmcp/index.html
+ok "plasma/index.html canonical tag" grep -q 'https://www.encryptedguru.com/plasma/' plasma/index.html
+ok "Plasma page links official network overview" grep -q 'https://www.plasma.org/network' plasma/index.html
+ok "Plasma page links official developer docs" grep -q 'https://docs.plasma.org/docs/get-started/why-build-on-plasma/overview' plasma/index.html
+ok "Plasma page links the observed X post" grep -q 'https://x.com/e4symp/status/2091829636108026276' plasma/index.html
+ok "Plasma page separates community signal" grep -q 'community distribution signal' plasma/index.html
 
 # Every page carrying the primary navigation must link to the Projects hub.
 for page in $pages; do
@@ -76,10 +83,14 @@ for page in $pages; do
     echo "FAIL: $page missing Projects navigation link" >&2
     failures=$((failures + 1))
   fi
+  if ! grep -q 'href="/plasma/"' "$page"; then
+    echo "FAIL: $page missing Plasma navigation link" >&2
+    failures=$((failures + 1))
+  fi
 done
 
 # Public-boundary leak patterns must stay absent from the new pages.
-leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html || true)"
+leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html plasma/index.html || true)"
 if [ -n "$leaks" ]; then
   echo "FAIL: leak patterns found in new pages:" >&2
   echo "$leaks" >&2

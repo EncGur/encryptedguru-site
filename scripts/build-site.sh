@@ -28,7 +28,7 @@ do
   cp "$file" "$output/"
 done
 
-for directory in .well-known contact docs infrastructure labs monero projects; do
+for directory in .well-known contact docs infrastructure labs monero plasma projects; do
   cp -R "$directory" "$output/"
 done
 
@@ -50,6 +50,7 @@ fi
 test -f "$output/index.html"
 test -f "$output/404.html"
 test -f "$output/monero/index.html"
+test -f "$output/plasma/index.html"
 test -f "$output/projects/index.html"
 test -f "$output/projects/gmcp/index.html"
 test -f "$output/.well-known/security.txt"

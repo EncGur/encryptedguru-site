@@ -13,8 +13,11 @@ tmp_headers="$(mktemp)"
 tmp_security="$(mktemp)"
 tmp_sitemap="$(mktemp)"
 tmp_monero="$(mktemp)"
+tmp_plasma_page="$(mktemp)"
+tmp_plasma="$(mktemp)"
+tmp_apex_plasma="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_monero" "$tmp_boundary_headers"' EXIT
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_monero" "$tmp_plasma_page" "$tmp_plasma" "$tmp_apex_plasma" "$tmp_boundary_headers"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -30,6 +33,17 @@ curl -sS --max-time 20 "https://$www/sitemap.xml" | tee "$tmp_sitemap" | sed -n 
 echo
 echo "== Monero knowledge page =="
 curl -sS --max-time 20 "https://$www/monero/" | tee "$tmp_monero" | sed -n '1,20p'
+
+echo
+echo "== Plasma knowledge page =="
+plasma_page_status="$(curl -sS -o "$tmp_plasma_page" -w '%{http_code}' --max-time 20 "https://$www/plasma/")"
+printf 'www/plasma/ status: %s\n' "$plasma_page_status"
+sed -n '1,20p' "$tmp_plasma_page"
+
+echo
+echo "== Plasma referral =="
+curl -sS -D "$tmp_plasma" -o /dev/null -w 'www/plasma status: %{http_code}\n' --max-time 20 "https://$www/plasma"
+curl -sS -D "$tmp_apex_plasma" -o /dev/null -w 'apex/plasma status: %{http_code}\n' --max-time 20 "https://$domain/plasma"
 
 echo
 echo "== Public surface boundary =="
@@ -116,10 +130,59 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  grep -q 'https://www.encryptedguru.com/plasma/' "$tmp_sitemap" || {
+    echo "live sitemap missing Plasma page" >&2
+    exit 1
+  }
+
   grep -q '<h1>Monero</h1>' "$tmp_monero" || {
     echo "live Monero page missing expected heading" >&2
     exit 1
   }
+
+  test "$plasma_page_status" = "200" || {
+    echo "live Plasma page is not returning 200" >&2
+    exit 1
+  }
+
+  grep -q '<h1>Plasma</h1>' "$tmp_plasma_page" || {
+    echo "live Plasma page missing expected heading" >&2
+    exit 1
+  }
+
+  grep -q 'https://docs.plasma.org/docs/get-started/why-build-on-plasma/overview' "$tmp_plasma_page" || {
+    echo "live Plasma page missing official developer documentation link" >&2
+    exit 1
+  }
+
+  grep -q 'https://x.com/e4symp/status/2091829636108026276' "$tmp_plasma_page" || {
+    echo "live Plasma page missing the observed community source link" >&2
+    exit 1
+  }
+
+  grep -qi '^HTTP/2 301' "$tmp_plasma" || {
+    echo "www/plasma is not returning a 301 redirect" >&2
+    exit 1
+  }
+
+  grep -qiF 'location: https://plasmaone.onelink.me/P8qq/rvdp9r4l?code=EGEGEG' "$tmp_plasma" || {
+    echo "www/plasma is not pointing at the fixed Plasma One referral URL" >&2
+    exit 1
+  }
+
+  grep -qi '^HTTP/2 301' "$tmp_apex_plasma" || {
+    echo "apex/plasma is not returning a 301 redirect" >&2
+    exit 1
+  }
+
+  if grep -qiF 'location: https://www.encryptedguru.com/plasma' "$tmp_apex_plasma"; then
+    echo "apex/plasma reaches the Pages referral route through the existing apex redirect"
+  elif grep -qiF 'location: https://plasmaone.onelink.me/P8qq/rvdp9r4l?code=EGEGEG' "$tmp_apex_plasma"; then
+    echo "apex/plasma reaches the Plasma One referral URL directly"
+  else
+    echo "apex/plasma has an unexpected redirect target" >&2
+    exit 1
+  fi
 
   for status in "$unknown_status" "$markdown_status" "$runbook_status" "$script_status"; do
     test "$status" = "404" || {
