@@ -2,13 +2,6 @@
 /plasma /plasma/ 308
 /go/plasma-one /go/plasma-one/ 308
 
-# Retire the former personal-image asset paths. Use new names so stale edge
-# objects cannot continue to present the old global brand image.
-/logo.png /eg-mark.png 302
-/favicon-32x32.png /eg-mark-32.png 302
-/favicon.ico /eg-mark.ico 302
-/apple-touch-icon.png /eg-mark-180.png 302
-
 https://encryptedguru.com/* https://www.encryptedguru.com/:splat 301
 http://encryptedguru.com/* https://www.encryptedguru.com/:splat 301
 http://www.encryptedguru.com/* https://www.encryptedguru.com/:splat 301

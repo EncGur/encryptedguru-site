@@ -82,6 +82,13 @@ else
   failures=$((failures + 1))
 fi
 
+if grep -q '"/logo.png"' _routes.json && grep -q '"/favicon.ico"' _routes.json && grep -q 'eg-mark.png' 'functions/[[path]].js'; then
+  echo "ok: retired personal asset paths use the no-store replacement boundary"
+else
+  echo "FAIL: retired personal asset paths are not covered by the replacement boundary" >&2
+  failures=$((failures + 1))
+fi
+
 # No tracked file may carry machine-specific identity patterns. The test file
 # itself is excluded because it deliberately contains payload strings.
 leaks="$(git grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|github-cbdtaeff' -- ':!scripts/audit-source.sh' ':!runbooks' ':!tests/' 2>/dev/null || true)"

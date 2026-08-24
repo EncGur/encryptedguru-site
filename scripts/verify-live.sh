@@ -20,8 +20,9 @@ tmp_plasma="$(mktemp)"
 tmp_plasma_invite_page="$(mktemp)"
 tmp_plasma_invite="$(mktemp)"
 tmp_apex_plasma="$(mktemp)"
+tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_boundary_headers"' EXIT
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -62,6 +63,7 @@ printf 'www/go/plasma-one/ status: %s\n' "$plasma_invite_page_status"
 sed -n '1,20p' "$tmp_plasma_invite_page"
 curl -sS -D "$tmp_plasma_invite" -o /dev/null -w 'www/go/plasma-one status: %{http_code}\n' --max-time 20 "https://$www/go/plasma-one"
 curl -sS -D "$tmp_apex_plasma" -o /dev/null -w 'apex/plasma status: %{http_code}\n' --max-time 20 "https://$domain/plasma"
+curl -sS -D "$tmp_legacy_logo" -o /dev/null -w 'legacy/logo.png status: %{http_code}\n' --max-time 20 "https://$www/logo.png"
 
 echo
 echo "== Public surface boundary =="
@@ -160,6 +162,16 @@ if [ "$strict" -eq 1 ]; then
 
   grep -q 'og-home.png' "$tmp_home" || {
     echo "live homepage is missing the neutral social preview image" >&2
+    exit 1
+  }
+
+  grep -qi '^HTTP/2 302' "$tmp_legacy_logo" || {
+    echo "legacy /logo.png is still served without the replacement boundary" >&2
+    exit 1
+  }
+
+  grep -qi 'location: /eg-mark.png' "$tmp_legacy_logo" || {
+    echo "legacy /logo.png is not redirected to the neutral EG asset" >&2
     exit 1
   }
 
