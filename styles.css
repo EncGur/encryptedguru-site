@@ -1401,15 +1401,10 @@ h3 {
 
   .nav {
     width: 100%;
-    flex-wrap: nowrap;
-    gap: 0.25rem;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    overflow: visible;
     padding-bottom: 0.2rem;
-    scrollbar-width: none;
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none;
   }
 }
 
