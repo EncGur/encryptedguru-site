@@ -98,3 +98,6 @@ are verified without exposing private operational material.
   made by Plasma One rather than promises made by this site.
 - Kept the existing official-source and community-source distinction intact;
   the recommendation is an action entry, not evidence of product guarantees.
+- Added a separate Bitfinex exchange entry to the Monero page, explicitly
+  separating exchange custody, KYC, geography, fees, withdrawals, and asset
+  support from Monero's protocol-level privacy claims.
