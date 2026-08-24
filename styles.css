@@ -113,6 +113,38 @@ a {
   box-shadow: 0 0 0 2px rgba(210, 244, 155, 0.3), 0 0 0 6px rgba(210, 244, 155, 0.08);
 }
 
+.brand-mark {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(217, 246, 165, 0.7);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(217, 246, 165, 0.18) 0 16%, transparent 17% 42%, rgba(168, 230, 107, 0.18) 43% 45%, transparent 46%), #121911;
+  box-shadow: 0 0 0 2px rgba(168, 230, 107, 0.18), 0 0 0 6px rgba(168, 230, 107, 0.06);
+}
+
+.brand-mark::before,
+.brand-mark::after {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--green-strong);
+  box-shadow: 0 0 10px rgba(217, 246, 165, 0.8);
+  content: "";
+}
+
+.brand-mark::before { top: 5px; left: 6px; }
+.brand-mark::after { right: 5px; bottom: 6px; background: var(--amber); box-shadow: 0 0 10px rgba(227, 176, 111, 0.75); }
+
+.brand-mark > span {
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(227, 176, 111, 0.7);
+  border-radius: 50%;
+}
+
 .nav {
   display: flex;
   align-items: center;

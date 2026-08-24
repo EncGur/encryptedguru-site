@@ -59,8 +59,10 @@ are verified without exposing private operational material.
   systems.
 - Turned verification into a first-class proof strip rather than a buried
   paragraph.
-- Restored a neutral Open Graph/Twitter share image using the existing logo;
-  no personal photo is used on the homepage.
+- Added structured Open Graph/Twitter title and description metadata without
+  reusing a personal photo for the homepage.
+- Replaced the visible brand avatar with a CSS-only system mark; the homepage
+  no longer displays a personal photo.
 - Added a restrained status/signal panel using CSS only, keeping the site static
   and avoiding new external assets or tracking.
 - Improved responsive navigation, card focus states, spacing rhythm, and
