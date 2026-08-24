@@ -3,12 +3,12 @@
   "short_name": "EncryptedGuru",
   "icons": [
     {
-      "src": "/eg-mark-32.png?v=1",
+      "src": "/eg-mark-32.png?v=2",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/eg-mark-180.png?v=1",
+      "src": "/eg-mark-180.png?v=2",
       "sizes": "180x180",
       "type": "image/png"
     }

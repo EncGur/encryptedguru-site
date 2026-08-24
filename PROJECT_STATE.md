@@ -53,5 +53,7 @@ Run these before a production release:
 - The source build and boundary tests pass.
 - The production route, headers, sitemap, security.txt, recommendation entry,
   and public/private edge behavior pass strict live verification.
-- Global brand assets contain no unintended personal portrait.
+- The red portrait is intentional for the global brand mark, favicon, and
+  browser/app icon; the homepage hero and generic social preview remain free
+  of a large personal photo.
 - Current-state documentation points to this file rather than a stale snapshot.

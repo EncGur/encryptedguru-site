@@ -161,7 +161,7 @@ if [ "$strict" -eq 1 ]; then
   }
 
   grep -q 'og-home.png' "$tmp_home" || {
-    echo "live homepage is missing the neutral social preview image" >&2
+    echo "live homepage is missing the branded social preview image" >&2
     exit 1
   }
 
@@ -171,7 +171,7 @@ if [ "$strict" -eq 1 ]; then
   }
 
   grep -qi 'location: /eg-mark.png' "$tmp_legacy_logo" || {
-    echo "legacy /logo.png is not redirected to the neutral EG asset" >&2
+    echo "legacy /logo.png is not redirected to the current EG brand asset" >&2
     exit 1
   }
 
