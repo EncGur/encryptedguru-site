@@ -77,3 +77,14 @@ are verified without exposing private operational material.
 - Canonical, Open Graph, and Twitter metadata are present for the homepage.
 - No credentials, private runbooks, or new external runtime dependencies are
   introduced.
+
+## Second pass — inner-page continuity
+
+- Preserved the existing type system and homepage hierarchy.
+- Added a consistent page context line to every inner route: section code,
+  category, and a return path to the overview or parent index.
+- Removed the obsolete `v0.3` footer label in favor of a durable site identity.
+- Removed the personal `logo.png` share image from generic inner pages; Monero
+  and Plasma retain only their topic-specific images.
+- Aligned inner-page theme colors with the homepage and added large-image
+  Twitter metadata for the two image-led research pages.

@@ -405,6 +405,38 @@ h3 {
   padding: 9rem 0 5rem;
 }
 
+.page-title-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.page-title-meta a {
+  color: var(--soft);
+  letter-spacing: 0.08em;
+  transition: color 180ms ease;
+}
+
+.page-title-meta a:hover,
+.page-title-meta a:focus-visible {
+  color: var(--green-strong);
+}
+
+.page-title-meta a span {
+  margin-left: 0.3rem;
+  color: var(--amber);
+}
+
 .plasma-title,
 .monero-title {
   display: grid;
@@ -1323,6 +1355,12 @@ h3 {
 }
 
 @media (max-width: 520px) {
+  .page-title-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
   .home-page h1 {
     font-size: clamp(3.5rem, 16vw, 5.5rem);
   }
