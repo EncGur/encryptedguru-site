@@ -120,7 +120,7 @@ a {
   height: 30px;
   border: 1px solid rgba(255, 123, 74, 0.78);
   border-radius: 50%;
-  background: url("/eg-mark-180.png?v=2") center / cover no-repeat;
+  background: url("/eg-mark-180.png?v=3") center / cover no-repeat;
   box-shadow: 0 0 0 2px rgba(255, 123, 74, 0.28), 0 0 0 6px rgba(255, 74, 45, 0.1);
   overflow: hidden;
 }
