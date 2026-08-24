@@ -101,3 +101,6 @@ are verified without exposing private operational material.
 - Added a separate Bitfinex exchange entry to the Monero page, explicitly
   separating exchange custody, KYC, geography, fees, withdrawals, and asset
   support from Monero's protocol-level privacy claims.
+- Added a separate Binance entry with the user-provided `EGURU` referral code;
+  the copy does not promise trading returns, leverage benefits, eligibility, or
+  regional availability.
