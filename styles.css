@@ -152,6 +152,19 @@ a {
   background: rgba(246, 244, 235, 0.1);
 }
 
+.nav a.nav-recommendations {
+  color: var(--green-strong);
+  border: 1px solid rgba(168, 230, 107, 0.28);
+  background: rgba(168, 230, 107, 0.08);
+}
+
+.nav a.nav-recommendations:hover,
+.nav a.nav-recommendations[aria-current="page"] {
+  color: var(--text);
+  border-color: rgba(217, 246, 165, 0.56);
+  background: rgba(168, 230, 107, 0.18);
+}
+
 .nav-more {
   position: relative;
 }
@@ -1161,6 +1174,41 @@ h3 {
   padding-top: 6.5rem;
 }
 
+.recommendation-highlight,
+.recommendation-jump {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-top: 1px solid rgba(168, 230, 107, 0.2);
+  border-bottom: 1px solid rgba(168, 230, 107, 0.2);
+  background: linear-gradient(110deg, rgba(31, 46, 26, 0.8), rgba(14, 18, 14, 0.66));
+}
+
+.recommendation-highlight-copy,
+.recommendation-jump > div {
+  max-width: 700px;
+}
+
+.recommendation-highlight h2,
+.recommendation-jump h2 {
+  max-width: 17ch;
+  margin: 0.25rem 0 0.8rem;
+}
+
+.recommendation-highlight p:last-child,
+.recommendation-jump p:last-child {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.recommendation-highlight .button,
+.recommendation-jump .button {
+  flex: 0 0 auto;
+}
+
 .path-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1396,6 +1444,12 @@ h3 {
 
   .section-header-row {
     align-items: start;
+    flex-direction: column;
+  }
+
+  .recommendation-highlight,
+  .recommendation-jump {
+    align-items: flex-start;
     flex-direction: column;
   }
 
