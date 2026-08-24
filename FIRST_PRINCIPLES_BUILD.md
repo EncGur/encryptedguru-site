@@ -12,7 +12,10 @@ Generated: 2026-06-14
 
 EncryptedGuru should be a small, inspectable public boundary for a personal sovereign systems lab.
 
-The site is not a marketing funnel. It is a namespace, trust surface, operating notebook, and recovery anchor for infrastructure, cloud, network simulation, and AI workflow work.
+The site is a namespace, trust surface, operating notebook, and recovery anchor
+for infrastructure, cloud, network simulation, and AI workflow work. Referral
+entries may exist, but they remain subordinate to evidence and are explicitly
+disclosed as personal incentives rather than presented as proof.
 
 ## First Principles
 
@@ -36,31 +39,13 @@ The site is not a marketing funnel. It is a namespace, trust surface, operating 
    - Decisions, DNS changes, deployment notes, runbooks, and incident lessons should live in files.
    - Chats can steer work, but artifacts should carry state forward.
 
-## Current Verified State
+## Current State Notice
 
-- `https://encryptedguru.com` redirects to `https://www.encryptedguru.com/`.
-- `https://www.encryptedguru.com/` serves the static v0.1 site through Cloudflare.
-- `https://www.encryptedguru.com/.well-known/security.txt` is published.
-- Public DNS via `1.1.1.1` and `8.8.8.8` resolves the site to Cloudflare IPs:
-  - `104.21.95.110`
-  - `172.67.144.164`
-- MX points to Google Workspace:
-  - `1 smtp.google.com.`
-- SPF is present:
-  - `v=spf1 include:_spf.google.com ~all`
-- DMARC is present:
-  - `v=DMARC1; p=none; rua=mailto:eg@encryptedguru.com; fo=1`
-- Google Workspace DKIM is present at `google._domainkey.encryptedguru.com`.
-- Local resolver returned `198.18.0.91` for the apex during audit. Public resolvers did not. Treat this as local proxy, gateway, or DNS interception behavior unless reproduced externally.
-- Local project folder is not currently a Git repository.
-
-## Main Gaps
-
-1. No repository-backed deployment workflow is visible locally.
-2. DMARC is currently monitoring-only with `p=none`; this is fine for observation, but it is not enforcement.
-3. Public docs exist, but operational runbooks are still thin.
-4. Planned subdomains are documented but not yet backed by clear activation criteria.
-5. Live `security.txt` still needs the local `Expires` update deployed.
+The operational snapshot that used to appear in this section is historical and
+should not be used as the current source of truth. It described a pre-repository
+and pre-public-release state. The current source, production, public-boundary,
+and open-risk record lives in `PROJECT_STATE.md` and is refreshed when a release
+changes those facts.
 
 ## V0.2 Build Order
 

@@ -12,12 +12,16 @@ fi
 tmp_headers="$(mktemp)"
 tmp_security="$(mktemp)"
 tmp_sitemap="$(mktemp)"
+tmp_home="$(mktemp)"
 tmp_monero="$(mktemp)"
+tmp_recommendations="$(mktemp)"
 tmp_plasma_page="$(mktemp)"
 tmp_plasma="$(mktemp)"
+tmp_plasma_invite_page="$(mktemp)"
+tmp_plasma_invite="$(mktemp)"
 tmp_apex_plasma="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_monero" "$tmp_plasma_page" "$tmp_plasma" "$tmp_apex_plasma" "$tmp_boundary_headers"' EXIT
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_boundary_headers"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -31,8 +35,18 @@ echo "== sitemap =="
 curl -sS --max-time 20 "https://$www/sitemap.xml" | tee "$tmp_sitemap" | sed -n '1,80p'
 
 echo
+echo "== Homepage metadata =="
+curl -sS --max-time 20 "https://$www/" | tee "$tmp_home" | sed -n '1,24p'
+
+echo
 echo "== Monero knowledge page =="
 curl -sS --max-time 20 "https://$www/monero/" | tee "$tmp_monero" | sed -n '1,20p'
+
+echo
+echo "== Recommendations page =="
+recommendations_status="$(curl -sS -o "$tmp_recommendations" -w '%{http_code}' --max-time 20 "https://$www/recommendations/")"
+printf 'www/recommendations/ status: %s\n' "$recommendations_status"
+sed -n '1,20p' "$tmp_recommendations"
 
 echo
 echo "== Plasma knowledge page =="
@@ -41,8 +55,12 @@ printf 'www/plasma/ status: %s\n' "$plasma_page_status"
 sed -n '1,20p' "$tmp_plasma_page"
 
 echo
-echo "== Plasma referral =="
+echo "== Plasma routes =="
 curl -sS -D "$tmp_plasma" -o /dev/null -w 'www/plasma status: %{http_code}\n' --max-time 20 "https://$www/plasma"
+plasma_invite_page_status="$(curl -sS -o "$tmp_plasma_invite_page" -w '%{http_code}' --max-time 20 "https://$www/go/plasma-one/")"
+printf 'www/go/plasma-one/ status: %s\n' "$plasma_invite_page_status"
+sed -n '1,20p' "$tmp_plasma_invite_page"
+curl -sS -D "$tmp_plasma_invite" -o /dev/null -w 'www/go/plasma-one status: %{http_code}\n' --max-time 20 "https://$www/go/plasma-one"
 curl -sS -D "$tmp_apex_plasma" -o /dev/null -w 'apex/plasma status: %{http_code}\n' --max-time 20 "https://$domain/plasma"
 
 echo
@@ -135,6 +153,16 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  grep -q 'https://www.encryptedguru.com/recommendations/' "$tmp_sitemap" || {
+    echo "live sitemap missing Recommendations page" >&2
+    exit 1
+  }
+
+  grep -q 'og-home.png' "$tmp_home" || {
+    echo "live homepage is missing the neutral social preview image" >&2
+    exit 1
+  }
+
   grep -q '<h1>Monero</h1>' "$tmp_monero" || {
     echo "live Monero page missing expected heading" >&2
     exit 1
@@ -150,6 +178,16 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  test "$recommendations_status" = "200" || {
+    echo "live Recommendations page is not returning 200" >&2
+    exit 1
+  }
+
+  grep -q '<h1>Recommendations</h1>' "$tmp_recommendations" || {
+    echo "live Recommendations page missing expected heading" >&2
+    exit 1
+  }
+
   grep -q 'https://docs.plasma.org/docs/get-started/why-build-on-plasma/overview' "$tmp_plasma_page" || {
     echo "live Plasma page missing official developer documentation link" >&2
     exit 1
@@ -160,13 +198,33 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
-  grep -qi '^HTTP/2 301' "$tmp_plasma" || {
-    echo "www/plasma is not returning a 301 redirect" >&2
+  grep -qi '^HTTP/2 308' "$tmp_plasma" || {
+    echo "www/plasma is not returning a 308 redirect to the research page" >&2
     exit 1
   }
 
-  grep -qiF 'location: https://plasmaone.onelink.me/P8qq/rvdp9r4l?code=EGEGEG' "$tmp_plasma" || {
-    echo "www/plasma is not pointing at the fixed Plasma One referral URL" >&2
+  grep -qiE '^location: .*\/plasma/' "$tmp_plasma" || {
+    echo "www/plasma is not pointing at the canonical research page" >&2
+    exit 1
+  }
+
+  grep -qi '^HTTP/2 308' "$tmp_plasma_invite" || {
+    echo "www/go/plasma-one is not returning a 308 redirect to the invitation page" >&2
+    exit 1
+  }
+
+  grep -qiE '^location: .*\/go/plasma-one/' "$tmp_plasma_invite" || {
+    echo "www/go/plasma-one is not pointing at the invitation page" >&2
+    exit 1
+  }
+
+  test "$plasma_invite_page_status" = "200" || {
+    echo "live Plasma invitation page is not returning 200" >&2
+    exit 1
+  }
+
+  grep -q 'https://plasmaone.onelink.me/P8qq?' "$tmp_plasma_invite_page" || {
+    echo "live Plasma invitation page is missing the exact provider deep link" >&2
     exit 1
   }
 
@@ -176,9 +234,7 @@ if [ "$strict" -eq 1 ]; then
   }
 
   if grep -qiF 'location: https://www.encryptedguru.com/plasma' "$tmp_apex_plasma"; then
-    echo "apex/plasma reaches the Pages referral route through the existing apex redirect"
-  elif grep -qiF 'location: https://plasmaone.onelink.me/P8qq/rvdp9r4l?code=EGEGEG' "$tmp_apex_plasma"; then
-    echo "apex/plasma reaches the Plasma One referral URL directly"
+    echo "apex/plasma reaches the canonical www research route"
   else
     echo "apex/plasma has an unexpected redirect target" >&2
     exit 1

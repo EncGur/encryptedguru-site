@@ -1,6 +1,6 @@
-# EncryptedGuru's fixed Plasma One referral entrypoint. Keep this exact
-# route above the broader domain redirects below. /plasma/ is the research page.
-/plasma https://plasmaone.onelink.me/P8qq/rvdp9r4l?code=EGEGEG 301
+# Keep the research route and the action route semantically separate.
+/plasma /plasma/ 308
+/go/plasma-one /go/plasma-one/ 308
 
 https://encryptedguru.com/* https://www.encryptedguru.com/:splat 301
 http://encryptedguru.com/* https://www.encryptedguru.com/:splat 301

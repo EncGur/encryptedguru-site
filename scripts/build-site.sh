@@ -15,6 +15,7 @@ for file in \
   styles.css \
   main.js \
   logo.png \
+  og-home.png \
   monero-hero.png \
   plasma-hero.jpg \
   favicon.ico \
@@ -30,7 +31,7 @@ do
   cp "$file" "$output/"
 done
 
-for directory in .well-known contact docs infrastructure labs monero plasma projects; do
+for directory in .well-known contact docs go infrastructure labs monero plasma projects recommendations; do
   cp -R "$directory" "$output/"
 done
 
@@ -53,6 +54,9 @@ test -f "$output/index.html"
 test -f "$output/404.html"
 test -f "$output/monero/index.html"
 test -f "$output/plasma/index.html"
+test -f "$output/go/plasma-one/index.html"
+test -f "$output/recommendations/index.html"
+test -f "$output/og-home.png"
 test -f "$output/projects/index.html"
 test -f "$output/projects/gmcp/index.html"
 test -f "$output/.well-known/security.txt"

@@ -3,12 +3,17 @@ set -eu
 
 cd "$(dirname "$0")/.."
 
-destination="https://plasmaone.onelink.me/P8qq/rvdp9r4l?code=EGEGEG"
+research_destination="/plasma/"
+invite_destination="/go/plasma-one/"
 
 ./scripts/build-site.sh >/dev/null
 
-for route in /plasma; do
-  expected="$route $destination 301"
+for route in /plasma /go/plasma-one; do
+  if [ "$route" = "/plasma" ]; then
+    expected="$route $research_destination 308"
+  else
+    expected="$route $invite_destination 308"
+  fi
   grep -Fqx "$expected" _redirects || {
     echo "FAIL: missing source redirect: $expected" >&2
     exit 1
@@ -21,6 +26,21 @@ done
 
 test -f dist/plasma/index.html || {
   echo "FAIL: /plasma/ research page is missing from the build" >&2
+  exit 1
+}
+
+test -f dist/go/plasma-one/index.html || {
+  echo "FAIL: /go/plasma-one/ invitation page is missing from the build" >&2
+  exit 1
+}
+
+grep -q 'https://plasmaone.onelink.me/P8qq?' dist/go/plasma-one/index.html || {
+  echo "FAIL: invitation page is missing the exact Plasma One deep link" >&2
+  exit 1
+}
+
+grep -q 'href="/go/plasma-one/"' plasma/index.html || {
+  echo "FAIL: Plasma research page is missing the explicit invitation route" >&2
   exit 1
 }
 

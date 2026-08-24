@@ -9,6 +9,8 @@ index.html
 monero/index.html
 projects/index.html
 projects/gmcp/index.html
+go/plasma-one/index.html
+recommendations/index.html
 styles.css
 main.js
 robots.txt
@@ -18,6 +20,7 @@ _headers
 _redirects
 _routes.json
 README.md
+PROJECT_STATE.md
 DEPLOYMENT.md
 RELEASE_CHECKLIST.md
 FIRST_PRINCIPLES_BUILD.md
