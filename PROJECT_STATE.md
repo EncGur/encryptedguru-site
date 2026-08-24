@@ -1,6 +1,6 @@
 # EncryptedGuru current project state
 
-Updated: 2026-08-24
+Updated: 2026-08-25
 
 ## Goal
 
@@ -24,6 +24,8 @@ from private operational control.
   artifacts, and deployment internals are blocked from the public edge.
 - Personal referral links are disclosed on the recommendation page and on the
   relevant research pages. They are not product guarantees or financial advice.
+- Recommendations are a first-class public route in the primary navigation;
+  visual prominence does not remove the adjacent provider-term disclosures.
 
 ## Verification gates
 
