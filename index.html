@@ -3,21 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EncryptedGuru</title>
-    <meta name="description" content="A personal sovereign systems lab for financial privacy, secure automation, cloud operations, networks, and trusted AI workflows.">
-    <meta name="theme-color" content="#0c0e0c">
+    <title>EncryptedGuru — Private systems. Public proof.</title>
+    <meta name="description" content="EncryptedGuru is an independent systems lab for financial privacy, cloud operations, network design, and AI workflows — documented with public evidence.">
+    <meta name="theme-color" content="#0b0d0b">
     <link rel="canonical" href="https://www.encryptedguru.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="EncryptedGuru">
-    <meta property="og:title" content="EncryptedGuru">
-    <meta property="og:description" content="A personal sovereign systems lab for financial privacy, secure automation, cloud operations, networks, and trusted AI workflows.">
+    <meta property="og:title" content="EncryptedGuru — Private systems. Public proof.">
+    <meta property="og:description" content="An independent systems lab for financial privacy, cloud operations, network design, and AI workflows — documented with public evidence.">
     <meta property="og:url" content="https://www.encryptedguru.com/">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://www.encryptedguru.com/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EncryptedGuru — Private systems. Public proof.">
+    <meta name="twitter:description" content="An independent systems lab for financial privacy, cloud operations, network design, and AI workflows — documented with public evidence.">
+    <meta name="twitter:image" content="https://www.encryptedguru.com/logo.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png?v=4" sizes="32x32">
     <link rel="icon" href="/favicon.ico?v=4" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/styles.css?v=20260824-home-no-photo">
+    <link rel="stylesheet" href="/styles.css?v=20260824-system-index">
   </head>
   <body class="home-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -33,246 +37,112 @@
         <a href="/docs/">Docs</a>
         <a href="/projects/">Projects</a>
         <a href="/labs/">Labs</a>
-        <a href="/infrastructure/">Infrastructure</a>
-        <a href="/contact/">Contact</a>
+        <details class="nav-more">
+          <summary>More <span aria-hidden="true">+</span></summary>
+          <div class="nav-more-menu"><a href="/infrastructure/">Infrastructure</a><a href="/contact/">Contact</a></div>
+        </details>
       </nav>
     </header>
 
     <main id="main">
-      <section class="hero">
+      <section class="hero home-hero">
         <div class="hero-inner">
-          <p class="eyebrow">Personal sovereign systems lab</p>
-          <h1>EncryptedGuru</h1>
+          <div class="hero-kicker"><span class="status-dot" aria-hidden="true"></span><span>Independent systems lab</span><span class="hero-kicker-divider">/</span><span>Publicly verified</span></div>
+          <h1>Private systems.<br><span class="hero-accent">Public proof.</span></h1>
           <p class="hero-copy">
-            A personal systems lab for financial privacy, secure automation, cloud operations, network simulation, and trusted AI workflows.
+            EncryptedGuru is a field guide to financial privacy, cloud operations, network design, and AI workflows — built around one rule: make important systems understandable under pressure.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
-            <a class="button primary" href="/docs/">Read the notes</a>
-            <a class="button secondary" href="/labs/">View lab work</a>
+            <a class="button primary" href="#start-here">Choose a path <span aria-hidden="true">↘</span></a>
+            <a class="button secondary" href="/docs/#production-verification">See the proof model</a>
           </div>
-          <dl class="hero-status" aria-label="Production status">
-            <div>
-              <dt>Production</dt>
-              <dd>Cloudflare Pages</dd>
-            </div>
-            <div>
-              <dt>Canonical</dt>
-              <dd>www.encryptedguru.com</dd>
-            </div>
-            <div>
-              <dt>Public surface</dt>
-              <dd>Static, no tracking</dd>
-            </div>
-            <div>
-              <dt>Last verified</dt>
-              <dd>2026-08-24</dd>
-            </div>
-          </dl>
+          <div class="hero-index" aria-label="Homepage status">
+            <span class="hero-index-label">Start here</span>
+            <a href="/monero/">Money <span aria-hidden="true">→</span></a>
+            <a href="/plasma/">Rails <span aria-hidden="true">→</span></a>
+            <a href="/projects/">Systems <span aria-hidden="true">→</span></a>
+          </div>
         </div>
+        <aside class="hero-signal" aria-label="Public surface signal">
+          <div class="signal-header"><span>PUBLIC SURFACE</span><span>EG / 026</span></div>
+          <div class="signal-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="signal-readout"><strong>Open by design</strong><span>Source, deploy, verify, recover.</span></div>
+          <div class="signal-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        </aside>
       </section>
 
-      <section class="section">
+      <section class="section section-intro" id="start-here">
         <div class="section-header">
-          <p class="eyebrow">Operating thesis</p>
-          <h2>Build systems that remain understandable, portable, and under human control.</h2>
+          <p class="eyebrow">Choose your entry point</p>
+          <h2>Start with the question you actually have.</h2>
         </div>
-        <p class="wide-copy">
-          EncryptedGuru exists to keep infrastructure understandable under pressure. The lab documents decisions,
-          tests changes before production, minimizes public surface area, and keeps human review in the loop.
-        </p>
-      </section>
-
-      <section class="section split">
-        <div>
-          <p class="eyebrow">Verification loop</p>
-          <h2>Every public claim should have a check.</h2>
-        </div>
-        <div class="verification-list">
-          <div>
-            <span>01</span>
-            <strong>Source</strong>
-            <p>Site source, build scripts, and deployment files are public in the open-source repository; operational runbooks stay private.</p>
-          </div>
-          <div>
-            <span>02</span>
-            <strong>Deploy</strong>
-            <p>Cloudflare Pages builds from the production branch and serves the canonical domain.</p>
-          </div>
-          <div>
-            <span>03</span>
-            <strong>Verify</strong>
-            <p>Live checks confirm redirect behavior, security headers, sitemap, security.txt, and mail DNS.</p>
-          </div>
-          <div>
-            <span>04</span>
-            <strong>Recover</strong>
-            <p>Runbooks preserve the exact rollback path for DNS, deployment, mail, and account access.</p>
-          </div>
+        <div class="path-grid">
+          <a class="path-card path-card-featured" href="/monero/">
+            <div class="path-card-top"><span class="tile-kicker">01 / MONEY</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+            <h3>Understand private money</h3>
+            <p>First-principles notes on Monero, fungibility, self-custody, nodes, and what can be verified today.</p>
+            <span class="card-link">Read the Monero notes <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="path-card" href="/plasma/">
+            <div class="path-card-top"><span class="tile-kicker">02 / RAILS</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+            <h3>Evaluate payment rails</h3>
+            <p>Separate network facts, product claims, community signals, and token value capture.</p>
+            <span class="card-link">Read the Plasma note <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="path-card" href="/projects/">
+            <div class="path-card-top"><span class="tile-kicker">03 / SYSTEMS</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+            <h3>Build systems that recover</h3>
+            <p>Architecture notes for control planes, networks, cloud operations, and human-authorized automation.</p>
+            <span class="card-link">Explore the projects <span aria-hidden="true">→</span></span>
+          </a>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section proof-section">
+        <div class="split proof-layout">
+          <div>
+            <p class="eyebrow">The operating thesis</p>
+            <h2>Trust is a workflow, not a mood.</h2>
+            <p class="wide-copy">Every public claim should have a path back to source, a known deployment boundary, a reproducible check, and a recovery plan.</p>
+            <a class="text-link" href="/docs/#production-verification">Read the verification notes <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="proof-rail" aria-label="Verification loop">
+            <div class="proof-step"><span>01</span><strong>Source</strong><p>Public code and public-facing documentation.</p></div>
+            <div class="proof-step"><span>02</span><strong>Deploy</strong><p>Known hosting and canonical domain boundary.</p></div>
+            <div class="proof-step"><span>03</span><strong>Verify</strong><p>Live checks for paths, headers, and public files.</p></div>
+            <div class="proof-step"><span>04</span><strong>Recover</strong><p>Rollback and operational detail kept where it belongs.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section feature-section">
+        <div class="section-header section-header-row">
+          <div><p class="eyebrow">Selected work</p><h2>Research logs before products.</h2></div>
+          <a class="text-link" href="/docs/">Open the library <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="feature-list">
+          <a href="/projects/gmcp/"><span class="feature-number">01</span><span><strong>GOD MODE Control Plane</strong><small>Long-running automation with machine evidence and explicit human authorization.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+          <a href="/labs/dsx-air/"><span class="feature-number">02</span><span><strong>DSX Air Network Lab</strong><small>Topology, routing, segmentation, and rollback learning before deployment.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+          <a href="/infrastructure/#sovereign-network"><span class="feature-number">03</span><span><strong>Sovereign network principles</strong><small>Identity, access, routing, and recovery made explicit.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="section boundary-section">
         <div class="section-header">
-          <p class="eyebrow">System pillars</p>
-          <h2>Own the namespace. Verify the path. Keep the system recoverable.</h2>
-        </div>
-        <div class="grid five">
-          <article class="tile">
-            <span class="tile-kicker">01</span>
-            <h3>Identity</h3>
-            <p>Domain-based email, account boundaries, recovery paths, and security contacts for durable ownership.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">02</span>
-            <h3>Money</h3>
-            <p>Self-custody, fungibility, financial privacy, and verifiable trust boundaries through Monero.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">03</span>
-            <h3>Cloud</h3>
-            <p>Deployable services, logs, storage, monitoring, and automation on real infrastructure.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">04</span>
-            <h3>Network</h3>
-            <p>Private routing, segmentation, simulation, failover thinking, and topology-first design.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">05</span>
-            <h3>Intelligence</h3>
-            <p>AI-assisted workflows that preserve auditability, privacy discipline, and human review.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <p class="eyebrow">Projects</p>
-          <h2>Engineering work with a public record.</h2>
-        </div>
-        <div class="grid three">
-          <article class="tile">
-            <span class="tile-kicker">01</span>
-            <h3><a href="/projects/gmcp/">GOD MODE Control Plane</a></h3>
-            <p>Durable orchestration for long-running autonomous missions: machine evidence, read-only review, and human-authorized risk boundaries.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">02</span>
-            <h3><a href="/monero/">Monero Knowledge Base</a></h3>
-            <p>First-principles financial privacy notes, corrected against current official documentation.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">03</span>
-            <h3><a href="/plasma/">Plasma Research Note</a></h3>
-            <p>Stablecoin rails, Plasma One product boundaries, community signals, and the separate XPL value-capture question.</p>
-          </article>
-          <article class="tile">
-            <span class="tile-kicker">04</span>
-            <h3><a href="/labs/dsx-air/">DSX Air Network Lab</a></h3>
-            <p>Data center network simulation with topology discipline and rollback learning before deployment.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section split">
-        <div>
-          <p class="eyebrow">Current stack</p>
-          <h2>Operational baseline, not a pitch deck.</h2>
-        </div>
-        <div class="stack-list">
-          <div>
-            <strong>Google Workspace</strong>
-            <span>Identity, admin email, verification, and operational communications.</span>
-          </div>
-          <div>
-            <strong>encryptedguru.com</strong>
-            <span>Public namespace for documentation, infrastructure endpoints, and future services.</span>
-          </div>
-          <div>
-            <strong>Google Cloud</strong>
-            <span>Runtime layer for deployable tools, APIs, storage, and observability.</span>
-          </div>
-          <div>
-            <strong>Cloudflare Pages</strong>
-            <span>Static public hosting, canonical redirects, headers, and production deployment boundary.</span>
-          </div>
-          <div>
-            <strong>NVIDIA DSX Air</strong>
-            <span>Network and data center simulation lab before real-world deployment.</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section split">
-        <div>
           <p class="eyebrow">Public boundary</p>
-          <h2>Small surface, clear intent.</h2>
+          <h2>Small surface. Clear intent.</h2>
         </div>
-        <div class="stack-list">
-          <div>
-            <strong>No tracking</strong>
-            <span>No analytics tags, pixels, ad networks, or behavioral profiling on the public site.</span>
-          </div>
-          <div>
-            <strong>No public admin</strong>
-            <span>Administrative systems stay off the public surface unless explicitly documented and protected.</span>
-          </div>
-          <div>
-            <strong>Security contact</strong>
-            <span>Responsible disclosure is routed through security.txt and a dedicated security mailbox.</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <p class="eyebrow">Initial notes</p>
-          <h2>Research logs before products.</h2>
-        </div>
-        <div class="link-list">
-          <a href="/projects/">
-            <span>Projects Index</span>
-            <small>Engineering work documented in the open</small>
-          </a>
-          <a href="/projects/gmcp/">
-            <span>GOD MODE Control Plane</span>
-            <small>Durable orchestration for long-running autonomous missions</small>
-          </a>
-          <a href="/monero/">
-            <span>Mastering Monero: First-Principles Notes</span>
-            <small>Financial privacy, fungibility, custody, nodes, and a 2026 correction layer</small>
-          </a>
-          <a href="/plasma/">
-            <span>Plasma: Stablecoin Rails and Product Boundaries</span>
-            <small>Network facts, Plasma One disclosures, community signals, and XPL research separation</small>
-          </a>
-          <a href="/docs/#infrastructure-v01">
-            <span>EncryptedGuru Infrastructure v0.1</span>
-            <small>Baseline architecture and operating principles</small>
-          </a>
-          <a href="/docs/#production-verification">
-            <span>Production Verification</span>
-            <small>What is checked after each public change</small>
-          </a>
-          <a href="/labs/#dsx-air">
-            <span>DSX Air Trial Log</span>
-            <small>Network simulation notes and resource discipline</small>
-          </a>
-          <a href="/labs/dsx-air/">
-            <span>NVIDIA DSX Air Trial Plan</span>
-            <small>Topology learning queue and public/private lab boundary</small>
-          </a>
-          <a href="/infrastructure/#sovereign-network">
-            <span>Personal Sovereign Network Principles</span>
-            <small>Segmentation, routing, identity, and recovery</small>
-          </a>
+        <div class="boundary-grid">
+          <div><span class="boundary-mark" aria-hidden="true">◎</span><strong>No tracking</strong><p>No analytics tags, pixels, ad networks, or behavioral profiling.</p></div>
+          <div><span class="boundary-mark" aria-hidden="true">⌁</span><strong>Open source</strong><p>Public pages and build rules are visible in the site repository.</p></div>
+          <div><span class="boundary-mark" aria-hidden="true">↺</span><strong>Recoverable</strong><p>Operational detail and emergency paths stay private and controlled.</p></div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <span>EncryptedGuru v0.3</span>
-      <span><a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a> / <a href="https://github.com/EncGur/encryptedguru-site">source</a></span>
+      <span>EncryptedGuru / public systems lab</span>
+      <span><a href="/infrastructure/">infrastructure</a> / <a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a> / <a href="https://github.com/EncGur/encryptedguru-site">source</a></span>
     </footer>
     <script src="/main.js"></script>
   </body>
