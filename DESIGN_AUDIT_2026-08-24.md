@@ -88,3 +88,13 @@ are verified without exposing private operational material.
   and Plasma retain only their topic-specific images.
 - Aligned inner-page theme colors with the homepage and added large-image
   Twitter metadata for the two image-led research pages.
+
+## Third pass — first recommendation entry
+
+- Added a visible Plasma One recommendation entry after the product boundary
+  section, with the user-provided invite code `EGEGEG` and the exact deep link.
+- Disclosed that the link is a personal EncryptedGuru referral and kept
+  eligibility, fees, availability, terms, and referral treatment as decisions
+  made by Plasma One rather than promises made by this site.
+- Kept the existing official-source and community-source distinction intact;
+  the recommendation is an action entry, not evidence of product guarantees.
