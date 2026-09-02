@@ -25,9 +25,13 @@ from private operational control.
 - Personal referral links for Plasma One, Bitfinex, Binance, and Aave App are
   disclosed on the recommendation page; relevant research pages carry separate
   context where applicable. They are not product guarantees or financial advice.
+- Aave has a dedicated source-separated research page at `/aave/`, using the
+  supplied purple portrait as its page visual and keeping the Aave App referral
+  entry separate from protocol, market, token, and risk claims.
 - Recommendations is the first primary-navigation item and the homepage's
-  first action; four referral entries appear in the first desktop row, while
-  the adjacent provider-term disclosures remain visible.
+  first action; Monero, Plasma, and Aave are the primary research routes, and
+  four referral entries appear in the first desktop row while the adjacent
+  provider-term disclosures remain visible.
 
 ## Verification gates
 

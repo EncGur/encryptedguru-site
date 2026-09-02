@@ -7,6 +7,7 @@ required_files="
 index.html
 404.html
 monero/index.html
+aave/index.html
 projects/index.html
 projects/gmcp/index.html
 go/plasma-one/index.html
@@ -49,6 +50,11 @@ grep -q 'https://www.encryptedguru.com/' sitemap.xml || {
 
 grep -q 'https://www.encryptedguru.com/monero/' sitemap.xml || {
   echo "sitemap.xml missing Monero page" >&2
+  exit 1
+}
+
+grep -q 'https://www.encryptedguru.com/aave/' sitemap.xml || {
+  echo "sitemap.xml missing Aave page" >&2
   exit 1
 }
 

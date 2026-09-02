@@ -21,6 +21,7 @@ for file in \
   og-home.png \
   monero-hero.png \
   plasma-hero.jpg \
+  aave-hero.png \
   site.webmanifest \
   robots.txt \
   sitemap.xml \
@@ -31,7 +32,7 @@ do
   cp "$file" "$output/"
 done
 
-for directory in .well-known contact docs go infrastructure labs monero plasma projects recommendations; do
+for directory in .well-known aave contact docs go infrastructure labs monero plasma projects recommendations; do
   cp -R "$directory" "$output/"
 done
 
@@ -54,9 +55,11 @@ test -f "$output/index.html"
 test -f "$output/404.html"
 test -f "$output/monero/index.html"
 test -f "$output/plasma/index.html"
+test -f "$output/aave/index.html"
 test -f "$output/go/plasma-one/index.html"
 test -f "$output/recommendations/index.html"
 test -f "$output/og-home.png"
+test -f "$output/aave-hero.png"
 test -f "$output/eg-mark.png"
 test -f "$output/eg-mark-32.png"
 test -f "$output/eg-mark.ico"

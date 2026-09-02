@@ -16,13 +16,15 @@ tmp_home="$(mktemp)"
 tmp_monero="$(mktemp)"
 tmp_recommendations="$(mktemp)"
 tmp_plasma_page="$(mktemp)"
+tmp_aave="$(mktemp)"
+tmp_aave_route="$(mktemp)"
 tmp_plasma="$(mktemp)"
 tmp_plasma_invite_page="$(mktemp)"
 tmp_plasma_invite="$(mktemp)"
 tmp_apex_plasma="$(mktemp)"
 tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers"' EXIT
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -56,8 +58,15 @@ printf 'www/plasma/ status: %s\n' "$plasma_page_status"
 sed -n '1,20p' "$tmp_plasma_page"
 
 echo
+echo "== Aave knowledge page =="
+aave_status="$(curl -sS -o "$tmp_aave" -w '%{http_code}' --max-time 20 "https://$www/aave/")"
+printf 'www/aave/ status: %s\n' "$aave_status"
+sed -n '1,20p' "$tmp_aave"
+
+echo
 echo "== Plasma routes =="
 curl -sS -D "$tmp_plasma" -o /dev/null -w 'www/plasma status: %{http_code}\n' --max-time 20 "https://$www/plasma"
+curl -sS -D "$tmp_aave_route" -o /dev/null -w 'www/aave status: %{http_code}\n' --max-time 20 "https://$www/aave"
 plasma_invite_page_status="$(curl -sS -o "$tmp_plasma_invite_page" -w '%{http_code}' --max-time 20 "https://$www/go/plasma-one/")"
 printf 'www/go/plasma-one/ status: %s\n' "$plasma_invite_page_status"
 sed -n '1,20p' "$tmp_plasma_invite_page"
@@ -155,6 +164,11 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  grep -q 'https://www.encryptedguru.com/aave/' "$tmp_sitemap" || {
+    echo "live sitemap missing Aave page" >&2
+    exit 1
+  }
+
   grep -q 'https://www.encryptedguru.com/recommendations/' "$tmp_sitemap" || {
     echo "live sitemap missing Recommendations page" >&2
     exit 1
@@ -190,6 +204,31 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  test "$aave_status" = "200" || {
+    echo "live Aave page is not returning 200" >&2
+    exit 1
+  }
+
+  grep -q '<h1>Aave</h1>' "$tmp_aave" || {
+    echo "live Aave page missing expected heading" >&2
+    exit 1
+  }
+
+  grep -q 'src="/aave-hero.png"' "$tmp_aave" || {
+    echo "live Aave page is missing its hero asset" >&2
+    exit 1
+  }
+
+  grep -q 'https://aave.com/app/r/999F66' "$tmp_aave" || {
+    echo "live Aave page is missing the exact referral entry" >&2
+    exit 1
+  }
+
+  grep -q 'https://aave.com/docs/resources/risks' "$tmp_aave" || {
+    echo "live Aave page is missing official risk documentation" >&2
+    exit 1
+  }
+
   test "$recommendations_status" = "200" || {
     echo "live Recommendations page is not returning 200" >&2
     exit 1
@@ -212,6 +251,16 @@ if [ "$strict" -eq 1 ]; then
 
   grep -qi '^HTTP/2 308' "$tmp_plasma" || {
     echo "www/plasma is not returning a 308 redirect to the research page" >&2
+    exit 1
+  }
+
+  grep -qi '^HTTP/2 308' "$tmp_aave_route" || {
+    echo "www/aave is not returning a 308 redirect to the research page" >&2
+    exit 1
+  }
+
+  grep -qiE '^location: .*\/aave/' "$tmp_aave_route" || {
+    echo "www/aave is not pointing at the canonical Aave research page" >&2
     exit 1
   }
 

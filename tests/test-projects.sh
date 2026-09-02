@@ -22,10 +22,12 @@ ok() {
 ok "dist/projects/index.html exists" test -f dist/projects/index.html
 ok "dist/projects/gmcp/index.html exists" test -f dist/projects/gmcp/index.html
 ok "dist/plasma/index.html exists" test -f dist/plasma/index.html
+ok "dist/aave/index.html exists" test -f dist/aave/index.html
+ok "dist/aave-hero.png exists" test -f dist/aave-hero.png
 
 # Every internal href on every page that carries the primary navigation must
 # resolve to a real file inside dist/.
-pages="index.html 404.html monero/index.html plasma/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html"
+pages="index.html 404.html monero/index.html plasma/index.html aave/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html"
 
 for page in $pages; do
   if [ ! -f "$page" ]; then
@@ -67,12 +69,18 @@ fi
 ok "sitemap.xml has Projects index URL" grep -q 'https://www.encryptedguru.com/projects/</loc>' sitemap.xml
 ok "sitemap.xml has GMCP project URL" grep -q 'https://www.encryptedguru.com/projects/gmcp/</loc>' sitemap.xml
 ok "sitemap.xml has Plasma URL" grep -q 'https://www.encryptedguru.com/plasma/</loc>' sitemap.xml
+ok "sitemap.xml has Aave URL" grep -q 'https://www.encryptedguru.com/aave/</loc>' sitemap.xml
 ok "sitemap.xml has Recommendations URL" grep -q 'https://www.encryptedguru.com/recommendations/</loc>' sitemap.xml
 
 # The new pages must carry the canonical tags matching the sitemap.
 ok "projects/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/' projects/index.html
 ok "projects/gmcp/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/gmcp/' projects/gmcp/index.html
 ok "plasma/index.html canonical tag" grep -q 'https://www.encryptedguru.com/plasma/' plasma/index.html
+ok "aave/index.html canonical tag" grep -q 'https://www.encryptedguru.com/aave/' aave/index.html
+ok "Aave page uses the supplied hero asset" grep -q 'src="/aave-hero.png"' aave/index.html
+ok "Aave page links official documentation" grep -q 'https://aave.com/docs' aave/index.html
+ok "Aave page links official risk documentation" grep -q 'https://aave.com/docs/resources/risks' aave/index.html
+ok "Aave page keeps the exact referral URL" grep -q 'href="https://aave.com/app/r/999F66"' aave/index.html
 ok "Plasma page links official network overview" grep -q 'https://www.plasma.org/network' plasma/index.html
 ok "Plasma page links official developer docs" grep -q 'https://docs.plasma.org/docs/get-started/why-build-on-plasma/overview' plasma/index.html
 ok "Plasma page links the observed X post" grep -q 'https://x.com/e4symp/status/2091829636108026276' plasma/index.html
@@ -92,6 +100,10 @@ for page in $pages; do
     echo "FAIL: $page missing Plasma navigation link" >&2
     failures=$((failures + 1))
   fi
+  if ! grep -q 'href="/aave/"' "$page"; then
+    echo "FAIL: $page missing Aave navigation link" >&2
+    failures=$((failures + 1))
+  fi
   first_nav_link="$(sed -n '/<nav class="nav"/,/<\/nav>/p' "$page" | grep -m1 -oE 'href="[^"]*"' || true)"
   if [ "$first_nav_link" = 'href="/recommendations/"' ]; then
     echo "ok: $page puts Recommendations first in primary navigation"
@@ -102,7 +114,7 @@ for page in $pages; do
 done
 
 # Public-boundary leak patterns must stay absent from the new pages.
-leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html plasma/index.html || true)"
+leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html plasma/index.html aave/index.html || true)"
 if [ -n "$leaks" ]; then
   echo "FAIL: leak patterns found in new pages:" >&2
   echo "$leaks" >&2

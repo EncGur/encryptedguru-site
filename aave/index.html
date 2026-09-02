@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aave - EncryptedGuru</title>
+    <meta name="description" content="First-principles notes on Aave, onchain liquidity, collateral, health factors, liquidation, governance, and the Aave App referral boundary.">
+    <meta name="theme-color" content="#100c19">
+    <link rel="canonical" href="https://www.encryptedguru.com/aave/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EncryptedGuru">
+    <meta property="og:title" content="Aave - EncryptedGuru">
+    <meta property="og:description" content="A source-separated reading of Aave the liquidity protocol, the Aave App, and AAVE governance.">
+    <meta property="og:url" content="https://www.encryptedguru.com/aave/">
+    <meta property="og:image" content="https://www.encryptedguru.com/aave-hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aave - EncryptedGuru">
+    <meta name="twitter:description" content="A source-separated reading of Aave the liquidity protocol, the Aave App, and AAVE governance.">
+    <meta name="twitter:image" content="https://www.encryptedguru.com/aave-hero.png">
+    <link rel="icon" type="image/png" href="/eg-mark-32.png?v=3" sizes="32x32">
+    <link rel="icon" href="/eg-mark.ico?v=3" sizes="any">
+    <link rel="apple-touch-icon" href="/eg-mark-180.png?v=3">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/styles.css?v=20260902-aave-page">
+  </head>
+  <body class="aave-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="ambient-canvas" id="ambient" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><span></span></span><span>EncryptedGuru</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="nav-recommendations" href="/recommendations/">Recommendations</a>
+        <a href="/monero/">Monero</a>
+        <a href="/plasma/">Plasma</a>
+        <a aria-current="page" href="/aave/">Aave</a>
+        <a href="/docs/">Docs</a>
+        <a href="/projects/">Projects</a>
+        <a href="/labs/">Labs</a>
+        <details class="nav-more">
+          <summary>More <span aria-hidden="true">+</span></summary>
+          <div class="nav-more-menu"><a href="/infrastructure/">Infrastructure</a><a href="/contact/">Contact</a></div>
+        </details>
+      </nav>
+    </header>
+
+    <main class="page" id="main">
+      <section class="page-title aave-title">
+        <div class="page-title-content">
+          <div class="page-title-meta"><span>EG / 03 — LENDING</span><a href="/">Overview <span aria-hidden="true">↗</span></a></div>
+          <p class="eyebrow">Onchain liquidity / research note</p>
+          <h1>Aave</h1>
+          <p>Aave the protocol, the Aave App the interface, and AAVE the governance token are related—but they are not the same claim. This page separates the market mechanics, the app entry, and the risks before any wallet signature.</p>
+        </div>
+        <div class="page-title-visual" aria-hidden="true">
+          <img src="/aave-hero.png" alt="">
+          <div class="page-title-visual-overlay"></div>
+          <span class="page-title-visual-caption">AAVE / ONCHAIN LIQUIDITY</span>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Current reading</p>
+          <h2>Supply is not savings, and borrow capacity is not free liquidity.</h2>
+        </div>
+        <div class="source-note">
+          <dl>
+            <div><dt>Protocol</dt><dd>Aave, a decentralized non-custodial liquidity protocol</dd></div>
+            <div><dt>Market</dt><dd>Network-specific pools with reserve and risk parameters</dd></div>
+            <div><dt>Position</dt><dd>Supplied collateral, debt, interest, and health factor</dd></div>
+            <div><dt>Reading rule</dt><dd>Live parameters and exact contract addresses before action</dd></div>
+          </dl>
+          <p>This is research and systems documentation, not financial, lending, tax, or investment advice. Rates, assets, networks, parameters, interfaces, and third-party services can change.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://aave.com/docs">Read official Aave docs <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="https://aave.com/docs/resources/parameters">Open live parameters <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section recommendation-jump" aria-labelledby="aave-recommendations">
+        <div>
+          <p class="eyebrow">Action layer</p>
+          <h2 id="aave-recommendations">Ready to review the Aave App entry?</h2>
+          <p>Open the disclosed referral entry only after checking the current official app, network, wallet permissions, market terms, and liquidation conditions. The referral is not evidence of protocol safety or yield.</p>
+        </div>
+        <a class="button secondary" href="https://aave.com/app/r/999F66" target="_blank" rel="sponsored noopener noreferrer">Open Aave App <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">First principles</p>
+          <h2>What the official Aave material supports.</h2>
+        </div>
+        <div class="grid four">
+          <article class="tile">
+            <span class="tile-kicker">01</span>
+            <h3>Pooled liquidity</h3>
+            <p>Suppliers and borrowers interact with smart-contract markets. A supplied asset can earn interest, while access to it remains subject to liquidity, reserve configuration, and the position's collateral state.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">02</span>
+            <h3>Collateral first</h3>
+            <p>Aave's core borrowing model is overcollateralized: supplied collateral supports a smaller borrowing position, with each reserve carrying its own thresholds, caps, and risk settings.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">03</span>
+            <h3>Utilization moves rates</h3>
+            <p>Interest rates respond to market utilization. Supplier yield is connected to borrower interest and reserve mechanics, so an advertised rate is a variable market output, not a fixed promise.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">04</span>
+            <h3>Health factor is live</h3>
+            <p>Collateral value, debt, oracle prices, and liquidation thresholds determine health. When a position falls below the relevant safety boundary, it may become eligible for liquidation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Architecture</p>
+          <h2>Aave is a stack of trust boundaries, not one riskless balance.</h2>
+        </div>
+        <div class="verification-list">
+          <div>
+            <span>01</span>
+            <strong>Contracts and reserves</strong>
+            <p>Each market is a set of smart contracts with governance-approved reserve configuration. The exact deployment, asset, network, and current parameter matter more than a familiar interface.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Oracles and prices</strong>
+            <p>Collateral valuation and liquidation logic depend on price data. Oracle behavior, asset liquidity, market conditions, and stale or unexpected prices are part of the position's security model.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>Risk controls</strong>
+            <p>E-Mode, Isolation Mode, and Siloed Borrowing change which assets and positions can interact. A risk control described in the docs is not a promise that every market exposes the same configuration.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <strong>Network and interface</strong>
+            <p>Chain deployments, bridges, wallets, RPC providers, frontends, and account abstractions add separate failure and custody boundaries. “Aave” does not erase the risk of the route used to reach it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Position lifecycle</p>
+        <h2>The transaction is only one moment in the position.</h2>
+        <p>A safe reading follows the complete lifecycle: what enters the market, what backs the debt, which live variables can move, and what action restores or exits the position.</p>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>Supply</h3>
+            <p>Supplying normally creates an interest-bearing position represented by aTokens. Withdrawal depends on available liquidity and whether the supplied asset is supporting an active borrow.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Borrow</h3>
+            <p>Borrowing creates debt and consumes collateral capacity. Interest accrues according to the market's current model, while the health factor changes as prices, debt, or collateral change.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Monitor and exit</h3>
+            <p>Repayment can restore capacity; withdrawal can reduce safety. Before acting, re-check the exact reserve, health factor, available liquidity, rate, network, and transaction recipient.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section referral-card" aria-labelledby="aave-app-entry">
+        <div class="referral-card-heading">
+          <p class="eyebrow">Recommended entry</p>
+          <h2 id="aave-app-entry">Start with the Aave App only after verifying the market.</h2>
+          <p>I have a personal Aave App referral link. It is an entrypoint for the interface, not a recommendation to supply, borrow, stake, or trade.</p>
+        </div>
+        <div class="referral-card-action">
+          <span class="referral-code-label">Referral path</span>
+          <strong class="referral-code">999F66</strong>
+          <a class="button primary" href="https://aave.com/app/r/999F66" target="_blank" rel="sponsored noopener noreferrer">Open Aave App <span aria-hidden="true">↗</span></a>
+          <p class="referral-disclosure">Personal referral link from EncryptedGuru. Aave determines eligibility, supported networks, market parameters, fees, app behavior, and any referral treatment. Never approve an unknown spender or sign a transaction without independently checking the exact domain, chain, contract, amount, and recipient.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Risk surface</p>
+          <h2>Audits lower uncertainty; they do not remove risk.</h2>
+        </div>
+        <p class="wide-copy">Aave's own risk material identifies multiple layers: smart-contract vulnerabilities, oracle behavior, collateral and liquidity conditions, bad debt, networks, and bridges. External reviews and a bug bounty are useful controls, but neither turns a live protocol position into a guaranteed outcome.</p>
+        <div class="grid four">
+          <article class="tile">
+            <span class="tile-kicker">01</span>
+            <h3>Smart contracts</h3>
+            <p>Code can contain unknown defects, unexpected interactions, or governance-approved changes. Use the current security and changelog material for the exact deployment.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">02</span>
+            <h3>Oracle and market risk</h3>
+            <p>Price movement, thin liquidity, volatility, and oracle conditions can change collateral value and liquidation eligibility faster than a user expects.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">03</span>
+            <h3>Liquidation and bad debt</h3>
+            <p>Liquidation is a protocol mechanism, not a support promise. Market gaps, collateral correlation, caps, and liquidity can affect recovery and losses.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">04</span>
+            <h3>Network and bridge</h3>
+            <p>A bridge, RPC, wallet, frontend, or wrong-chain transaction can introduce risks outside the core market contracts. Verify the route as well as the protocol.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">AAVE / GHO / safety layer</p>
+          <h2>Protocol governance, stablecoin design, and protection mechanisms remain separate questions.</h2>
+        </div>
+        <div class="grid three">
+          <article class="tile">
+            <span class="tile-kicker">01 / AAVE</span>
+            <h3>Governance is not ownership</h3>
+            <p>Official documentation describes AAVE as the native governance token, with AAVE and stkAAVE holders able to vote or delegate. Governance power is not a promise of price, yield, or value capture.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">02 / GHO</span>
+            <h3>Stablecoin is not cash</h3>
+            <p>GHO is described as an overcollateralized, native Aave stablecoin with governance, facilitators, and supply limits. Its design and current parameters still require independent review.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-kicker">03 / UMBRELLA</span>
+            <h3>Coverage is scoped</h3>
+            <p>Aave documents Umbrella as a modular onchain mechanism for certain bad-debt coverage. Rewards, eligibility, slashing, and coverage boundaries are not the same as guaranteed insurance.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section article">
+        <p class="eyebrow">Operating rules</p>
+        <h2>EncryptedGuru Aave discipline</h2>
+        <ul class="clean-list">
+          <li>Use the official Aave domains and current documentation for app access, network deployments, contract addresses, reserve parameters, and governance changes.</li>
+          <li>Keep Aave the protocol, the Aave App the interface, and AAVE the governance token as separate labels in research notes and decisions.</li>
+          <li>Treat supply APY, borrow rates, rewards, GHO claims, safety mechanisms, and referral benefits as variable or scoped claims requiring current verification.</li>
+          <li>Before supplying, borrowing, repaying, or withdrawing, verify the exact network, market, reserve, wallet, recipient, amount, health factor, and available liquidity.</li>
+          <li>Never enter a seed phrase, private key, recovery code, or payment credential into a site reached from a social post or referral link.</li>
+          <li>Re-check official risk, security, address, and parameter pages before acting; smart-contract, oracle, market, network, bridge, and provider conditions can change.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <p class="eyebrow">Source path</p>
+          <h2>Read the primary material in layers.</h2>
+        </div>
+        <div class="link-list">
+          <a href="https://aave.com/docs">
+            <span>Aave documentation overview</span>
+            <small>Official framing for the protocol, products, and developer resources</small>
+          </a>
+          <a href="https://aave.com/docs/aave-v3/overview">
+            <span>Aave V3 overview</span>
+            <small>Supply, borrowing, collateral, health factor, liquidation, and risk modes</small>
+          </a>
+          <a href="https://aave.com/docs/aave-v3/concepts/liquidity-pool">
+            <span>Liquidity pool mechanics</span>
+            <small>Official supply, withdraw, borrow, repay, utilization, and liquidity concepts</small>
+          </a>
+          <a href="https://aave.com/docs/resources/parameters">
+            <span>Live risk parameters</span>
+            <small>Current reserve and market configuration must be checked before action</small>
+          </a>
+          <a href="https://aave.com/docs/resources/addresses">
+            <span>Official contract addresses</span>
+            <small>Check the exact deployment, network, version, and address</small>
+          </a>
+          <a href="https://aave.com/docs/resources/risks">
+            <span>Protocol risks</span>
+            <small>Official discussion of smart-contract, oracle, collateral, liquidity, network, and bridge risk</small>
+          </a>
+          <a href="https://aave.com/security">
+            <span>Aave security resources</span>
+            <small>Security assessments, bug bounty, addresses, access controls, and changelog paths</small>
+          </a>
+          <a href="https://aave.com/docs/ecosystem/aave">
+            <span>AAVE governance token</span>
+            <small>Read governance, delegation, staking, and current ecosystem documentation separately</small>
+          </a>
+          <a href="https://aave.com/docs/ecosystem/gho">
+            <span>GHO ecosystem documentation</span>
+            <small>Native stablecoin design, governance, facilitators, and current limits</small>
+          </a>
+          <a href="https://aave.com/app/r/999F66" target="_blank" rel="sponsored noopener noreferrer">
+            <span>Aave App referral entry — user-provided</span>
+            <small>Personal referral link; provider terms, eligibility, and any referral treatment apply</small>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>EncryptedGuru / public systems lab</span>
+      <span><a href="/infrastructure/">infrastructure</a> / <a href="/recommendations/">recommendations</a> / <a href="/contact/">contact</a> / <a href="/.well-known/security.txt">security.txt</a> / <a href="https://github.com/EncGur/encryptedguru-site">source</a></span>
+    </footer>
+    <script src="/main.js"></script>
+  </body>
+</html>

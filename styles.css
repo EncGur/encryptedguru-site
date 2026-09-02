@@ -453,7 +453,8 @@ h3 {
 }
 
 .plasma-title,
-.monero-title {
+.monero-title,
+.aave-title {
   display: grid;
   grid-template-columns: minmax(0, 0.94fr) minmax(300px, 0.66fr);
   gap: clamp(2rem, 6vw, 6rem);
@@ -462,10 +463,52 @@ h3 {
 }
 
 .plasma-title .page-title-content,
-.monero-title .page-title-content {
+.monero-title .page-title-content,
+.aave-title .page-title-content {
   position: relative;
   z-index: 1;
   padding-bottom: 0.75rem;
+}
+
+.aave-title .page-title-visual {
+  border-color: rgba(198, 169, 255, 0.34);
+  background: #171128;
+  box-shadow: 0 28px 100px rgba(35, 15, 70, 0.34);
+}
+
+.aave-title .page-title-visual img {
+  object-position: center 28%;
+  filter: saturate(0.98) contrast(1.08);
+}
+
+.aave-title .page-title-visual-overlay {
+  background:
+    linear-gradient(180deg, rgba(14, 8, 28, 0.04), rgba(14, 8, 28, 0.62)),
+    linear-gradient(135deg, rgba(169, 124, 255, 0.14), transparent 48%);
+  mix-blend-mode: normal;
+}
+
+.aave-title .page-title-visual-caption {
+  color: rgba(232, 219, 255, 0.84);
+}
+
+.aave-page .referral-card {
+  border-color: rgba(198, 169, 255, 0.34);
+  background:
+    linear-gradient(135deg, rgba(145, 105, 215, 0.14), transparent 48%),
+    linear-gradient(145deg, rgba(34, 39, 31, 0.82), rgba(16, 19, 16, 0.72));
+}
+
+.aave-page .referral-card::before {
+  background: linear-gradient(90deg, #c6a9ff, transparent 72%);
+}
+
+.aave-page .referral-code {
+  color: #d9c4ff;
+}
+
+.aave-page .tile:hover {
+  border-color: rgba(198, 169, 255, 0.38);
 }
 
 .page-title-visual {
@@ -890,7 +933,8 @@ h3 {
   }
 
   .plasma-title,
-  .monero-title {
+  .monero-title,
+  .aave-title {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     min-height: auto;
@@ -898,7 +942,8 @@ h3 {
   }
 
   .plasma-title .page-title-visual,
-  .monero-title .page-title-visual {
+  .monero-title .page-title-visual,
+  .aave-title .page-title-visual {
     width: min(100%, 620px);
     min-height: 420px;
     margin-left: auto;
@@ -963,7 +1008,8 @@ h3 {
   }
 
   .plasma-title .page-title-visual,
-  .monero-title .page-title-visual {
+  .monero-title .page-title-visual,
+  .aave-title .page-title-visual {
     min-height: 350px;
     border-radius: 1.4rem;
   }

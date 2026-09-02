@@ -56,6 +56,7 @@ http://127.0.0.1:4173/
 
 - `FIRST_PRINCIPLES_BUILD.md`: historical first-principles build plan and v0.2 order.
 - `PROJECT_STATE.md`: current source, production, public-boundary, and open-risk state.
+- `aave/index.html`: source-backed Aave protocol, market, risk, and referral research note.
 - `recommendations/index.html`: public referral and editorial-disclosure policy.
 - `SECURITY_AUDIT_2026-06-14.md`: historical public-surface audit.
 - `RELEASE_CHECKLIST.md`: pre-release and post-release checks.

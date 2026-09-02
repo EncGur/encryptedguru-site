@@ -34,6 +34,21 @@ test -f dist/go/plasma-one/index.html || {
   exit 1
 }
 
+aave_expected="/aave /aave/ 308"
+grep -Fqx "$aave_expected" _redirects || {
+  echo "FAIL: missing Aave source redirect: $aave_expected" >&2
+  exit 1
+}
+grep -Fqx "$aave_expected" dist/_redirects || {
+  echo "FAIL: build did not carry Aave redirect: $aave_expected" >&2
+  exit 1
+}
+
+test -f dist/aave/index.html || {
+  echo "FAIL: /aave/ research page is missing from the build" >&2
+  exit 1
+}
+
 grep -q 'https://plasmaone.onelink.me/P8qq?' dist/go/plasma-one/index.html || {
   echo "FAIL: invitation page is missing the exact Plasma One deep link" >&2
   exit 1
