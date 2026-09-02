@@ -32,6 +32,12 @@ from private operational control.
   content surface, and focused action surface. Split sections use a stable
   editorial axis on desktop; ordinary tiles carry less radius, shadow, and
   visual weight than recommendation entries.
+- On wide screens, the editorial frame expands to 1440px without widening
+  long-form reading measures; Recommendations uses a tighter action-first
+  opening so the four referral entries appear in the first desktop row.
+- The mobile page-title override keeps long headings inside the content
+  measure; the 390px acceptance pass showed zero horizontal overflow on the
+  homepage, Recommendations, Monero, Plasma, and Aave routes.
 - Recommendations is the first primary-navigation item and the homepage's
   first action; Monero, Plasma, and Aave are the primary research routes, and
   four referral entries appear in the first desktop row while the adjacent

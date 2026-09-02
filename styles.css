@@ -1023,6 +1023,28 @@ h3 {
   }
 }
 
+/* Large-screen and action-first refinement. Keep text measures disciplined
+   while giving the page frame enough width to avoid a floating center island. */
+@media (min-width: 1440px) {
+  .section,
+  .page-title {
+    width: min(1440px, 90vw);
+  }
+}
+
+.recommendations-page .page-title {
+  padding-top: clamp(4rem, 5vw, 5rem);
+  padding-bottom: clamp(2rem, 3vw, 3rem);
+}
+
+.recommendations-page .page-title + .section {
+  padding-top: clamp(3rem, 4vw, 4rem);
+}
+
+.recommendations-page .page-title + .section .section-header {
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+}
+
 @media (max-width: 360px) {
   h1 {
     overflow-wrap: anywhere;
@@ -1632,5 +1654,17 @@ h3 {
 @media (max-width: 860px) {
   .recommendations-page .recommendation-entry-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile page titles must respect the content measure. The base page-title
+   rule is intentionally large for desktop, so restate it at this breakpoint
+   to prevent long single-word titles from creating horizontal scroll. */
+@media (max-width: 860px) {
+  .page-title h1 {
+    max-width: 100%;
+    font-size: clamp(2.65rem, 11.5vw, 5rem);
+    line-height: 0.92;
+    overflow-wrap: anywhere;
   }
 }
