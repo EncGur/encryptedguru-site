@@ -1,6 +1,6 @@
 # EncryptedGuru current project state
 
-Updated: 2026-08-25
+Updated: 2026-09-02
 
 ## Goal
 
@@ -22,8 +22,9 @@ from private operational control.
   and the live verification script are source-managed.
 - Source-only Markdown, scripts, private runbook paths, credentials-like
   artifacts, and deployment internals are blocked from the public edge.
-- Personal referral links are disclosed on the recommendation page and on the
-  relevant research pages. They are not product guarantees or financial advice.
+- Personal referral links for Plasma One, Bitfinex, Binance, and Aave App are
+  disclosed on the recommendation page; relevant research pages carry separate
+  context where applicable. They are not product guarantees or financial advice.
 - Recommendations are a first-class public route in the primary navigation;
   visual prominence does not remove the adjacent provider-term disclosures.
 
