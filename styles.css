@@ -160,6 +160,7 @@ a {
 
 .nav a.nav-recommendations {
   color: var(--green-strong);
+  font-weight: 800;
   border: 1px solid rgba(168, 230, 107, 0.28);
   background: rgba(168, 230, 107, 0.08);
 }
@@ -1551,13 +1552,13 @@ h3 {
   }
 }
 
-@media (min-width: 681px) and (max-width: 1180px) {
+@media (min-width: 861px) and (max-width: 1180px) {
   .recommendations-page .recommendation-entry-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 860px) {
   .recommendations-page .recommendation-entry-grid {
     grid-template-columns: 1fr;
   }

@@ -78,6 +78,9 @@ ok "Plasma page links official developer docs" grep -q 'https://docs.plasma.org/
 ok "Plasma page links the observed X post" grep -q 'https://x.com/e4symp/status/2091829636108026276' plasma/index.html
 ok "Plasma page separates community signal" grep -q 'community distribution signal' plasma/index.html
 ok "Plasma page uses explicit invitation route" grep -q 'href="/go/plasma-one/"' plasma/index.html
+ok "Recommendations page has four referral entries" test "$(grep -c '<article class="tile recommendation-card">' recommendations/index.html)" -eq 4
+ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
+ok "Recommendations desktop grid defines four columns" grep -q 'grid-template-columns: repeat(4, minmax(0, 1fr));' styles.css
 
 # Every page carrying the primary navigation must link to the Projects hub.
 for page in $pages; do
@@ -87,6 +90,13 @@ for page in $pages; do
   fi
   if ! grep -q 'href="/plasma/"' "$page"; then
     echo "FAIL: $page missing Plasma navigation link" >&2
+    failures=$((failures + 1))
+  fi
+  first_nav_link="$(sed -n '/<nav class="nav"/,/<\/nav>/p' "$page" | grep -m1 -oE 'href="[^"]*"' || true)"
+  if [ "$first_nav_link" = 'href="/recommendations/"' ]; then
+    echo "ok: $page puts Recommendations first in primary navigation"
+  else
+    echo "FAIL: $page does not put Recommendations first in primary navigation" >&2
     failures=$((failures + 1))
   fi
 done

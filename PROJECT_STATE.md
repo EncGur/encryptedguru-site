@@ -25,8 +25,9 @@ from private operational control.
 - Personal referral links for Plasma One, Bitfinex, Binance, and Aave App are
   disclosed on the recommendation page; relevant research pages carry separate
   context where applicable. They are not product guarantees or financial advice.
-- Recommendations are a first-class public route in the primary navigation;
-  visual prominence does not remove the adjacent provider-term disclosures.
+- Recommendations is the first primary-navigation item and the homepage's
+  first action; four referral entries appear in the first desktop row, while
+  the adjacent provider-term disclosures remain visible.
 
 ## Verification gates
 
