@@ -1,6 +1,6 @@
 # EncryptedGuru current project state
 
-Updated: 2026-09-02
+Updated: 2026-09-03
 
 ## Goal
 
@@ -28,6 +28,10 @@ from private operational control.
 - Aave has a dedicated source-separated research page at `/aave/`, using the
   supplied purple portrait as its page visual and keeping the Aave App referral
   entry separate from protocol, market, token, and risk claims.
+- The shared visual system uses a quieter three-level green field: deep base,
+  content surface, and focused action surface. Split sections use a stable
+  editorial axis on desktop; ordinary tiles carry less radius, shadow, and
+  visual weight than recommendation entries.
 - Recommendations is the first primary-navigation item and the homepage's
   first action; Monero, Plasma, and Aave are the primary research routes, and
   four referral entries appear in the first desktop row while the adjacent
