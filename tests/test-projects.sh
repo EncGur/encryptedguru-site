@@ -24,6 +24,10 @@ ok "dist/projects/gmcp/index.html exists" test -f dist/projects/gmcp/index.html
 ok "dist/plasma/index.html exists" test -f dist/plasma/index.html
 ok "dist/aave/index.html exists" test -f dist/aave/index.html
 ok "dist/aave-hero.png exists" test -f dist/aave-hero.png
+ok "dist/monero-hero.webp exists" test -f dist/monero-hero.webp
+ok "dist/monero-hero-720.webp exists" test -f dist/monero-hero-720.webp
+ok "dist/aave-hero.webp exists" test -f dist/aave-hero.webp
+ok "dist/aave-hero-720.webp exists" test -f dist/aave-hero-720.webp
 
 # Every internal href on every page that carries the primary navigation must
 # resolve to a real file inside dist/.
@@ -77,7 +81,10 @@ ok "projects/index.html canonical tag" grep -q 'https://www.encryptedguru.com/pr
 ok "projects/gmcp/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/gmcp/' projects/gmcp/index.html
 ok "plasma/index.html canonical tag" grep -q 'https://www.encryptedguru.com/plasma/' plasma/index.html
 ok "aave/index.html canonical tag" grep -q 'https://www.encryptedguru.com/aave/' aave/index.html
-ok "Aave page uses the supplied hero asset" grep -q 'src="/aave-hero.png"' aave/index.html
+ok "Aave page keeps the supplied PNG fallback" grep -q 'src="/aave-hero.png' aave/index.html
+ok "Aave page uses responsive WebP hero sources" grep -q 'aave-hero-720.webp' aave/index.html
+ok "Monero page uses responsive WebP hero sources" grep -q 'monero-hero-720.webp' monero/index.html
+ok "Research hero images declare intrinsic dimensions" sh -c 'grep -q "width=" monero/index.html && grep -q "height=" monero/index.html && grep -q "width=" aave/index.html && grep -q "height=" aave/index.html && grep -q "width=" plasma/index.html && grep -q "height=" plasma/index.html'
 ok "Aave page links official documentation" grep -q 'https://aave.com/docs' aave/index.html
 ok "Aave page links official risk documentation" grep -q 'https://aave.com/docs/resources/risks' aave/index.html
 ok "Aave page keeps the exact referral URL" grep -q 'href="https://aave.com/app/r/999F66"' aave/index.html
@@ -89,6 +96,8 @@ ok "Plasma page uses explicit invitation route" grep -q 'href="/go/plasma-one/"'
 ok "Recommendations page has four referral entries" test "$(grep -c '<article class="tile recommendation-card">' recommendations/index.html)" -eq 4
 ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
 ok "Recommendations desktop grid defines four columns" grep -q 'grid-template-columns: repeat(4, minmax(0, 1fr));' styles.css
+ok "Homepage caps the ultrawide hero frame" grep -q 'width: min(1440px, 100vw);' styles.css
+ok "Ambient animation has a bounded point count" grep -q 'Math.min(120' main.js
 
 # Every page carrying the primary navigation must link to the Projects hub.
 for page in $pages; do

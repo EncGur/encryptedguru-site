@@ -24,7 +24,8 @@ tmp_plasma_invite="$(mktemp)"
 tmp_apex_plasma="$(mktemp)"
 tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers"' EXIT
+tmp_edge_runtime="$(mktemp)"
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -144,6 +145,27 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
+  # A default curl request does not reproduce a browser navigation closely
+  # enough to catch Cloudflare's conditional HTML injections. Use a browser-
+  # shaped request so the zero-analytics promise is tested at the edge.
+  curl -sS --compressed \
+    -A 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36' \
+    -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8' \
+    -H 'Accept-Language: en-US,en;q=0.9' \
+    -H 'Sec-Fetch-Dest: document' \
+    -H 'Sec-Fetch-Mode: navigate' \
+    -H 'Sec-Fetch-Site: none' \
+    --max-time 20 "https://$www/?eg-runtime-probe=1" > "$tmp_edge_runtime"
+
+  if grep -qiE 'static\.cloudflareinsights\.com|data-cf-beacon' "$tmp_edge_runtime"; then
+    echo "live browser-shaped HTML contains an analytics beacon despite the zero-analytics policy" >&2
+    exit 1
+  fi
+
+  if grep -qi 'rocket-loader\.min\.js' "$tmp_edge_runtime"; then
+    echo "warning: live browser-shaped HTML is being rewritten by Cloudflare Rocket Loader" >&2
+  fi
+
   grep -q '^Expires: 2027-06-14T00:00:00Z' "$tmp_security" || {
     echo "live security.txt is missing expected Expires" >&2
     exit 1
@@ -214,10 +236,28 @@ if [ "$strict" -eq 1 ]; then
     exit 1
   }
 
-  grep -q 'src="/aave-hero.png"' "$tmp_aave" || {
-    echo "live Aave page is missing its hero asset" >&2
+  grep -q 'src="/aave-hero.png' "$tmp_aave" || {
+    echo "live Aave page is missing its PNG fallback hero asset" >&2
     exit 1
   }
+
+  grep -q 'aave-hero-720.webp' "$tmp_aave" || {
+    echo "live Aave page is missing its responsive WebP source" >&2
+    exit 1
+  }
+
+  grep -q 'monero-hero-720.webp' "$tmp_monero" || {
+    echo "live Monero page is missing its responsive WebP source" >&2
+    exit 1
+  }
+
+  for asset in aave-hero.webp aave-hero-720.webp monero-hero.webp monero-hero-720.webp; do
+    asset_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "https://$www/$asset?v=20260903")"
+    test "$asset_status" = "200" || {
+      echo "live responsive hero asset is not returning 200: $asset_status $asset" >&2
+      exit 1
+    }
+  done
 
   grep -q 'https://aave.com/app/r/999F66' "$tmp_aave" || {
     echo "live Aave page is missing the exact referral entry" >&2

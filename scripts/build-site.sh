@@ -20,8 +20,12 @@ for file in \
   eg-mark-180.png \
   og-home.png \
   monero-hero.png \
+  monero-hero.webp \
+  monero-hero-720.webp \
   plasma-hero.jpg \
   aave-hero.png \
+  aave-hero.webp \
+  aave-hero-720.webp \
   site.webmanifest \
   robots.txt \
   sitemap.xml \

@@ -20,7 +20,9 @@ if (canvas && !reduceMotion.matches) {
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = Math.max(42, Math.floor((width * height) / 23000));
+    // Keep the decorative field dense enough to feel alive without allowing
+    // the all-pairs connection pass to grow without bound on ultrawide screens.
+    const count = Math.min(120, Math.max(42, Math.floor((width * height) / 23000)));
     points = Array.from({ length: count }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
