@@ -16,8 +16,10 @@ from private operational control.
 - The current release identity for this change is the Git commit recorded at
   release time; production is served at `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
-- The public site is static and has no forms, database, analytics, pixels,
-  advertising network, or public admin surface.
+- The public source build is static and contains no forms, database, analytics,
+  pixels, advertising network, or public admin surface. This is a source-level
+  property; the production edge still needs the browser-shaped no-analytics
+  check below to pass.
 - `_headers`, `_redirects`, `_routes.json`, `security.txt`, the build script,
   and the live verification script are source-managed.
 - Source-only Markdown, scripts, private runbook paths, credentials-like
@@ -42,6 +44,9 @@ from private operational control.
   first action; Monero, Plasma, and Aave are the primary research routes, and
   four referral entries appear in the first desktop row while the adjacent
   provider-term disclosures remain visible.
+- The 2026-09-03 production browser-shaped probe found a conditional Cloudflare
+  Insights beacon in the returned HTML. The strict live gate therefore remains
+  intentionally red until the edge setting is removed and rechecked.
 
 ## Verification gates
 
@@ -58,6 +63,10 @@ Run these before a production release:
 
 ## Open risks
 
+- Production control-plane blocker: Cloudflare conditionally injects an
+  Insights beacon for browser-shaped navigations despite the source-level
+  zero-analytics policy. Disable Web Analytics/Insights at the Cloudflare
+  account or zone edge, then rerun the strict live gate and browser DOM check.
 - DMARC remains monitoring-only with `p=none`; change only after sender
   alignment is understood.
 - Mobile animation performance still needs a real-device measurement pass.
@@ -70,7 +79,8 @@ Run these before a production release:
 
 - The source build and boundary tests pass.
 - The production route, headers, sitemap, security.txt, recommendation entry,
-  and public/private edge behavior pass strict live verification.
+  public/private edge behavior, and browser-shaped no-analytics probe pass
+  strict live verification.
 - The red portrait is intentional for the global brand mark, favicon, and
   browser/app icon; the homepage hero and generic social preview remain free
   of a large personal photo.
