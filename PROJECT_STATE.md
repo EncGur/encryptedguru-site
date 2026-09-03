@@ -46,7 +46,11 @@ from private operational control.
   provider-term disclosures remain visible.
 - The 2026-09-03 production browser-shaped probe found a conditional Cloudflare
   Insights beacon in the returned HTML. The strict live gate therefore remains
-  intentionally red until the edge setting is removed and rechecked.
+  intentionally red until the edge setting is removed and rechecked. Cloudflare
+  documents the automatic Pages injection in its [Web Analytics setup
+  guide](https://developers.cloudflare.com/pages/how-to/web-analytics/) and
+  the RUM control boundary in its [RUM beacon
+  guide](https://developers.cloudflare.com/speed/observatory/rum-beacon/).
 
 ## Verification gates
 
