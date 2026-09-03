@@ -44,12 +44,13 @@ from private operational control.
   first action; Monero, Plasma, and Aave are the primary research routes, and
   four referral entries appear in the first desktop row while the adjacent
   provider-term disclosures remain visible.
-- The 2026-09-03 production browser-shaped probe found a conditional Cloudflare
-  Insights beacon in the returned HTML. The strict live gate therefore remains
-  intentionally red until the edge setting is removed and rechecked. Cloudflare
-  documents the automatic Pages injection in its [Web Analytics setup
-  guide](https://developers.cloudflare.com/pages/how-to/web-analytics/) and
-  the RUM control boundary in its [RUM beacon
+- The 2026-09-03 audit first found a conditional Cloudflare Insights beacon in
+  browser-shaped production HTML. The account-level `encryptedguru.com` RUM
+  site was then changed to `Disable`; the final browser-shaped response and
+  Chrome DOM checks returned no beacon, and the strict live gate passed.
+  Cloudflare documents the automatic Pages injection in its [Web Analytics
+  setup guide](https://developers.cloudflare.com/pages/how-to/web-analytics/)
+  and the RUM control boundary in its [RUM beacon
   guide](https://developers.cloudflare.com/speed/observatory/rum-beacon/).
 
 ## Verification gates
@@ -67,10 +68,9 @@ Run these before a production release:
 
 ## Open risks
 
-- Production control-plane blocker: Cloudflare conditionally injects an
-  Insights beacon for browser-shaped navigations despite the source-level
-  zero-analytics policy. Disable Web Analytics/Insights at the Cloudflare
-  account or zone edge, then rerun the strict live gate and browser DOM check.
+- Cloudflare Rocket Loader remains visible as a non-blocking edge-rewrite
+  warning in the strict gate; disable it only if deterministic, source-matching
+  HTML and script loading is preferred over its optimization behavior.
 - DMARC remains monitoring-only with `p=none`; change only after sender
   alignment is understood.
 - Mobile animation performance still needs a real-device measurement pass.
