@@ -1,18 +1,23 @@
 :root {
   color-scheme: dark;
-  --bg: #090f0b;
+  --bg: #0a0e0b;
+  --surface: #10170f;
+  --surface-2: #141d16;
+  --surface-focus: #182518;
   --panel: rgba(21, 31, 23, 0.82);
   --panel-strong: rgba(27, 39, 28, 0.96);
   --panel-focus: rgba(31, 49, 31, 0.94);
-  --line: rgba(231, 242, 223, 0.13);
-  --line-strong: rgba(231, 242, 223, 0.21);
-  --text: #f5f5ed;
-  --muted: #a8afa3;
-  --soft: #dce3d5;
+  --line: rgba(231, 242, 223, 0.11);
+  --line-strong: rgba(231, 242, 223, 0.2);
+  --text: #f3f5ee;
+  --muted: #a3ab9f;
+  --soft: #d8dfd1;
   --green: #a8e66b;
   --green-strong: #d9f6a5;
+  --green-ink: #0b120c;
   --amber: #e3b06f;
   --shadow: rgba(0, 0, 0, 0.38);
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -1873,4 +1878,236 @@ body {
 }
 @media (min-width: 861px) and (max-width: 1000px) {
   .recommendation-card .button { font-size: 0.8rem; padding-inline: 0.4rem; }
+}
+
+/* ------------------------------------------------------------------
+   Visual v3 — calm field, floating navigation, lighter display type,
+   one accent, flat surfaces. Borrowed devices: a single green horizon
+   glow and detached pill navigation (usdt0.to), lighter display weights
+   with tight tracking and generous measure (plasma.org), and a
+   brand-coloured primary action with hairline-separated content
+   (tether.to). Everything below overrides earlier layers on purpose.
+   ------------------------------------------------------------------ */
+
+html { background: var(--bg); overflow-x: clip; }
+body {
+  background:
+    radial-gradient(70% 42% at 50% -8%, rgba(168, 230, 107, 0.11), transparent 70%),
+    var(--bg);
+}
+
+/* Type: lighter display weights, tighter tracking, calmer rhythm. */
+h1 { font-weight: 620; letter-spacing: -0.05em; line-height: 0.96; }
+h2 { font-weight: 600; letter-spacing: -0.04em; line-height: 1.04; }
+h3 { font-weight: 620; letter-spacing: -0.02em; }
+.eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; }
+.tile-kicker, .entry-index, .map-heading, .page-title-meta, .proof-step > span, .feature-number, .map-number, .capital-loop li > span { font-weight: 600; letter-spacing: 0.08em; }
+.wide-copy, .article p, .tile p, .path-card p, .proof-step p, .boundary-grid p { color: var(--soft); }
+.tile p, .path-card p, .proof-step p, .boundary-grid p, .feature-list small { color: var(--muted); }
+
+/* Floating pill navigation. */
+.site-header,
+.home-page .site-header,
+.sovereign-home .site-header {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 30;
+  width: min(1440px, 92vw);
+  min-height: 0;
+  margin: 0.75rem auto 0;
+  padding: 0.4rem 0.5rem 0.4rem 0.95rem;
+  gap: 1.5rem;
+  border: 1px solid var(--line-strong);
+  border-bottom-color: var(--line-strong);
+  border-radius: 999px;
+  background: rgba(10, 14, 11, 0.72);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(130%);
+}
+.brand { font-weight: 640; letter-spacing: -0.02em; }
+.nav { gap: 0.15rem; font-size: 0.88rem; }
+.nav a, .nav-more summary { min-height: 40px; padding: 0.45rem 0.85rem; border-radius: 999px; }
+.nav a:hover, .nav a[aria-current="page"] { background: rgba(246, 244, 235, 0.08); }
+.nav a.nav-recommendations {
+  margin-right: 0.35rem;
+  color: var(--green-ink);
+  font-weight: 700;
+  border-color: transparent;
+  background: var(--green);
+  transition: background 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+.nav a.nav-recommendations:hover { color: var(--green-ink); background: var(--green-strong); border-color: transparent; }
+.nav a.nav-recommendations[aria-current="page"] { color: var(--green-ink); background: var(--green-strong); border-color: transparent; box-shadow: 0 0 0 3px rgba(168, 230, 107, 0.22); }
+.nav-more summary { color: var(--muted); }
+.nav-more-menu {
+  top: calc(100% + 0.6rem);
+  min-width: 13rem;
+  padding: 0.45rem;
+  border-color: var(--line-strong);
+  border-radius: 1.1rem;
+  background: rgba(13, 19, 14, 0.96);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.nav-more-menu a { padding: 0.55rem 0.85rem; border-radius: 0.7rem; }
+
+/* Buttons: one brand-coloured primary, quiet secondary. */
+.button { min-height: 46px; padding-inline: 1.4rem; font-weight: 640; letter-spacing: -0.005em; transition: transform 200ms var(--ease-out), background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 200ms ease; }
+.button:hover { transform: translateY(-1px); }
+.button.primary { color: var(--green-ink); background: var(--green); border-color: var(--green); }
+.button.primary:hover { background: var(--green-strong); border-color: var(--green-strong); box-shadow: 0 10px 30px rgba(168, 230, 107, 0.18); }
+.button.secondary { color: var(--text); background: transparent; border-color: var(--line-strong); }
+.button.secondary:hover { color: var(--green-strong); background: rgba(168, 230, 107, 0.06); border-color: rgba(168, 230, 107, 0.5); }
+.text-link { border-bottom-color: rgba(168, 230, 107, 0.45); font-weight: 640; }
+
+/* Flat surfaces instead of gradient islands. */
+.tile, .path-card, .capital-map, .entry-strip > a, .boundary-grid > div, .recommendation-card {
+  background: var(--surface);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.tile, .path-card, .capital-map { border-radius: 1.1rem; }
+.tile:hover, .path-card:hover, .path-card:focus-visible { background: var(--surface-2); border-color: var(--line-strong); transform: translateY(-2px); }
+.entry-strip > a { border-radius: 1rem; padding: 1.3rem 1.35rem; transition: background 160ms ease, border-color 160ms ease, transform 200ms var(--ease-out); }
+.entry-strip > a:hover { background: var(--surface-focus); border-color: rgba(168, 230, 107, 0.5); transform: translateY(-2px); }
+.recommendation-card { background: var(--surface-2); border-color: rgba(168, 230, 107, 0.2); }
+.recommendation-card:hover { border-color: rgba(168, 230, 107, 0.5); }
+.boundary-grid > div { border: 1px solid var(--line); border-top: 2px solid var(--green); border-radius: 0 0 1rem 1rem; }
+.capital-map { border-color: var(--line-strong); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04); }
+.section { border-top-color: var(--line); }
+
+/* Homepage hero: one horizon glow, a faint dot field, staged entrance. */
+.capital-hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(4rem, 7vw, 7.5rem) clamp(3rem, 5vw, 5rem);
+}
+.capital-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -10rem 0 auto;
+  height: 34rem;
+  background: radial-gradient(48% 62% at 26% 42%, rgba(168, 230, 107, 0.17), transparent 72%);
+  pointer-events: none;
+}
+.capital-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: radial-gradient(rgba(231, 242, 223, 0.13) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(60% 70% at 40% 45%, #000 10%, transparent 72%);
+  mask-image: radial-gradient(60% 70% at 40% 45%, #000 10%, transparent 72%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.sovereign-home h1 { font-size: clamp(3.4rem, 6.4vw, 6.8rem); font-weight: 600; letter-spacing: -0.052em; line-height: 0.98; }
+.capital-intro { font-size: clamp(1.08rem, 1.45vw, 1.28rem); line-height: 1.55; }
+.capital-hero .hero-actions { margin-top: 2rem; }
+.capital-signoff { font-size: 0.84rem; }
+.map-row strong { font-weight: 620; }
+.capital-map h2 { font-weight: 600; }
+.home-entries { padding-block: 1.5rem 3rem; }
+.entry-strip strong { font-weight: 620; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  .capital-hero-copy > * { animation: rise 680ms var(--ease-out) both; }
+  .capital-hero-copy > :nth-child(2) { animation-delay: 60ms; }
+  .capital-hero-copy > :nth-child(3) { animation-delay: 120ms; }
+  .capital-hero-copy > :nth-child(4) { animation-delay: 180ms; }
+  .capital-hero-copy > :nth-child(5) { animation-delay: 240ms; }
+  .capital-map { animation: rise 760ms var(--ease-out) 220ms both; }
+}
+
+/* Research and thesis pages: calmer titles, numerals as typography. */
+.page-title h1 { font-weight: 600; }
+.page-title-meta { border-bottom-color: var(--line); }
+.thesis-title h1 { font-weight: 600; }
+.thesis-content h2 { font-weight: 600; }
+.thesis-content h3 { font-weight: 620; }
+.thesis-toc a { font-weight: 500; }
+.thesis-toc a:hover { color: var(--green-strong); }
+.capital-loop li > span { font-size: 0.85rem; color: var(--green-strong); font-variant-numeric: tabular-nums; }
+.thesis-layer { padding-block: 1.75rem; }
+.thesis-layer h3 { font-weight: 600; letter-spacing: -0.035em; }
+.recommendation-card h3 { font-weight: 620; }
+.recommendations-page .page-title h1 { font-weight: 600; }
+
+/* Footer: brand, grouped links, trust line. */
+.site-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr);
+  gap: 2.5rem 4rem;
+  width: min(1440px, 90vw);
+  margin: clamp(3rem, 6vw, 6rem) auto 0;
+  padding: clamp(2.5rem, 4vw, 3.5rem) 0 2rem;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  backdrop-filter: none;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.footer-brand .brand { color: var(--text); font-size: 1rem; }
+.footer-brand p { max-width: 34ch; margin: 1rem 0 0; }
+.footer-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+.footer-links > div { display: grid; align-content: start; gap: 0.15rem; }
+.footer-links span { margin-bottom: 0.5rem; color: var(--text); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.footer-links a { display: block; width: fit-content; padding-block: 0.2rem; color: var(--muted); transition: color 160ms ease; }
+.footer-links a:hover, .footer-links a:focus-visible { color: var(--green-strong); }
+.footer-note { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; margin: 0.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.76rem; }
+
+@media (max-width: 1120px) and (min-width: 861px) {
+  .site-header, .home-page .site-header, .sovereign-home .site-header { gap: 1rem; padding-inline: 0.45rem 0.45rem; }
+  .nav a, .nav-more summary { padding-inline: 0.6rem; }
+}
+@media (max-width: 860px) {
+  .site-header, .home-page .site-header, .sovereign-home .site-header {
+    position: relative;
+    top: auto;
+    width: min(1440px, calc(100% - 1.5rem));
+    margin: 0.75rem auto 0;
+    padding: 0.85rem 0.9rem 0.75rem;
+    gap: 0.75rem;
+    border-radius: 1.4rem;
+  }
+  .nav a, .nav-more summary { padding-inline: 0.7rem; }
+  .capital-hero { padding-block: 3.5rem 2.5rem; }
+  .capital-hero::before { inset: -6rem 0 auto; height: 26rem; background: radial-gradient(70% 55% at 30% 40%, rgba(168, 230, 107, 0.16), transparent 72%); }
+  .site-footer { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-note { flex-direction: column; }
+}
+@media (max-width: 520px) {
+  .site-header, .home-page .site-header, .sovereign-home .site-header { width: calc(100% - 1rem); margin-top: 0.5rem; padding: 0.75rem 0.75rem 0.65rem; border-radius: 1.2rem; }
+  .nav a.nav-recommendations { margin-right: 0.2rem; }
+}
+
+/* v3 polish: footer brand lockup, physical press feedback, engraved display type. */
+.footer-brand .brand { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0; }
+.button:active { transform: scale(0.97); transition-duration: 80ms; }
+.entry-strip > a:active, .path-card:active, .map-row:active { transform: scale(0.99); }
+.sovereign-home h1,
+.thesis-title h1,
+.page-title h1 {
+  background: linear-gradient(180deg, #ffffff 0%, #d5ddcd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.capital-hero h1 span {
+  background: linear-gradient(180deg, var(--green-strong) 0%, var(--green) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .button, .entry-strip > a, .path-card, .tile { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
 }
