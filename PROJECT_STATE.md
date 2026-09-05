@@ -40,15 +40,25 @@ clear separation from private operational control.
   probed before the deploy.
 - Local checks pass for source hygiene, all internal destinations and fragment
   links, landmarks, referral integrity, and existing route/boundary tests.
-- Production acceptance for this release is pending until the pushed version
-  passes the strict live gate and rendered checks.
+- Production acceptance passed on 2026-09-05 for commit `f72ff84`: the
+  strict live gate passed; `styles.css`, `main.js`, and `og-home.png` served
+  under their new version strings match the local build byte for byte; the
+  browser-shaped probe returned no analytics beacon and no Rocket Loader
+  rewrite; and Chrome DOM checks at 390, 600, 768, 1024, 1440, and 2560 px
+  showed no horizontal overflow, the More menu inside the viewport, four
+  referral cards in the first desktop row, and no console errors.
+- The CI workflow addition (a `python3 tests/test-site-structure.py` step in
+  `.github/workflows/static-audit.yml`) is not yet on `main`: the release
+  token lacks the `workflow` scope. Push it after refreshing the GitHub CLI
+  token with that scope.
 
 ## Current verified state
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- The current release identity for this change is the Git commit recorded at
-  release time; production is served at `https://www.encryptedguru.com/`.
+- The current release identity is commit `f72ff84` (feat: publish the
+  sovereign capital thesis release); production is served at
+  `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
   pixels, advertising network, or public admin surface. This is a source-level
@@ -104,11 +114,11 @@ python3 tests/test-site-structure.py
 
 ## Open risks
 
-- Cloudflare Rocket Loader is still enabled at the edge. `data-cfasync="false"`
-  exempts `/main.js` from rewriting, but Cloudflare still injects
-  `rocket-loader.min.js` into browser-shaped responses and the strict gate
-  still warns. Disable Rocket Loader in the zone speed settings if a
-  source-matching response is wanted.
+- Cloudflare Rocket Loader is still enabled at the zone. With `/main.js`
+  opted out via `data-cfasync="false"`, the 2026-09-05 browser-shaped probe
+  showed no Rocket Loader injection at all; the strict gate still warns if
+  it reappears. Disable it in the zone speed settings if a source-matching
+  response must be guaranteed.
 - DMARC remains monitoring-only with `p=none`; change only after sender
   alignment is understood.
 - A real-device pass (iPhone and Android) for the More menu and the copy
