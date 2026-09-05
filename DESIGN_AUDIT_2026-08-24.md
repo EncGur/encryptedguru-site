@@ -1,5 +1,8 @@
 # EncryptedGuru design audit — 2026-08-24
 
+> Historical record. Superseded by `PROJECT_STATE.md`: the build size, homepage
+> copy, and navigation described below are no longer current.
+
 ## Goal
 
 Make the public site feel like a deliberate research product: visitors should

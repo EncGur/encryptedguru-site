@@ -6,6 +6,8 @@ Use this before publishing a new static-site release.
 
 - [ ] Run `./scripts/audit-source.sh`.
 - [ ] Run `./scripts/build-site.sh` and confirm only public assets exist in `dist/`.
+- [ ] Run `./tests/test-plasma-redirect.sh`, `./tests/test-projects.sh`, `./tests/test-public-boundary.sh`, `./tests/test-reproducible-package.sh`, and `python3 tests/test-site-structure.py`.
+- [ ] Bump every `?v=` cache-busting value that changed to a string never requested from production.
 - [ ] Run `./scripts/check-remote-ready.sh` after the GitHub repo and credentials are configured.
 - [ ] Confirm no secrets, tokens, private URLs, billing data, recovery codes, or unreduced screenshots are present.
 - [ ] Confirm all public email addresses are intentional and active.
@@ -20,8 +22,8 @@ Use this before publishing a new static-site release.
 
 - [ ] Start local preview with `python3 -m http.server 4173 --directory dist`.
 - [ ] Open `http://127.0.0.1:4173/`.
-- [ ] Check homepage, Monero, docs, projects, labs, infrastructure, contact, and `security.txt`.
-- [ ] Check mobile width for navigation and text fit.
+- [ ] Check `/`, `/recommendations/`, `/thesis/`, `/monero/`, `/plasma/`, `/aave/`, `/go/plasma-one/`, `/docs/`, `/projects/`, `/projects/gmcp/`, `/labs/`, `/labs/dsx-air/`, `/infrastructure/`, `/contact/`, and `security.txt`.
+- [ ] Check 390px, 560px, 768px, 1024px, and an ultrawide width for navigation, the More menu, referral cards, and text fit.
 - [ ] Check that external-facing links and mail links are correct.
 - [ ] Check an unknown route returns `404` rather than the homepage.
 

@@ -1,101 +1,47 @@
-const canvas = document.getElementById("ambient");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+// Progressive enhancement only. Every page works without this script:
+// the More menu is a native <details>, and referral codes remain selectable text.
 
-if (canvas && !reduceMotion.matches) {
-  const ctx = canvas.getContext("2d");
-
-  let width = 0;
-  let height = 0;
-  let points = [];
-  let animationFrame = 0;
-  let running = false;
-
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    // Keep the decorative field dense enough to feel alive without allowing
-    // the all-pairs connection pass to grow without bound on ultrawide screens.
-    const count = Math.min(120, Math.max(42, Math.floor((width * height) / 23000)));
-    points = Array.from({ length: count }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.18,
-      vy: (Math.random() - 0.5) * 0.18,
-      r: Math.random() * 1.8 + 0.7,
-    }));
-  }
-
-  function draw() {
-    if (!running) return;
-
-    ctx.clearRect(0, 0, width, height);
-
-    for (const point of points) {
-      point.x += point.vx;
-      point.y += point.vy;
-
-      if (point.x < -20) point.x = width + 20;
-      if (point.x > width + 20) point.x = -20;
-      if (point.y < -20) point.y = height + 20;
-      if (point.y > height + 20) point.y = -20;
-    }
-
-    for (let i = 0; i < points.length; i += 1) {
-      for (let j = i + 1; j < points.length; j += 1) {
-        const a = points[i];
-        const b = points[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 145) {
-          const alpha = (1 - dist / 145) * 0.2;
-          ctx.strokeStyle = `rgba(113, 212, 64, ${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
+// More menu: add outside-click, Escape, and focus-departure dismissal.
+const menus = document.querySelectorAll(".nav-more");
+if (menus.length) {
+  document.addEventListener("click", (event) => {
+    menus.forEach((menu) => {
+      if (menu.open && !menu.contains(event.target)) menu.open = false;
+    });
+  });
+  menus.forEach((menu) => {
+    menu.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.open) {
+        menu.open = false;
+        menu.querySelector("summary").focus();
       }
-    }
+    });
+    menu.addEventListener("focusout", (event) => {
+      if (event.relatedTarget && !menu.contains(event.relatedTarget)) menu.open = false;
+    });
+  });
+}
 
-    for (const point of points) {
-      ctx.fillStyle = "rgba(162, 255, 104, 0.48)";
-      ctx.beginPath();
-      ctx.arc(point.x, point.y, point.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    animationFrame = requestAnimationFrame(draw);
-  }
-
-  function start() {
-    if (running) return;
-    running = true;
-    animationFrame = requestAnimationFrame(draw);
-  }
-
-  function stop() {
-    running = false;
-    if (animationFrame) cancelAnimationFrame(animationFrame);
-    animationFrame = 0;
-  }
-
-  resize();
-  start();
-  window.addEventListener("resize", resize);
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stop();
-    } else {
-      start();
-    }
+// Copy controls: revealed only when the Clipboard API exists. Focus stays on
+// the button (no disabled toggling), and the status text is cleared before it
+// is set again so assistive technology re-announces repeated copies.
+if (navigator.clipboard && navigator.clipboard.writeText) {
+  document.querySelectorAll("[data-copy]").forEach((button) => {
+    const holder = button.closest(".referral-value");
+    const status = holder ? holder.querySelector(".copy-status") : null;
+    button.hidden = false;
+    button.addEventListener("click", async () => {
+      if (button.dataset.busy) return;
+      button.dataset.busy = "1";
+      if (status) status.textContent = "";
+      let message = "Copied to clipboard.";
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy);
+      } catch (error) {
+        message = "Copy unavailable. Select the code or use the link below.";
+      }
+      if (status) status.textContent = message;
+      delete button.dataset.busy;
+    });
   });
 }

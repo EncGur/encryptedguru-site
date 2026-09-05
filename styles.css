@@ -70,15 +70,6 @@ a {
   transform: translateY(0);
 }
 
-.ambient-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  opacity: 0.3;
-  pointer-events: none;
-}
 
 .site-header {
   position: sticky;
@@ -1080,9 +1071,6 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 
-  .ambient-canvas {
-    display: none;
-  }
 }
 
 /* Homepage detail layer: signal, entry paths, and proof rhythm. */
@@ -1103,9 +1091,6 @@ h3 {
     linear-gradient(112deg, rgba(10, 14, 10, 0.32), transparent 52%);
 }
 
-.home-page .ambient-canvas {
-  opacity: 0.42;
-}
 
 .hero-inner {
   max-width: 880px;
@@ -1691,4 +1676,201 @@ h3 {
   .home-page h1 {
     font-size: clamp(4.3rem, 8vw, 8.2rem);
   }
+}
+
+/* Sovereign capital: shared navigation, readable research, and direct entries. */
+body {
+  background: radial-gradient(ellipse at 12% 0%, #19261a 0%, transparent 42rem), #0b100d;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.brand { flex-shrink: 0; }
+.site-header { gap: 1rem; }
+.sovereign-home .site-header {
+  position: sticky;
+  background: rgba(11, 16, 13, 0.94);
+  border-bottom-color: var(--line);
+}
+.nav-more:has(a:not(.mobile-research)[aria-current="page"]) summary { color: var(--text); }
+.nav-more summary span { transition: transform 180ms ease; }
+.nav-more[open] summary span { transform: rotate(45deg); }
+.nav-more-menu a { border-radius: 0.4rem; }
+.nav-more-menu .mobile-research { display: none; }
+.nav-more-menu { max-height: 65vh; overflow-y: auto; }
+.site-footer { font-size: 0.84rem; line-height: 2; }
+.site-footer a { display: inline-block; padding-block: 0.35rem; }
+.button { text-align: center; line-height: 1.35; padding-block: 0.75rem; }
+.button.primary:hover { background: var(--green-strong); border-color: var(--green-strong); }
+[id] { scroll-margin-top: 7rem; }
+
+.capital-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4.5vw, 5rem);
+  align-items: center;
+  width: min(1440px, 90vw);
+  margin-inline: auto;
+  padding-block: clamp(2.5rem, 3.6vw, 3.5rem);
+}
+.sovereign-home h1 {
+  max-width: none;
+  font-size: clamp(3.2rem, 5.9vw, 6.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+  text-wrap: initial;
+}
+.capital-hero h1 span { color: var(--green-strong); }
+.capital-intro { max-width: 48ch; margin-block: 1.5rem 0; color: var(--soft); font-size: clamp(1.05rem, 1.4vw, 1.24rem); line-height: 1.6; }
+.capital-hero .hero-actions { gap: 0.6rem; margin-top: 1.8rem; font-size: 0.9rem; }
+.capital-signoff { margin-top: 1.7rem; color: var(--soft); font-size: 0.86rem; }
+.capital-signoff span { color: var(--muted); margin-left: 0.3rem; }
+.capital-map { padding: clamp(1.1rem, 2vw, 2rem); border: 1px solid var(--line-strong); border-radius: 1rem; background: linear-gradient(145deg, #1a261c, #0e1711); }
+.map-heading { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.1em; gap: 0.5rem; }
+.capital-map h2 { margin-top: 1.6rem; font-size: clamp(1.6rem, 2.3vw, 2.3rem); }
+.capital-map > p { color: var(--muted); font-size: 0.85rem; }
+.map-row { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 0.6rem; align-items: center; padding-block: 1.1rem; border-top: 1px solid var(--line); }
+.map-number { font-size: 0.65rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.map-row strong, .map-row small { display: block; }
+.map-row strong { font-size: 1.1rem; }
+.map-row small { margin-top: 0.2rem; color: var(--muted); font-size: 0.7rem; }
+.map-label { color: var(--green-strong); font-size: 0.7rem; }
+.map-label span { margin-left: 0.35rem; }
+.map-row:hover strong { color: var(--green-strong); }
+.capital-map .map-caption { border-top: 1px solid var(--line); margin: 0; padding-top: 1rem; font-size: 0.72rem; line-height: 1.6; }
+.map-caption a { display: block; color: var(--soft); text-decoration: underline; text-underline-offset: 0.2em; }
+
+.home-entries { padding-block: 2rem 2.5rem; }
+.entry-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 1.5rem; }
+.entry-heading .eyebrow { margin-bottom: 0.65rem; }
+.entry-heading h2 { font-size: clamp(1.65rem, 2.5vw, 2.4rem); }
+.entry-heading > a { flex-shrink: 0; font-size: 0.85rem; }
+.entry-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; }
+.entry-strip > a { min-width: 0; display: grid; gap: 0.7rem; padding: 1.15rem; border: 1px solid var(--line); border-radius: 0.65rem; background: #141d16; transition: background 160ms ease, border-color 160ms ease; }
+.entry-strip > a:hover { background: #1d2c20; border-color: var(--green); }
+.entry-index { font-size: 0.65rem; letter-spacing: 0.06em; color: var(--amber); }
+.entry-strip strong { display: flex; justify-content: space-between; font-size: 1.12rem; }
+.entry-strip strong span { font-size: 0.9rem; color: var(--green-strong); }
+.entry-strip small { color: var(--muted); font-size: 0.76rem; }
+.entry-strip b { color: var(--soft); font-weight: 600; }
+.entry-disclosure { color: var(--muted); font-size: 0.77rem; margin: 1rem 0 0; }
+.sovereign-home .section:not(.home-entries) { padding-block: clamp(3.5rem, 6vw, 6rem); }
+.sovereign-home .path-card { min-height: 260px; box-shadow: none; }
+.sovereign-home .path-card h3 { margin-top: 2rem; }
+.sovereign-home .boundary-grid > div { min-height: 150px; }
+.sovereign-home .boundary-mark { margin-bottom: 1rem; }
+
+.recommendations-page .page-title { padding-block: clamp(2rem, 4vw, 3.5rem) 1.5rem; }
+.recommendations-page .page-title-meta { margin-bottom: 1.5rem; }
+.recommendations-page .page-title h1 { font-size: clamp(2rem, 5.5vw, 5rem); letter-spacing: -0.06em; }
+.recommendations-page .page-title > p { color: var(--soft); }
+.recommendations-page .page-title .recommendation-intro { font-size: 0.9rem; line-height: 1.65; max-width: 82ch; color: var(--muted); margin-bottom: 0; }
+.recommendations-page .page-title + .section { padding-top: 1.75rem; }
+.recommendation-card { padding: clamp(1rem, 1.7vw, 1.5rem); gap: 1rem; background: #141d16; box-shadow: none; }
+.recommendation-card .tile-kicker { margin: 0 0 0.6rem; font-size: 0.68rem; letter-spacing: 0.05em; }
+.recommendation-card h3 { margin: 0; font-size: 1.5rem; letter-spacing: -0.04em; }
+.recommendation-card > p { font-size: 0.93rem; line-height: 1.65; }
+.recommendation-card .button { width: 100%; margin-top: 0; font-size: 0.9rem; padding-inline: 0.6rem; }
+.recommendation-card small a { color: var(--soft); text-decoration: underline; text-underline-offset: 0.2em; }
+.recommendation-card > small { min-height: 2.9em; }
+.recommendation-card:target { border-color: var(--green); }
+.referral-value { margin-top: auto; padding-top: 1rem; }
+.referral-value > span { display: block; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.35rem; }
+.referral-value > div { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; border-block: 1px solid var(--line); min-height: 48px; }
+.referral-value code { color: var(--green-strong); font-size: 1rem; font-weight: 700; }
+.copy-control { font: inherit; font-size: 0.72rem; background: transparent; border: 0; padding: 0.5rem; min-height: 44px; color: var(--soft); cursor: pointer; flex-shrink: 0; }
+.copy-control:hover { color: var(--green-strong); text-decoration: underline; }
+.copy-status { min-height: 1.15rem; margin-top: 0.3rem; }
+
+.thesis-title { padding-block: clamp(3rem, 6vw, 5rem) 3rem; }
+.thesis-title h1 { font-size: clamp(2.5rem, 6.2vw, 6rem); line-height: 1.02; max-width: 20ch; }
+.thesis-title .thesis-deck { font-size: clamp(1.05rem, 1.5vw, 1.25rem); max-width: 60ch; line-height: 1.6; }
+.thesis-layout { width: min(1180px, 90vw); margin: 3rem auto 0; display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); }
+.thesis-toc { position: sticky; top: 7rem; align-self: start; display: grid; padding-bottom: 1rem; }
+.thesis-toc a { display: block; color: var(--muted); font-size: 0.86rem; padding-block: 0.65rem; border-bottom: 1px solid var(--line); }
+.thesis-toc a:hover { color: var(--green-strong); }
+.thesis-content { min-width: 0; max-width: 720px; }
+.thesis-content > section { border-bottom: 1px solid var(--line); padding-bottom: 3.5rem; margin-bottom: 3.5rem; }
+.thesis-content h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); line-height: 1.1; }
+.thesis-content h3 { margin-top: 2rem; font-size: 1.2rem; }
+.thesis-content p { color: var(--soft); line-height: 1.85; font-size: 1.04rem; }
+.thesis-content .eyebrow { color: var(--green-strong); font-size: 0.72rem; }
+.thesis-content p a { text-decoration: underline; text-underline-offset: 0.22em; color: var(--green-strong); }
+.thesis-content .thesis-mantra { margin: 2rem 0; padding: 0.2rem 0 0.2rem 1.5rem; border-left: 2px solid var(--green); color: var(--green-strong); font-size: clamp(1.3rem, 2.3vw, 2rem); line-height: 1.6; letter-spacing: -0.035em; }
+.thesis-content .editorial-note, .thesis-content .source-review { color: var(--muted); font-size: 0.85rem; }
+.thesis-layer { padding-block: 1.5rem; border-top: 1px solid var(--line); }
+.thesis-layer h3 { font-size: 1.8rem; margin: 0.5rem 0; }
+.thesis-content .layer-question { font-size: 0.93rem; color: var(--green-strong); }
+.capital-loop { list-style: none; margin: 1.8rem 0; padding: 0; }
+.capital-loop li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; border-top: 1px solid var(--line); padding-block: 1.2rem; }
+.capital-loop li > span { font-size: 0.75rem; color: var(--amber); }
+.capital-loop h3 { margin: 0; }
+.capital-loop p { margin: 0.4rem 0 0; font-size: 0.95rem; }
+.method-list { margin-block: 2rem; }
+.method-list > div { border-top: 1px solid var(--line); padding-block: 1rem; }
+.method-list dt { font-weight: 700; }
+.method-list dd { margin: 0.45rem 0 0; color: var(--muted); line-height: 1.65; }
+.thesis-content .thesis-signature { font-size: 1.15rem; color: var(--green-strong); }
+.thesis-signature span { font-size: 0.85rem; color: var(--muted); }
+.research-context { width: min(1180px, 90vw); margin: 1.5rem auto 0; color: var(--muted); font-size: 0.85rem; }
+.research-context a { color: var(--green-strong); text-decoration: underline; text-underline-offset: 0.2em; }
+
+@media (min-width: 1440px) { .thesis-layout, .research-context { width: min(1440px, 90vw); } }
+@media (min-width: 600px) and (max-width: 860px) {
+  .recommendations-page .recommendation-entry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1000px) {
+  .capital-hero { grid-template-columns: 1fr; gap: 2rem; }
+  .sovereign-home h1 { font-size: clamp(3rem, 8vw, 5rem); }
+  .capital-map { max-width: none; }
+  .capital-map h2 { font-size: 2rem; }
+  .map-row { grid-template-columns: 2rem minmax(0, 1fr) auto; }
+}
+@media (max-width: 860px) {
+  .site-header, .sovereign-home .site-header { position: relative; gap: 0.75rem; padding-block: 1rem 0.75rem; }
+  .nav { gap: 0.1rem; font-size: 0.82rem; }
+  .nav a, .nav-more summary { padding-inline: 0.65rem; }
+  /* Anchor the More menu to the navigation bar so it never leaves the viewport. */
+  .nav { position: relative; }
+  .nav-more { position: static; }
+  .nav-more-menu { left: auto; right: 0; }
+  .entry-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .thesis-layout { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+  .thesis-toc { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+  .thesis-toc .eyebrow { grid-column: 1 / -1; }
+  .thesis-content { max-width: none; }
+  .thesis-title h1 { font-size: clamp(2.3rem, 7.5vw, 4.5rem); }
+  .page-title:not(.thesis-title) { padding-top: 3rem; }
+  [id] { scroll-margin-top: 1.5rem; }
+}
+@media (max-width: 520px) {
+  .nav > a[href="/monero/"], .nav > a[href="/plasma/"], .nav > a[href="/aave/"] { display: none; }
+  .nav-more-menu .mobile-research { display: inline-flex; }
+  .nav-more:has([aria-current="page"]) summary { color: var(--text); }
+  .sovereign-home h1 { font-size: clamp(2.3rem, 9.2vw, 3rem); }
+  .capital-hero { padding-block: 2.5rem; }
+  .capital-hero .eyebrow { font-size: 0.65rem; }
+  .capital-intro { font-size: 1.05rem; }
+  .capital-signoff span { display: block; margin-left: 0; margin-top: 0.25rem; }
+  .entry-heading { align-items: start; flex-direction: column; gap: 0.7rem; }
+  .entry-strip > a { padding: 1rem 0.8rem; }
+  .entry-strip strong { font-size: 1rem; }
+  .entry-strip small { font-size: 0.68rem; }
+  .map-row { grid-template-columns: 1.3rem minmax(0, 1fr) auto; gap: 0.4rem; }
+  .map-row small { font-size: 0.65rem; }
+  .map-label { font-size: 0.65rem; }
+  .recommendations-page .page-title h1 { font-size: clamp(1.9rem, 8.9vw, 2.9rem); overflow-wrap: normal; }
+  .recommendation-card { padding: 1.5rem; }
+  .thesis-content .thesis-mantra { padding-left: 1rem; }
+}
+@media (min-width: 861px) and (max-width: 1000px) {
+  .recommendation-card .button { font-size: 0.8rem; padding-inline: 0.4rem; }
 }

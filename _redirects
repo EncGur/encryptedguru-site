@@ -1,6 +1,7 @@
 # Keep the research route and the action route semantically separate.
 /plasma /plasma/ 308
 /aave /aave/ 308
+/thesis /thesis/ 308
 /go/plasma-one /go/plasma-one/ 308
 
 https://encryptedguru.com/* https://www.encryptedguru.com/:splat 301

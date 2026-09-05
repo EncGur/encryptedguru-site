@@ -36,7 +36,7 @@ do
   cp "$file" "$output/"
 done
 
-for directory in .well-known aave contact docs go infrastructure labs monero plasma projects recommendations; do
+for directory in .well-known aave contact docs go infrastructure labs monero plasma projects recommendations thesis; do
   cp -R "$directory" "$output/"
 done
 
@@ -44,7 +44,9 @@ if find "$output" -type f \( \
   -name '*.md' -o \
   -name '*.sh' -o \
   -name '*.zip' -o \
-  -name '*.log' \
+  -name '*.log' -o \
+  -name '*.svg' -o \
+  -name '*.py' \
 \) -print | grep -q .; then
   echo "non-public source artifact entered $output" >&2
   exit 1
@@ -62,6 +64,7 @@ test -f "$output/plasma/index.html"
 test -f "$output/aave/index.html"
 test -f "$output/go/plasma-one/index.html"
 test -f "$output/recommendations/index.html"
+test -f "$output/thesis/index.html"
 test -f "$output/og-home.png"
 test -f "$output/aave-hero.png"
 test -f "$output/eg-mark.png"

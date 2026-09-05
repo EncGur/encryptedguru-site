@@ -27,10 +27,16 @@ Cloudflare Pages source-control files:
 - `404.html`: disables Pages' implicit single-page-app fallback and restores real
   not-found responses.
 
-Before release:
+Before release, run the verification gates listed in `PROJECT_STATE.md`:
 
 ```sh
 ./scripts/audit-source.sh
+./scripts/build-site.sh
+./tests/test-plasma-redirect.sh
+./tests/test-projects.sh
+./tests/test-public-boundary.sh
+./tests/test-reproducible-package.sh
+python3 tests/test-site-structure.py
 ```
 
 After release:

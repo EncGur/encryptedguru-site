@@ -42,7 +42,7 @@ run_audit_with() {
   )
 }
 
-mkdir -p "$tmp/scripts" "$tmp/.well-known" "$tmp/functions" "$tmp/monero" "$tmp/aave" "$tmp/projects/gmcp" "$tmp/go/plasma-one" "$tmp/recommendations"
+mkdir -p "$tmp/scripts" "$tmp/.well-known" "$tmp/functions" "$tmp/monero" "$tmp/aave" "$tmp/projects/gmcp" "$tmp/go/plasma-one" "$tmp/recommendations" "$tmp/thesis"
 cp scripts/audit-source.sh scripts/build-site.sh "$tmp/scripts/"
 cp .well-known/security.txt "$tmp/.well-known/security.txt"
 cp sitemap.xml "$tmp/sitemap.xml"
@@ -52,6 +52,7 @@ cp projects/index.html "$tmp/projects/index.html"
 cp projects/gmcp/index.html "$tmp/projects/gmcp/index.html"
 cp go/plasma-one/index.html "$tmp/go/plasma-one/index.html"
 cp recommendations/index.html "$tmp/recommendations/index.html"
+cp thesis/index.html "$tmp/thesis/index.html"
 cp _routes.json _redirects index.html 404.html styles.css main.js _headers robots.txt README.md PROJECT_STATE.md DEPLOYMENT.md RELEASE_CHECKLIST.md FIRST_PRINCIPLES_BUILD.md SECURITY_AUDIT_2026-06-14.md MONERO_SOURCE_AUDIT_2026-07-29.md "$tmp/"
 cp 'functions/[[path]].js' "$tmp/functions/[[path]].js"
 

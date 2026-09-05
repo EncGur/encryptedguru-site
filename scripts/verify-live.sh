@@ -25,7 +25,8 @@ tmp_apex_plasma="$(mktemp)"
 tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
 tmp_edge_runtime="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime"' EXIT
+tmp_thesis="$(mktemp)"
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -104,6 +105,37 @@ dig @1.1.1.1 +short "google._domainkey.$domain" TXT | sed 's/ .*$/ .../'
 if [ "$strict" -eq 1 ]; then
   echo
   echo "== strict checks =="
+
+  curl --fail -sS --max-time 20 "https://$www/thesis/" > "$tmp_thesis" || {
+    echo "live Thesis page is not returning 200" >&2
+    exit 1
+  }
+  grep -q 'https://www.encryptedguru.com/thesis/</loc>' "$tmp_sitemap" || {
+    echo "live sitemap missing Thesis page" >&2
+    exit 1
+  }
+  grep -q 'Sovereign Capital Intelligence' "$tmp_home" || {
+    echo "live homepage missing the Sovereign Capital Intelligence title" >&2
+    exit 1
+  }
+  grep -q 'id="capital-stack"' "$tmp_thesis" || {
+    echo "live Thesis page missing capital-stack anchor" >&2
+    exit 1
+  }
+  grep -q 'id="method"' "$tmp_thesis" || {
+    echo "live Thesis page missing method anchor" >&2
+    exit 1
+  }
+  for referral in plasma-one bitfinex binance aave; do
+    grep -q "id=\"$referral\"" "$tmp_recommendations" || {
+      echo "live Recommendations page missing deep-link target $referral" >&2
+      exit 1
+    }
+  done
+  grep -q '<script data-cfasync="false" defer src="/main.js' "$tmp_home" || {
+    echo "live homepage script tag lost its Rocket Loader opt-out ordering" >&2
+    exit 1
+  }
 
   grep -qi '^HTTP/2 301' "$tmp_headers" || {
     echo "missing apex redirect response" >&2

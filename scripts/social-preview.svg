@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><radialGradient id="field"><stop stop-color="#263827"/><stop offset="1" stop-color="#0b100d"/></radialGradient></defs>
+  <rect width="1200" height="630" fill="#0b100d"/>
+  <rect width="1200" height="630" fill="url(#field)"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="70" y="85" fill="#f5f5ed" font-size="25" font-weight="700">EncryptedGuru</text>
+    <text x="70" y="164" fill="#abb6a6" font-size="15" letter-spacing="3">SOVEREIGN CAPITAL INTELLIGENCE</text>
+    <text x="65" y="280" fill="#f5f5ed" font-size="86" font-weight="700" letter-spacing="-5">Protect identity.</text>
+    <text x="65" y="376" fill="#d9f6a5" font-size="86" font-weight="700" letter-spacing="-5">Control capital.</text>
+    <path d="M70 445H1130" stroke="#41513e"/>
+    <text x="70" y="502" fill="#f5f5ed" font-size="24">Study forever. Compound with discipline.</text>
+    <text x="70" y="567" fill="#a8afa3" font-size="17">encryptedguru.com</text>
+    <g stroke="#80966c" fill="none" stroke-width="1.5">
+      <circle cx="975" cy="278" r="107"/><circle cx="975" cy="278" r="73"/>
+      <path d="M901 199L1049 357M868 278H1082"/>
+    </g>
+    <circle cx="975" cy="171" r="6" fill="#d9f6a5"/>
+    <circle cx="1049" cy="357" r="5" fill="#e3b06f"/>
+    <circle cx="902" cy="278" r="4" fill="#d9f6a5"/>
+  </g>
+</svg>

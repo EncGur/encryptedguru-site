@@ -31,7 +31,7 @@ ok "dist/aave-hero-720.webp exists" test -f dist/aave-hero-720.webp
 
 # Every internal href on every page that carries the primary navigation must
 # resolve to a real file inside dist/.
-pages="index.html 404.html monero/index.html plasma/index.html aave/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html"
+pages="index.html 404.html monero/index.html plasma/index.html aave/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html thesis/index.html"
 
 for page in $pages; do
   if [ ! -f "$page" ]; then
@@ -93,11 +93,13 @@ ok "Plasma page links official developer docs" grep -q 'https://docs.plasma.org/
 ok "Plasma page links the observed X post" grep -q 'https://x.com/e4symp/status/2091829636108026276' plasma/index.html
 ok "Plasma page separates community signal" grep -q 'community distribution signal' plasma/index.html
 ok "Plasma page uses explicit invitation route" grep -q 'href="/go/plasma-one/"' plasma/index.html
-ok "Recommendations page has four referral entries" test "$(grep -c '<article class="tile recommendation-card">' recommendations/index.html)" -eq 4
+ok "Recommendations page has four referral entries" test "$(grep -c '<article class="tile recommendation-card"' recommendations/index.html)" -eq 4
 ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
 ok "Recommendations desktop grid defines four columns" grep -q 'grid-template-columns: repeat(4, minmax(0, 1fr));' styles.css
-ok "Homepage caps the ultrawide hero frame" grep -q 'width: min(1440px, 100vw);' styles.css
-ok "Ambient animation has a bounded point count" grep -q 'Math.min(120' main.js
+ok "Homepage caps the ultrawide hero frame" sh -c "sed -n '/^\\.capital-hero {/,/^}/p' styles.css | grep -q 'width: min(1440px, 90vw);'"
+ok "No decorative canvas ships in the build" sh -c '! grep -rq "<canvas" dist && ! grep -q "ambient" main.js'
+ok "Main script opts out of Rocket Loader before src" grep -q '<script data-cfasync="false" defer src="/main.js' index.html
+ok "Thesis page has its anchored chapters" sh -c 'grep -q "id=\"capital-stack\"" thesis/index.html && grep -q "id=\"method\"" thesis/index.html'
 
 # Every page carrying the primary navigation must link to the Projects hub.
 for page in $pages; do

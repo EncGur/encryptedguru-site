@@ -43,7 +43,7 @@ else
 fi
 
 # The unpacked tree must contain only public allowlist content.
-leaks="$(cd "$tmp/ua" && find . -type f \( -name '*.md' -o -name '*.sh' -o -name '*.zip' -o -name '*.log' -o -name '.env*' -o -name '*.key' -o -name '*.pem' \) )"
+leaks="$(cd "$tmp/ua" && find . -type f \( -name '*.md' -o -name '*.sh' -o -name '*.zip' -o -name '*.log' -o -name '.env*' -o -name '*.key' -o -name '*.pem' -o -name '*.svg' -o -name '*.py' \) )"
 if [ -n "$leaks" ]; then
   echo "FAIL: source-only artifacts in release archive:" >&2
   echo "$leaks" >&2
