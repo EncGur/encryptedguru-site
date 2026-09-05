@@ -47,10 +47,9 @@ clear separation from private operational control.
   rewrite; and Chrome DOM checks at 390, 600, 768, 1024, 1440, and 2560 px
   showed no horizontal overflow, the More menu inside the viewport, four
   referral cards in the first desktop row, and no console errors.
-- The CI workflow addition (a `python3 tests/test-site-structure.py` step in
-  `.github/workflows/static-audit.yml`) is not yet on `main`: the release
-  token lacks the `workflow` scope. Push it after refreshing the GitHub CLI
-  token with that scope.
+- CI (`.github/workflows/static-audit.yml`) now runs the built-site structure
+  test alongside the existing source, boundary, projects, and reproducible
+  package gates.
 
 ## Current verified state
 
