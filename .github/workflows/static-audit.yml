@@ -25,6 +25,9 @@ jobs:
       - name: Projects regression tests
         run: ./tests/test-projects.sh
 
+      - name: Built page links and structure
+        run: python3 tests/test-site-structure.py
+
       - name: Reproducible-package test
         run: ./tests/test-reproducible-package.sh
 
