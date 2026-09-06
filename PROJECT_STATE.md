@@ -24,9 +24,10 @@ clear separation from private operational control.
 - Connected the field guide from the homepage proof section, Thesis, Docs,
   global More navigation, footer navigation, sitemap, build allowlist, and
   release tests. Recommendations remains the first primary navigation entry.
-- This release is source-only until the full build, remote sync, and strict live
-  verification pass. No Cloudflare dashboard setting, DNS record, or external
-  provider terms are changed by this content expansion.
+- The expansion was committed as `5c5c645` and pushed to `main`. The public
+  build, route structure, and strict live verification passed after propagation
+  on 2026-09-07 (Asia/Singapore). No Cloudflare dashboard setting, DNS record,
+  or external provider terms were changed by this content expansion.
 
 ## 2026-09-06 first-principles audit follow-up
 
@@ -210,6 +211,10 @@ clear separation from private operational control.
   first action; Monero, Plasma, and Aave are the primary research routes, and
   five disclosed referral entries—including the featured Fluid Lend entry—are
   available with the adjacent provider-term disclosures kept visible.
+- The Capital Operating System field guide is published at `/playbook/`. Its
+  public route, canonical tag, current More-navigation state, sitemap entry,
+  seven-step flow, six-boundary model, and decision-record anchors passed the
+  2026-09-07 strict live verification.
 - The 2026-09-03 audit first found a conditional Cloudflare Insights beacon in
   browser-shaped production HTML. The account-level `encryptedguru.com` RUM
   site was then changed to `Disable`; the final browser-shaped response and
