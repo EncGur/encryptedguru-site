@@ -9,6 +9,30 @@ identity, control, liquidity, settlement rails, allocation, and lifelong learnin
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
 
+## 2026-09-06 Fluid capital-productivity release
+
+- Added Fluid Lend as a distinct `Capital productivity / stablecoin lending`
+  subject. The site does not equate a stablecoin with stable yield: the
+  position depends on the selected asset and network, contracts, liquidity,
+  rate model, withdrawal conditions, and provider controls.
+- Home now shows a four-function capital map—Tether / Plasma / USDT0 / Fluid
+  Lend—and a featured Fluid entry in the current recommendations action area.
+- Recommendations now contains five disclosed personal referral entries. Fluid
+  is the featured stablecoin-lending entry in the first desktop row; the four
+  existing entries retain their deep links and provider disclosures.
+- `/thesis/#capital-productivity` documents Fluid as an allocation/productivity
+  layer and links to Fluid's technical documentation. The page explicitly
+  separates variable lending output from cash, bank deposits, fixed-rate, or
+  guaranteed-return claims.
+- Local source, build, structure, public-boundary, reproducible-package, and
+  syntax gates passed. The 390px acceptance pass showed the Fluid entry and
+  expanded More navigation inside the viewport without horizontal overflow.
+- Pushed as commit `d70ea8f`. Production HTML contains the exact
+  `https://fluid.io/9745/lending` path, the `#fluid` target, and the
+  `#capital-productivity` research layer; strict live verification passed on
+  2026-09-06. External Fluid market rates, limits, terms, and eligibility
+  remain time-sensitive and were not represented as fixed promises.
+
 ## 2026-09-06 follow-up hardening
 
 - Corrected the navigation truth model: Recommendations remains the most
@@ -77,8 +101,8 @@ clear separation from private operational control.
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- The current production release identity is commit `0ea7619` (fix: align
-  active navigation and first-paint accessibility); production is served at
+- The current production release identity is commit `d70ea8f` (feat: add Fluid
+  stablecoin lending entry); production is served at
   `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
@@ -89,9 +113,10 @@ clear separation from private operational control.
   and the live verification script are source-managed.
 - Source-only Markdown, scripts, private runbook paths, credentials-like
   artifacts, and deployment internals are blocked from the public edge.
-- Personal referral links for Plasma One, Bitfinex, Binance, and Aave App are
-  disclosed on the recommendation page; relevant research pages carry separate
-  context where applicable. They are not product guarantees or financial advice.
+- Personal referral links for Plasma One, Fluid Lend, Bitfinex, Binance, and
+  Aave App are disclosed on the recommendation page; relevant research pages
+  carry separate context where applicable. They are not product guarantees or
+  financial advice.
 - Aave has a dedicated source-separated research page at `/aave/`, using the
   supplied purple portrait as its page visual and keeping the Aave App referral
   entry separate from protocol, market, token, and risk claims.
@@ -100,15 +125,16 @@ clear separation from private operational control.
   editorial axis on desktop; ordinary tiles carry less radius, shadow, and
   visual weight than recommendation entries.
 - On wide screens, the editorial frame expands to 1440px without widening
-  long-form reading measures; Recommendations puts four referral entries in
-  the first desktop row, two per row on tablets, and one per row on phones.
+  long-form reading measures; Recommendations puts four of the five referral
+  entries in the first desktop row, two per row on tablets, and one per row on
+  phones.
 - The mobile page-title override keeps long headings inside the content
   measure; the 390px acceptance pass showed zero horizontal overflow on the
   homepage, Recommendations, Monero, Plasma, and Aave routes.
 - Recommendations is the first primary-navigation item and the homepage's
   first action; Monero, Plasma, and Aave are the primary research routes, and
-  four referral entries appear in the first desktop row while the adjacent
-  provider-term disclosures remain visible.
+  five disclosed referral entries—including the featured Fluid Lend entry—are
+  available with the adjacent provider-term disclosures kept visible.
 - The 2026-09-03 audit first found a conditional Cloudflare Insights beacon in
   browser-shaped production HTML. The account-level `encryptedguru.com` RUM
   site was then changed to `Disable`; the final browser-shaped response and
