@@ -96,8 +96,12 @@ ok "Plasma page uses explicit invitation route" grep -q 'href="/go/plasma-one/"'
 ok "Recommendations page has five referral entries" test "$(grep -c '<article class="tile recommendation-card' recommendations/index.html)" -eq 5
 ok "Recommendations page keeps the exact Fluid referral URL" grep -q 'href="https://fluid.io/9745/lending"' recommendations/index.html
 ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
+ok "Recommendations page links the official Rabby control entry" grep -q 'href="https://rabby.io/"' recommendations/index.html
 ok "Homepage features the Fluid stablecoin-yield entry" grep -q 'href="/recommendations/#fluid"' index.html
+ok "Homepage maps the Rabby control surface" grep -q 'href="/infrastructure/#wallet-control"' index.html
 ok "Thesis defines the Fluid capital-productivity layer" grep -q 'id="capital-productivity"' thesis/index.html
+ok "Thesis defines the Rabby control-surface layer" grep -q 'id="control-surface"' thesis/index.html
+ok "Infrastructure page defines the Rabby wallet boundary" grep -q 'id="wallet-control"' infrastructure/index.html
 ok "Recommendations desktop grid defines four columns" grep -q 'grid-template-columns: repeat(4, minmax(0, 1fr));' styles.css
 ok "Homepage caps the ultrawide hero frame" sh -c "sed -n '/^\\.capital-hero {/,/^}/p' styles.css | grep -q 'width: min(1440px, 90vw);'"
 ok "No decorative canvas ships in the build" sh -c '! grep -rq "<canvas" dist && ! grep -q "ambient" main.js'

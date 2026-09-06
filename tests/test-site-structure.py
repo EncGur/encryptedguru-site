@@ -90,6 +90,8 @@ for url in ("https://fluid.io/9745/lending", "https://www.bitfinex.com/sign-up?r
     links = [link for link in referrals.links if link["href"] == url]
     if len(links) != 1 or "sponsored" not in links[0].get("rel", ""):
         failures.append(f"recommendations: missing or undisclosed provider link {url}")
+if sum(link["href"] == "https://rabby.io/" for link in referrals.links) != 1:
+    failures.append("recommendations: missing official Rabby control entry")
 if failures:
     raise SystemExit("\n".join(failures))
 print(f"Structure passed: {len(pages)} pages; destinations, fragments, landmarks, and referral integrity.")

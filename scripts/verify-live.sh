@@ -26,7 +26,8 @@ tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
 tmp_edge_runtime="$(mktemp)"
 tmp_thesis="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis"' EXIT
+tmp_infrastructure="$(mktemp)"
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_infrastructure"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -64,6 +65,12 @@ echo "== Aave knowledge page =="
 aave_status="$(curl -sS -o "$tmp_aave" -w '%{http_code}' --max-time 20 "https://$www/aave/")"
 printf 'www/aave/ status: %s\n' "$aave_status"
 sed -n '1,20p' "$tmp_aave"
+
+echo
+echo "== Infrastructure page =="
+infrastructure_status="$(curl -sS -o "$tmp_infrastructure" -w '%{http_code}' --max-time 20 "https://$www/infrastructure/")"
+printf 'www/infrastructure/ status: %s\n' "$infrastructure_status"
+sed -n '1,20p' "$tmp_infrastructure"
 
 echo
 echo "== Plasma routes =="
@@ -136,8 +143,28 @@ if [ "$strict" -eq 1 ]; then
     echo "live Recommendations page is missing the exact Fluid referral URL" >&2
     exit 1
   }
+  grep -q 'https://rabby.io/' "$tmp_recommendations" || {
+    echo "live Recommendations page is missing the official Rabby control entry" >&2
+    exit 1
+  }
+  grep -q 'id="rabby-boundary"' "$tmp_recommendations" || {
+    echo "live Recommendations page is missing the Rabby control boundary" >&2
+    exit 1
+  }
   grep -q 'id="capital-productivity"' "$tmp_thesis" || {
     echo "live Thesis page is missing the Fluid capital-productivity layer" >&2
+    exit 1
+  }
+  grep -q 'id="control-surface"' "$tmp_thesis" || {
+    echo "live Thesis page is missing the Rabby control-surface layer" >&2
+    exit 1
+  }
+  grep -q 'id="wallet-control"' "$tmp_infrastructure" || {
+    echo "live Infrastructure page is missing the Rabby wallet boundary" >&2
+    exit 1
+  }
+  grep -q 'https://rabby.io/' "$tmp_infrastructure" || {
+    echo "live Infrastructure page is missing the official Rabby URL" >&2
     exit 1
   }
   grep -q '<script data-cfasync="false" defer src="/main.js' "$tmp_home" || {

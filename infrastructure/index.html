@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Infrastructure - EncryptedGuru</title>
-    <meta name="description" content="EncryptedGuru infrastructure architecture notes.">
+    <meta name="description" content="EncryptedGuru infrastructure architecture notes on identity, routing, recovery, and EVM wallet control.">
     <meta name="theme-color" content="#090b09">
     <link rel="canonical" href="https://www.encryptedguru.com/infrastructure/">
     <meta property="og:type" content="website">
@@ -58,6 +58,27 @@
           <li>Test topology and routing concepts in simulation before applying them to live systems.</li>
           <li>Keep emergency access independent from experimental routing paths.</li>
         </ul>
+      </section>
+
+      <section class="section article" id="wallet-control">
+        <p class="eyebrow">Wallet / execution boundary</p>
+        <h2>Rabby is a control surface, not a trust substitute.</h2>
+        <p>Rabby's official site positions the product as a wallet for Ethereum and EVM chains. Its integration documentation describes the wallet as a selectable dapp connection and signing surface. In the EncryptedGuru framework, Rabby closes the capital loop at the point where a user reviews and authorizes a transaction.</p>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>What the user controls</h3>
+            <p>Account selection, key custody, device security, connection approval, and whether a transaction is signed are still user-controlled decisions.</p>
+          </article>
+          <article class="tile compact">
+            <h3>What review can show</h3>
+            <p>Transaction simulation and signing context can make an expected call easier to inspect before approval. A simulation cannot prove that the contract, oracle, chain, or device is safe.</p>
+          </article>
+          <article class="tile compact">
+            <h3>What remains external</h3>
+            <p>Wallet software does not remove phishing, malicious approvals, contract permissions, bridge dependencies, chain failures, protocol losses, or irreversible signatures.</p>
+          </article>
+        </div>
+        <p class="editorial-note">Primary material: <a href="https://rabby.io/" target="_blank" rel="noopener noreferrer">Rabby Wallet</a> · <a href="https://rabby.io/docs/integrating-rabby-wallet" target="_blank" rel="noopener noreferrer">Rabby integration documentation</a>.</p>
       </section>
 
       <section class="section">

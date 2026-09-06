@@ -1816,6 +1816,9 @@ body {
 .copy-control { font: inherit; font-size: 0.72rem; background: transparent; border: 0; padding: 0.5rem; min-height: 44px; color: var(--soft); cursor: pointer; flex-shrink: 0; }
 .copy-control:hover { color: var(--green-strong); text-decoration: underline; }
 .copy-status { min-height: 1.15rem; margin-top: 0.3rem; }
+.recommendation-infra-boundary { padding-block: clamp(3rem, 5vw, 5rem); border-block: 1px solid var(--line); background: linear-gradient(110deg, rgba(24, 37, 27, 0.72), transparent 68%); }
+.recommendation-infra-boundary h2 { max-width: 17ch; }
+.recommendation-infra-boundary .stack-list a { color: var(--green-strong); }
 .recommendation-yield-boundary { padding-block: clamp(3rem, 5vw, 5rem); border-block: 1px solid var(--line); }
 .recommendation-yield-boundary h2 { max-width: 15ch; }
 .recommendation-yield-boundary .stack-list a { color: var(--green-strong); }
