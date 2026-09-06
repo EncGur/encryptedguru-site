@@ -1,6 +1,6 @@
 # EncryptedGuru current project state
 
-Updated: 2026-09-05
+Updated: 2026-09-06
 
 ## Goal
 
@@ -8,6 +8,28 @@ Build EncryptedGuru as an independent research system for sovereign capital:
 identity, control, liquidity, settlement rails, allocation, and lifelong learning.
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
+
+## 2026-09-06 follow-up hardening
+
+- Corrected the navigation truth model: Recommendations remains the most
+  visible entry, but it is outlined on other pages and filled only when it is
+  the current route. The direct desktop research link owns the single static
+  `aria-current` state; on phones, the visible research copies inside More
+  mirror that state at runtime.
+- Removed the first-paint blank interval caused by the entrance animation.
+  Primary content remains visible before motion starts, including when the
+  browser has not yet run the deferred script.
+- Added accessible labels to the More navigation group and its links, and
+  made the built-site structure gate enforce document language, image alt
+  attributes, one More group, and no duplicate primary current-page states.
+- Made CI build `dist/` explicitly before the built-site and public-boundary
+  tests, so structure assertions cannot silently depend on a stale local
+  artifact. Cache-busting now points all pages at the `20260906` CSS/JS
+  resources.
+- Pushed as commit `0ea7619`. Production HTML references both new asset
+  versions, the strict live gate passed on 2026-09-06, and a live browser-shaped
+  Thesis readback exposed the five anchored chapters and the corrected primary
+  navigation. A physical iPhone/Android pass remains open.
 
 ## 2026-09-05 release
 
@@ -55,8 +77,8 @@ clear separation from private operational control.
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- The current release identity is commit `f72ff84` (feat: publish the
-  sovereign capital thesis release); production is served at
+- The current production release identity is commit `0ea7619` (fix: align
+  active navigation and first-paint accessibility); production is served at
   `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
