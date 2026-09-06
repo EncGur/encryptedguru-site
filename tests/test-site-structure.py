@@ -82,10 +82,10 @@ for name, page in pages.items():
             failures.append(f"{name}: image missing alt attribute")
 
 referrals = pages["recommendations/index.html"]
-for identity in ("plasma-one", "bitfinex", "binance", "aave"):
+for identity in ("plasma-one", "fluid", "bitfinex", "binance", "aave"):
     if identity not in referrals.ids:
         failures.append(f"recommendations: missing deep-link target {identity}")
-for url in ("https://www.bitfinex.com/sign-up?refcode=noAVQ3EXo",
+for url in ("https://fluid.io/9745/lending", "https://www.bitfinex.com/sign-up?refcode=noAVQ3EXo",
             "https://www.binance.com/register?ref=EGURU", "https://aave.com/app/r/999F66"):
     links = [link for link in referrals.links if link["href"] == url]
     if len(links) != 1 or "sponsored" not in links[0].get("rel", ""):

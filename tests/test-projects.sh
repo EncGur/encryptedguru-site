@@ -93,8 +93,11 @@ ok "Plasma page links official developer docs" grep -q 'https://docs.plasma.org/
 ok "Plasma page links the observed X post" grep -q 'https://x.com/e4symp/status/2091829636108026276' plasma/index.html
 ok "Plasma page separates community signal" grep -q 'community distribution signal' plasma/index.html
 ok "Plasma page uses explicit invitation route" grep -q 'href="/go/plasma-one/"' plasma/index.html
-ok "Recommendations page has four referral entries" test "$(grep -c '<article class="tile recommendation-card"' recommendations/index.html)" -eq 4
+ok "Recommendations page has five referral entries" test "$(grep -c '<article class="tile recommendation-card' recommendations/index.html)" -eq 5
+ok "Recommendations page keeps the exact Fluid referral URL" grep -q 'href="https://fluid.io/9745/lending"' recommendations/index.html
 ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
+ok "Homepage features the Fluid stablecoin-yield entry" grep -q 'href="/recommendations/#fluid"' index.html
+ok "Thesis defines the Fluid capital-productivity layer" grep -q 'id="capital-productivity"' thesis/index.html
 ok "Recommendations desktop grid defines four columns" grep -q 'grid-template-columns: repeat(4, minmax(0, 1fr));' styles.css
 ok "Homepage caps the ultrawide hero frame" sh -c "sed -n '/^\\.capital-hero {/,/^}/p' styles.css | grep -q 'width: min(1440px, 90vw);'"
 ok "No decorative canvas ships in the build" sh -c '! grep -rq "<canvas" dist && ! grep -q "ambient" main.js'

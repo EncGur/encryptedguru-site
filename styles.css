@@ -1761,6 +1761,26 @@ body {
 .entry-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; }
 .entry-strip > a { min-width: 0; display: grid; gap: 0.7rem; padding: 1.15rem; border: 1px solid var(--line); border-radius: 0.65rem; background: #141d16; transition: background 160ms ease, border-color 160ms ease; }
 .entry-strip > a:hover { background: #1d2c20; border-color: var(--green); }
+.entry-feature {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.7fr) minmax(0, 2fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+  margin-bottom: 0.8rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid rgba(168, 230, 107, 0.42);
+  border-radius: 1rem;
+  background: linear-gradient(110deg, rgba(33, 55, 31, 0.96), rgba(18, 27, 19, 0.92));
+  box-shadow: inset 0 1px 0 rgba(217, 246, 165, 0.08), 0 14px 36px rgba(0, 0, 0, 0.16);
+  transition: background 160ms ease, border-color 160ms ease, transform 200ms var(--ease-out);
+}
+.entry-feature:hover { border-color: var(--green); background: linear-gradient(110deg, rgba(43, 69, 38, 0.98), rgba(20, 32, 21, 0.96)); transform: translateY(-2px); }
+.entry-feature-copy { display: grid; gap: 0.3rem; min-width: 0; }
+.entry-feature-copy strong { display: flex; justify-content: space-between; gap: 1rem; color: var(--text); font-size: clamp(1.05rem, 1.7vw, 1.35rem); letter-spacing: -0.025em; }
+.entry-feature-copy strong span { color: var(--green-strong); font-size: 0.9em; }
+.entry-feature-copy small { max-width: 70ch; color: var(--soft); font-size: 0.82rem; line-height: 1.55; }
+.entry-feature-label { color: var(--green-strong); font-size: 0.78rem; font-weight: 760; white-space: nowrap; }
 .entry-index { font-size: 0.65rem; letter-spacing: 0.06em; color: var(--amber); }
 .entry-strip strong { display: flex; justify-content: space-between; font-size: 1.12rem; }
 .entry-strip strong span { font-size: 0.9rem; color: var(--green-strong); }
@@ -1780,6 +1800,8 @@ body {
 .recommendations-page .page-title .recommendation-intro { font-size: 0.9rem; line-height: 1.65; max-width: 82ch; color: var(--muted); margin-bottom: 0; }
 .recommendations-page .page-title + .section { padding-top: 1.75rem; }
 .recommendation-card { padding: clamp(1rem, 1.7vw, 1.5rem); gap: 1rem; background: #141d16; box-shadow: none; }
+.recommendation-card-featured { border-color: rgba(168, 230, 107, 0.48); background: linear-gradient(145deg, rgba(28, 46, 29, 0.98), #141d16 72%); }
+.recommendation-card-featured .tile-kicker { color: var(--green-strong); }
 .recommendation-card .tile-kicker { margin: 0 0 0.6rem; font-size: 0.68rem; letter-spacing: 0.05em; }
 .recommendation-card h3 { margin: 0; font-size: 1.5rem; letter-spacing: -0.04em; }
 .recommendation-card > p { font-size: 0.93rem; line-height: 1.65; }
@@ -1794,6 +1816,9 @@ body {
 .copy-control { font: inherit; font-size: 0.72rem; background: transparent; border: 0; padding: 0.5rem; min-height: 44px; color: var(--soft); cursor: pointer; flex-shrink: 0; }
 .copy-control:hover { color: var(--green-strong); text-decoration: underline; }
 .copy-status { min-height: 1.15rem; margin-top: 0.3rem; }
+.recommendation-yield-boundary { padding-block: clamp(3rem, 5vw, 5rem); border-block: 1px solid var(--line); }
+.recommendation-yield-boundary h2 { max-width: 15ch; }
+.recommendation-yield-boundary .stack-list a { color: var(--green-strong); }
 
 .thesis-title { padding-block: clamp(3rem, 6vw, 5rem) 3rem; }
 .thesis-title h1 { font-size: clamp(2.5rem, 6.2vw, 6rem); line-height: 1.02; max-width: 20ch; }
@@ -1848,6 +1873,8 @@ body {
   .nav-more { position: static; }
   .nav-more-menu { left: auto; right: 0; }
   .entry-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .entry-feature { grid-template-columns: 1fr auto; }
+  .entry-feature-copy { grid-column: 1 / -1; grid-row: 2; }
   .thesis-layout { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
   .thesis-toc { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
   .thesis-toc .eyebrow { grid-column: 1 / -1; }
@@ -1866,6 +1893,9 @@ body {
   .capital-intro { font-size: 1.05rem; }
   .capital-signoff span { display: block; margin-left: 0; margin-top: 0.25rem; }
   .entry-heading { align-items: start; flex-direction: column; gap: 0.7rem; }
+  .entry-feature { grid-template-columns: 1fr; gap: 0.65rem; padding: 1.1rem 0.85rem; }
+  .entry-feature-copy { grid-column: auto; grid-row: auto; }
+  .entry-feature-label { white-space: normal; }
   .entry-strip > a { padding: 1rem 0.8rem; }
   .entry-strip strong { font-size: 1rem; }
   .entry-strip small { font-size: 0.68rem; }

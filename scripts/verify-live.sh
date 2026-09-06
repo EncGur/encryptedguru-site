@@ -126,12 +126,20 @@ if [ "$strict" -eq 1 ]; then
     echo "live Thesis page missing method anchor" >&2
     exit 1
   }
-  for referral in plasma-one bitfinex binance aave; do
+  for referral in plasma-one fluid bitfinex binance aave; do
     grep -q "id=\"$referral\"" "$tmp_recommendations" || {
       echo "live Recommendations page missing deep-link target $referral" >&2
       exit 1
     }
   done
+  grep -q 'https://fluid.io/9745/lending' "$tmp_recommendations" || {
+    echo "live Recommendations page is missing the exact Fluid referral URL" >&2
+    exit 1
+  }
+  grep -q 'id="capital-productivity"' "$tmp_thesis" || {
+    echo "live Thesis page is missing the Fluid capital-productivity layer" >&2
+    exit 1
+  }
   grep -q '<script data-cfasync="false" defer src="/main.js' "$tmp_home" || {
     echo "live homepage script tag lost its Rocket Loader opt-out ordering" >&2
     exit 1
