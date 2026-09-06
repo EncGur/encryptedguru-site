@@ -1930,10 +1930,10 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 .nav a:hover, .nav a[aria-current="page"] { background: rgba(246, 244, 235, 0.08); }
 .nav a.nav-recommendations {
   margin-right: 0.35rem;
-  color: var(--green-ink);
+  color: var(--green-strong);
   font-weight: 700;
-  border-color: transparent;
-  background: var(--green);
+  border-color: rgba(168, 230, 107, 0.38);
+  background: rgba(168, 230, 107, 0.08);
   transition: background 180ms ease, box-shadow 180ms ease, color 180ms ease;
 }
 .nav a.nav-recommendations:hover { color: var(--green-ink); background: var(--green-strong); border-color: transparent; }
@@ -1949,6 +1949,7 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 .nav-more-menu a { padding: 0.55rem 0.85rem; border-radius: 0.7rem; }
+.nav-more-menu a[aria-current="page"] { color: var(--green-strong); background: rgba(168, 230, 107, 0.1); }
 
 /* Buttons: one brand-coloured primary, quiet secondary. */
 .button { min-height: 46px; padding-inline: 1.4rem; font-weight: 640; letter-spacing: -0.005em; transition: transform 200ms var(--ease-out), background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 200ms ease; }
@@ -2013,7 +2014,8 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 
 @media (prefers-reduced-motion: no-preference) {
   @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
+    /* Keep primary content visible before and during the entrance motion. */
+    from { opacity: 1; transform: translateY(14px); }
     to { opacity: 1; transform: none; }
   }
   .capital-hero-copy > * { animation: rise 680ms var(--ease-out) both; }

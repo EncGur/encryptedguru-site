@@ -19,6 +19,9 @@ jobs:
       - name: Audit source
         run: ./scripts/audit-source.sh
 
+      - name: Build public site
+        run: ./scripts/build-site.sh
+
       - name: Public-boundary regression tests
         run: ./tests/test-public-boundary.sh
 

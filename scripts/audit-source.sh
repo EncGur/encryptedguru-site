@@ -29,6 +29,7 @@ FIRST_PRINCIPLES_BUILD.md
 SECURITY_AUDIT_2026-06-14.md
 MONERO_SOURCE_AUDIT_2026-07-29.md
 scripts/build-site.sh
+scripts/social-preview.svg
 functions/[[path]].js
 "
 

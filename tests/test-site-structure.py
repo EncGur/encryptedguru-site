@@ -6,32 +6,57 @@ from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1] / "dist"
+if not ROOT.is_dir():
+    raise SystemExit("dist/ is missing; run ./scripts/build-site.sh before the built-site structure test")
 
 
 class Page(HTMLParser):
     def __init__(self, path):
         super().__init__()
-        self.path, self.ids, self.links, self.assets = path, [], [], []
+        self.path, self.ids, self.links, self.assets, self.images = path, [], [], [], []
+        self.primary_links, self.more_menus = [], []
+        self.lang = None
+        self.primary_nav_depth = 0
         self.tags = Counter()
         self.feed(path.read_text())
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         self.tags[tag] += 1
+        if tag == "html":
+            self.lang = attrs.get("lang")
+        if tag == "nav" and "nav" in attrs.get("class", "").split():
+            self.primary_nav_depth += 1
+        if tag == "div" and "nav-more-menu" in attrs.get("class", "").split():
+            self.more_menus.append(attrs)
         if "id" in attrs:
             self.ids.append(attrs["id"])
         if tag == "a" and "href" in attrs:
             self.links.append(attrs)
+            if self.primary_nav_depth:
+                self.primary_links.append(attrs)
+        if tag == "img":
+            self.images.append(attrs)
         if tag in ("img", "script") and "src" in attrs:
             self.assets.append(attrs["src"])
         if tag == "link" and attrs.get("rel") == "stylesheet":
             self.assets.append(attrs["href"])
+
+    def handle_endtag(self, tag):
+        if tag == "nav" and self.primary_nav_depth:
+            self.primary_nav_depth -= 1
 
 
 pages = {path.relative_to(ROOT).as_posix(): Page(path) for path in ROOT.rglob("*.html")}
 assert "thesis/index.html" in pages, "Thesis missing from production build"
 failures = []
 for name, page in pages.items():
+    if page.lang != "en":
+        failures.append(f"{name}: document must declare lang=\"en\"")
+    if len(page.more_menus) != 1 or page.more_menus[0].get("role") != "group" or page.more_menus[0].get("aria-label") != "More navigation":
+        failures.append(f"{name}: More navigation group is missing its accessible label")
+    if sum(link.get("aria-current") == "page" for link in page.primary_links) > 1:
+        failures.append(f"{name}: primary navigation has duplicate current-page links")
     for tag in ("main", "h1"):
         if page.tags[tag] != 1:
             failures.append(f"{name}: expected one {tag}, got {page.tags[tag]}")
@@ -52,6 +77,9 @@ for name, page in pages.items():
     for link in page.links:
         if link.get("target") == "_blank" and "noopener" not in link.get("rel", ""):
             failures.append(f"{name}: external new-tab link missing noopener")
+    for image in page.images:
+        if "alt" not in image:
+            failures.append(f"{name}: image missing alt attribute")
 
 referrals = pages["recommendations/index.html"]
 for identity in ("plasma-one", "bitfinex", "binance", "aave"):

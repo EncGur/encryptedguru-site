@@ -43,7 +43,7 @@ run_audit_with() {
 }
 
 mkdir -p "$tmp/scripts" "$tmp/.well-known" "$tmp/functions" "$tmp/monero" "$tmp/aave" "$tmp/projects/gmcp" "$tmp/go/plasma-one" "$tmp/recommendations" "$tmp/thesis"
-cp scripts/audit-source.sh scripts/build-site.sh "$tmp/scripts/"
+cp scripts/audit-source.sh scripts/build-site.sh scripts/social-preview.svg "$tmp/scripts/"
 cp .well-known/security.txt "$tmp/.well-known/security.txt"
 cp sitemap.xml "$tmp/sitemap.xml"
 cp monero/index.html "$tmp/monero/index.html"

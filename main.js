@@ -4,6 +4,20 @@
 // More menu: add outside-click, Escape, and focus-departure dismissal.
 const menus = document.querySelectorAll(".nav-more");
 if (menus.length) {
+  // On narrow screens the three research links move into More. Mirror the
+  // current-page state onto those visible copies without duplicating it on
+  // desktop, where the direct links remain visible.
+  menus.forEach((menu) => {
+    const nav = menu.closest(".nav");
+    const current = nav ? nav.querySelector(":scope > a[aria-current='page']") : null;
+    const currentPath = current ? new URL(current.href, location.href).pathname : "";
+    menu.querySelectorAll(".mobile-research").forEach((link) => {
+      const linkPath = new URL(link.href, location.href).pathname;
+      if (currentPath && linkPath === currentPath) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  });
+
   document.addEventListener("click", (event) => {
     menus.forEach((menu) => {
       if (menu.open && !menu.contains(event.target)) menu.open = false;
