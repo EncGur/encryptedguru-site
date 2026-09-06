@@ -750,6 +750,17 @@ h3 {
   line-height: 1.6;
 }
 
+.review-note {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.review-note strong {
+  color: var(--soft);
+}
+
 .referral-card {
   position: relative;
   display: grid;

@@ -49,14 +49,35 @@ class Page(HTMLParser):
 
 pages = {path.relative_to(ROOT).as_posix(): Page(path) for path in ROOT.rglob("*.html")}
 assert "thesis/index.html" in pages, "Thesis missing from production build"
+expected_current = {
+    "recommendations/index.html": "/recommendations/",
+    "thesis/index.html": "/thesis/",
+    "monero/index.html": "/monero/",
+    "plasma/index.html": "/plasma/",
+    "aave/index.html": "/aave/",
+    "docs/index.html": "/docs/",
+    "projects/index.html": "/projects/",
+    "projects/gmcp/index.html": "/projects/",
+    "labs/index.html": "/labs/",
+    "labs/dsx-air/index.html": "/labs/",
+    "infrastructure/index.html": "/infrastructure/",
+    "contact/index.html": "/contact/",
+}
 failures = []
 for name, page in pages.items():
     if page.lang != "en":
         failures.append(f"{name}: document must declare lang=\"en\"")
     if len(page.more_menus) != 1 or page.more_menus[0].get("role") != "group" or page.more_menus[0].get("aria-label") != "More navigation":
         failures.append(f"{name}: More navigation group is missing its accessible label")
-    if sum(link.get("aria-current") == "page" for link in page.primary_links) > 1:
+    current_links = [link for link in page.primary_links if link.get("aria-current") == "page"]
+    if len(current_links) > 1:
         failures.append(f"{name}: primary navigation has duplicate current-page links")
+    expected_href = expected_current.get(name)
+    if expected_href is None:
+        if current_links:
+            failures.append(f"{name}: unexpected current-page navigation link")
+    elif len(current_links) != 1 or current_links[0].get("href") != expected_href:
+        failures.append(f"{name}: expected exactly one current-page link to {expected_href}")
     for tag in ("main", "h1"):
         if page.tags[tag] != 1:
             failures.append(f"{name}: expected one {tag}, got {page.tags[tag]}")

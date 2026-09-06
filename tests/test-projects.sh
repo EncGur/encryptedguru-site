@@ -97,7 +97,19 @@ ok "Recommendations page has five referral entries" test "$(grep -c '<article cl
 ok "Recommendations page keeps the exact Fluid referral URL" grep -q 'href="https://fluid.io/9745/lending"' recommendations/index.html
 ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
 ok "Recommendations page links the official Rabby control entry" grep -q 'href="https://rabby.io/"' recommendations/index.html
-ok "Homepage features the Fluid stablecoin-yield entry" grep -q 'href="/recommendations/#fluid"' index.html
+ok "Homepage features the Fluid stablecoin-lending entry" grep -q 'href="/recommendations/#fluid"' index.html
+ok "Homepage labels Fluid as stablecoin lending" grep -q '01 / STABLECOIN LENDING' index.html
+ok "Recommendations labels Fluid as stablecoin lending" grep -q '02 / STABLECOIN LENDING' recommendations/index.html
+ok "Homepage labels the capital map as a research framework" grep -q 'not a prescribed stack' index.html
+ok "Homepage scopes its first-party tracking claim" grep -q 'No first-party tracking' index.html
+ok "Recommendations records an editorial review date" grep -q 'datetime="2026-09-06"' recommendations/index.html
+ok "Aave records a documentation review date" grep -q 'datetime="2026-09-06"' aave/index.html
+ok "Plasma records a documentation review date" grep -q 'datetime="2026-09-06"' plasma/index.html
+ok "Monero records a documentation review date" grep -q 'datetime="2026-09-06"' monero/index.html
+ok "Plasma invite explains the app-store fallback" grep -q 'App-store fallback' go/plasma-one/index.html
+ok "Contact has a no-JavaScript email fallback" grep -Fq 'contact [at] encryptedguru [dot] com' contact/index.html
+ok "Projects page scopes the public source claim" grep -q 'public entry has a corresponding page or source record' projects/index.html
+ok "Web manifest declares an in-scope start URL" grep -q '"start_url": "/"' site.webmanifest
 ok "Homepage maps the Rabby control surface" grep -q 'href="/infrastructure/#wallet-control"' index.html
 ok "Thesis defines the Fluid capital-productivity layer" grep -q 'id="capital-productivity"' thesis/index.html
 ok "Thesis defines the Rabby control-surface layer" grep -q 'id="control-surface"' thesis/index.html

@@ -1,20 +1,36 @@
 // Progressive enhancement only. Every page works without this script:
 // the More menu is a native <details>, and referral codes remain selectable text.
 
+const normalizePath = (href) => {
+  const pathname = new URL(href, location.href).pathname.replace(/\/index\.html$/, "");
+  if (pathname === "/") return "/";
+  return pathname.replace(/\/+$/, "") + "/";
+};
+
 // More menu: add outside-click, Escape, and focus-departure dismissal.
 const menus = document.querySelectorAll(".nav-more");
 if (menus.length) {
-  // On narrow screens the three research links move into More. Mirror the
-  // current-page state onto those visible copies without duplicating it on
-  // desktop, where the direct links remain visible.
+  // Secondary pages live inside More. Mark the active section there, including
+  // nested routes, while the direct research links remain authoritative on
+  // wide screens and their visible mobile copies mirror that state.
   menus.forEach((menu) => {
     const nav = menu.closest(".nav");
     const current = nav ? nav.querySelector(":scope > a[aria-current='page']") : null;
-    const currentPath = current ? new URL(current.href, location.href).pathname : "";
-    menu.querySelectorAll(".mobile-research").forEach((link) => {
-      const linkPath = new URL(link.href, location.href).pathname;
-      if (currentPath && linkPath === currentPath) link.setAttribute("aria-current", "page");
-      else link.removeAttribute("aria-current");
+    const currentPath = current ? normalizePath(current.href) : "";
+    const pagePath = normalizePath(location.href);
+    menu.querySelectorAll("a").forEach((link) => {
+      const linkPath = normalizePath(link.href);
+      const sectionMatches = linkPath === "/"
+        ? pagePath === "/"
+        : pagePath === linkPath || pagePath.startsWith(linkPath);
+      if (link.classList.contains("mobile-research")) {
+        if (currentPath && linkPath === currentPath) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      } else if (!currentPath && sectionMatches) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
   });
 

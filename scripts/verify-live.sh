@@ -21,13 +21,14 @@ tmp_aave_route="$(mktemp)"
 tmp_plasma="$(mktemp)"
 tmp_plasma_invite_page="$(mktemp)"
 tmp_plasma_invite="$(mktemp)"
+tmp_contact="$(mktemp)"
 tmp_apex_plasma="$(mktemp)"
 tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
 tmp_edge_runtime="$(mktemp)"
 tmp_thesis="$(mktemp)"
 tmp_infrastructure="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_infrastructure"' EXIT
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_contact" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_infrastructure"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -71,6 +72,12 @@ echo "== Infrastructure page =="
 infrastructure_status="$(curl -sS -o "$tmp_infrastructure" -w '%{http_code}' --max-time 20 "https://$www/infrastructure/")"
 printf 'www/infrastructure/ status: %s\n' "$infrastructure_status"
 sed -n '1,20p' "$tmp_infrastructure"
+
+echo
+echo "== Contact page =="
+contact_status="$(curl -sS -o "$tmp_contact" -w '%{http_code}' --max-time 20 "https://$www/contact/")"
+printf 'www/contact/ status: %s\n' "$contact_status"
+sed -n '1,20p' "$tmp_contact"
 
 echo
 echo "== Plasma routes =="
@@ -125,6 +132,14 @@ if [ "$strict" -eq 1 ]; then
     echo "live homepage missing the Sovereign Capital Intelligence title" >&2
     exit 1
   }
+  grep -q 'not a prescribed stack' "$tmp_home" || {
+    echo "live homepage is missing the capital-map research-framework boundary" >&2
+    exit 1
+  }
+  grep -q '01 / STABLECOIN LENDING' "$tmp_home" || {
+    echo "live homepage is missing the stablecoin-lending label" >&2
+    exit 1
+  }
   grep -q 'id="capital-stack"' "$tmp_thesis" || {
     echo "live Thesis page missing capital-stack anchor" >&2
     exit 1
@@ -165,6 +180,26 @@ if [ "$strict" -eq 1 ]; then
   }
   grep -q 'https://rabby.io/' "$tmp_infrastructure" || {
     echo "live Infrastructure page is missing the official Rabby URL" >&2
+    exit 1
+  }
+  test "$contact_status" = "200" || {
+    echo "live Contact page is not returning 200" >&2
+    exit 1
+  }
+  grep -q 'contact [at] encryptedguru [dot] com' "$tmp_contact" || {
+    echo "live Contact page is missing the no-JavaScript email fallback" >&2
+    exit 1
+  }
+  grep -q 'aria-label="Contact" aria-current="page"' "$tmp_contact" || {
+    echo "live Contact page is missing its current More-navigation state" >&2
+    exit 1
+  }
+  grep -q 'datetime="2026-09-06"' "$tmp_recommendations" || {
+    echo "live Recommendations page is missing its scoped review date" >&2
+    exit 1
+  }
+  grep -q 'STABLECOIN LENDING' "$tmp_recommendations" || {
+    echo "live Recommendations page is missing the stablecoin-lending label" >&2
     exit 1
   }
   grep -q '<script data-cfasync="false" defer src="/main.js' "$tmp_home" || {
@@ -393,6 +428,10 @@ if [ "$strict" -eq 1 ]; then
 
   grep -q 'https://plasmaone.onelink.me/P8qq?' "$tmp_plasma_invite_page" || {
     echo "live Plasma invitation page is missing the exact provider deep link" >&2
+    exit 1
+  }
+  grep -q 'App-store fallback' "$tmp_plasma_invite_page" || {
+    echo "live Plasma invitation page is missing the app-store fallback" >&2
     exit 1
   }
 

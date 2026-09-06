@@ -9,6 +9,28 @@ identity, control, liquidity, settlement rails, allocation, and lifelong learnin
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
 
+## 2026-09-06 first-principles audit follow-up
+
+- Secondary routes now declare their active section inside the `More` menu at
+  first paint; the runtime also normalizes nested paths such as
+  `/projects/gmcp/` and `/labs/dsx-air/` before applying the state.
+- Recommendation and research surfaces now carry scoped review dates. The
+  dates identify an editorial or documentation review, not a promise that
+  provider terms, rates, eligibility, or live parameters remain unchanged.
+- Fluid is labeled `stablecoin lending` rather than `stablecoin yield`, because
+  the interface is an allocation route and its output is variable.
+- The homepage capital map now states that it is a research framework, not a
+  prescribed stack. The Projects page no longer claims that GMCP is the
+  implementation controlling this website.
+- The Plasma invitation explains the app-store fallback, and Contact contains
+  a no-JavaScript email path for the Cloudflare Email Obfuscation edge case.
+- First-party privacy wording is scoped to EncryptedGuru's own analytics and
+  profiling rather than making a claim about external providers.
+- The web manifest declares `/` as both its start URL and scope.
+- This follow-up changed local source and tests only. No Cloudflare dashboard
+  setting, DNS record, deployment setting, or external provider terms were
+  changed.
+
 ## 2026-09-06 Fluid capital-productivity release
 
 - Added Fluid Lend as a distinct `Capital productivity / stablecoin lending`
@@ -126,9 +148,13 @@ clear separation from private operational control.
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- The current production release identity is commit `c5b5937` (feat: add Rabby
-  control surface); production is served at
-  `https://www.encryptedguru.com/`.
+- Source `HEAD` and `origin/main` currently point to commit `eac6555` (docs:
+  record Rabby control-surface release). The pre-follow-up 2026-09-06 audit
+  recorded core live HTML and assets matching that build; this working tree
+  now contains local follow-up changes that are not deployed yet. Cloudflare
+  edge transforms were observed on `contact` and `robots.txt`; the hosting
+  deployment identifier has not been independently recorded here.
+- Production is served at `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
   pixels, advertising network, or public admin surface. This is a source-level
@@ -194,6 +220,13 @@ python3 tests/test-site-structure.py
   showed no Rocket Loader injection at all; the strict gate still warns if
   it reappears. Disable it in the zone speed settings if a source-matching
   response must be guaranteed.
+- Cloudflare Email Obfuscation rewrites live contact mail links and injects a
+  decoder script; the source now includes an explicit no-JavaScript fallback.
+  Re-open `/contact/` after the next deployment to verify both paths.
+- Cloudflare's managed `robots.txt` currently differs from the source file
+  because edge crawler policy is being added at runtime. Decide whether that
+  policy belongs in a documented hosting control or in the repository before
+  treating the source file as the complete crawler policy.
 - DMARC remains monitoring-only with `p=none`; change only after sender
   alignment is understood.
 - A real-device pass (iPhone and Android) for the More menu and the copy
