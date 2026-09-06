@@ -186,7 +186,7 @@ if [ "$strict" -eq 1 ]; then
     echo "live Contact page is not returning 200" >&2
     exit 1
   }
-  grep -q 'contact [at] encryptedguru [dot] com' "$tmp_contact" || {
+  grep -Fq 'contact [at] encryptedguru [dot] com' "$tmp_contact" || {
     echo "live Contact page is missing the no-JavaScript email fallback" >&2
     exit 1
   }

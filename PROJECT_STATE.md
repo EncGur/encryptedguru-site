@@ -27,9 +27,11 @@ clear separation from private operational control.
 - First-party privacy wording is scoped to EncryptedGuru's own analytics and
   profiling rather than making a claim about external providers.
 - The web manifest declares `/` as both its start URL and scope.
-- This follow-up changed local source and tests only. No Cloudflare dashboard
-  setting, DNS record, deployment setting, or external provider terms were
-  changed.
+- Site-content changes were committed as `2eff4c9` and pushed to `main`.
+  Strict live verification passed after propagation on 2026-09-06, including
+  the new homepage boundary, review markers, Contact fallback, and Plasma
+  app-store fallback. No Cloudflare dashboard setting, DNS record, deployment
+  setting, or external provider terms were changed.
 
 ## 2026-09-06 Fluid capital-productivity release
 
@@ -148,10 +150,10 @@ clear separation from private operational control.
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- Source `HEAD` and `origin/main` currently point to commit `eac6555` (docs:
-  record Rabby control-surface release). The pre-follow-up 2026-09-06 audit
-  recorded core live HTML and assets matching that build; this working tree
-  now contains local follow-up changes that are not deployed yet. Cloudflare
+- The deployed site-content release is commit `2eff4c9` (feat: harden site
+  after global audit). `main` also contains a subsequent verification and
+  state-documentation correction. Core live HTML and assets matched the
+  deployed site-content release during the 2026-09-06 audit, while Cloudflare
   edge transforms were observed on `contact` and `robots.txt`; the hosting
   deployment identifier has not been independently recorded here.
 - Production is served at `https://www.encryptedguru.com/`.
@@ -222,7 +224,9 @@ python3 tests/test-site-structure.py
   response must be guaranteed.
 - Cloudflare Email Obfuscation rewrites live contact mail links and injects a
   decoder script; the source now includes an explicit no-JavaScript fallback.
-  Re-open `/contact/` after the next deployment to verify both paths.
+  The 2026-09-06 strict live pass confirmed the fallback marker in the default
+  live HTML; reopen `/contact/` after future deployments because edge
+  variants can differ.
 - Cloudflare's managed `robots.txt` currently differs from the source file
   because edge crawler policy is being added at runtime. Decide whether that
   policy belongs in a documented hosting control or in the repository before
