@@ -160,8 +160,8 @@ clear separation from private operational control.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
   pixels, advertising network, or public admin surface. This is a source-level
-  property; the production edge still needs the browser-shaped no-analytics
-  check below to pass.
+  property; the browser-shaped production no-analytics check passed on
+  2026-09-06 and remains a release gate.
 - `_headers`, `_redirects`, `_routes.json`, `security.txt`, the build script,
   and the live verification script are source-managed.
 - Source-only Markdown, scripts, private runbook paths, credentials-like
