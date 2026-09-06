@@ -1,7 +1,8 @@
 # EncryptedGuru
 
 Independent research for sovereign capital: privacy, digital dollar rails,
-rational allocation, and lifelong learning. The public thesis is at `/thesis/`;
+rational allocation, and lifelong learning. The public thesis is at `/thesis/`,
+and the practical Capital Operating System field guide is at `/playbook/`;
 Recommendations remains the first navigation entry. The capital framework
 also treats Rabby as an EVM control surface around the stack, separate from
 personal referral links and protocol claims.
@@ -75,6 +76,7 @@ http://127.0.0.1:4173/
 - `FIRST_PRINCIPLES_BUILD.md`: historical first-principles build plan and v0.2 order.
 - `PROJECT_STATE.md`: current source, production, public-boundary, and open-risk state.
 - `thesis/index.html`: the public Sovereign Capital thesis; the framework behind the research pages.
+- `playbook/index.html`: the public Capital Operating System field guide; the repeatable practice layer between thesis and action.
 - `DESIGN_AUDIT_2026-08-24.md`: historical design audit; superseded by `PROJECT_STATE.md`.
 - `aave/index.html`: source-backed Aave protocol, market, risk, and referral research note.
 - `infrastructure/index.html`: public architecture notes, including the Rabby wallet control boundary.

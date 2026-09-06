@@ -22,7 +22,7 @@ Use this before publishing a new static-site release.
 
 - [ ] Start local preview with `python3 -m http.server 4173 --directory dist`.
 - [ ] Open `http://127.0.0.1:4173/`.
-- [ ] Check `/`, `/recommendations/`, `/thesis/`, `/monero/`, `/plasma/`, `/aave/`, `/go/plasma-one/`, `/docs/`, `/projects/`, `/projects/gmcp/`, `/labs/`, `/labs/dsx-air/`, `/infrastructure/`, `/contact/`, and `security.txt`, including the Fluid Lend capital-productivity entry and Rabby control-surface boundary.
+- [ ] Check `/`, `/recommendations/`, `/thesis/`, `/playbook/`, `/monero/`, `/plasma/`, `/aave/`, `/go/plasma-one/`, `/docs/`, `/projects/`, `/projects/gmcp/`, `/labs/`, `/labs/dsx-air/`, `/infrastructure/`, `/contact/`, and `security.txt`, including the Capital Operating System field guide, Fluid Lend capital-productivity entry, and Rabby control-surface boundary.
 - [ ] Check 390px, 560px, 768px, 1024px, and an ultrawide width for navigation, the More menu, referral cards, and text fit.
 - [ ] Check that external-facing links and mail links are correct.
 - [ ] Check an unknown route returns `404` rather than the homepage.

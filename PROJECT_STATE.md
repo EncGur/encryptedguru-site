@@ -1,6 +1,6 @@
 # EncryptedGuru current project state
 
-Updated: 2026-09-06
+Updated: 2026-09-07
 
 ## Goal
 
@@ -8,6 +8,25 @@ Build EncryptedGuru as an independent research system for sovereign capital:
 identity, control, liquidity, settlement rails, allocation, and lifelong learning.
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
+
+## 2026-09-07 Capital Operating System expansion
+
+- Added `/playbook/` as the missing practice layer between the public thesis,
+  research notes, and Recommendations. It turns the existing principles into a
+  repeatable path: protect, define, verify, allocate, authorize, monitor, and
+  audit/reallocate.
+- The new field guide unifies six control boundaries—identity, custody,
+  liquidity, rails, productivity, and exit—without presenting them as a
+  prescribed portfolio, product guarantee, or personalized financial plan.
+- Added a compact decision-record model covering objective, evidence, control,
+  dependencies, exit, and review trigger. It is intentionally a static reading
+  surface: no form, account, analytics, or persistent user data was added.
+- Connected the field guide from the homepage proof section, Thesis, Docs,
+  global More navigation, footer navigation, sitemap, build allowlist, and
+  release tests. Recommendations remains the first primary navigation entry.
+- This release is source-only until the full build, remote sync, and strict live
+  verification pass. No Cloudflare dashboard setting, DNS record, or external
+  provider terms are changed by this content expansion.
 
 ## 2026-09-06 first-principles audit follow-up
 

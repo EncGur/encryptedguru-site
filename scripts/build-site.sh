@@ -36,7 +36,7 @@ do
   cp "$file" "$output/"
 done
 
-for directory in .well-known aave contact docs go infrastructure labs monero plasma projects recommendations thesis; do
+for directory in .well-known aave contact docs go infrastructure labs monero plasma playbook projects recommendations thesis; do
   cp -R "$directory" "$output/"
 done
 
@@ -65,6 +65,7 @@ test -f "$output/aave/index.html"
 test -f "$output/go/plasma-one/index.html"
 test -f "$output/recommendations/index.html"
 test -f "$output/thesis/index.html"
+test -f "$output/playbook/index.html"
 test -f "$output/og-home.png"
 test -f "$output/aave-hero.png"
 test -f "$output/eg-mark.png"

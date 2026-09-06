@@ -52,6 +52,7 @@ assert "thesis/index.html" in pages, "Thesis missing from production build"
 expected_current = {
     "recommendations/index.html": "/recommendations/",
     "thesis/index.html": "/thesis/",
+    "playbook/index.html": "/playbook/",
     "monero/index.html": "/monero/",
     "plasma/index.html": "/plasma/",
     "aave/index.html": "/aave/",

@@ -2084,6 +2084,27 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 .recommendation-card h3 { font-weight: 620; }
 .recommendations-page .page-title h1 { font-weight: 600; }
 
+/* Capital Operating System: turn the thesis into a repeatable public practice. */
+.playbook-title { padding-block: clamp(3rem, 6vw, 5rem) 2.75rem; }
+.playbook-title h1 { max-width: 13ch; }
+.playbook-title .playbook-deck { max-width: 52ch; color: var(--soft); font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.6; }
+.playbook-title .review-note { max-width: 82ch; margin-top: 1.5rem; color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+.playbook-model .tile { display: flex; flex-direction: column; }
+.playbook-model .tile h3 { margin: 0 0 0.85rem; font-size: 1.35rem; }
+.playbook-model .tile p { margin: 0; }
+.playbook-model .card-link { margin-top: auto; padding-top: 1.2rem; color: var(--green-strong); font-size: 0.78rem; line-height: 1.45; }
+.playbook-loop { max-width: 760px; margin-top: 0; }
+.playbook-loop li { padding-block: 1.05rem; }
+.playbook-loop h3 { font-size: 1.1rem; }
+.playbook-loop p { max-width: 60ch; }
+.playbook-ledger dt { color: var(--green-strong); font-size: 1.08rem; }
+.playbook-ledger dd { max-width: 64ch; }
+
+@media (max-width: 520px) {
+  .playbook-title h1 { font-size: clamp(2.35rem, 10.5vw, 3.6rem); }
+  .playbook-model .tile { min-height: 200px; }
+}
+
 /* Footer: brand, grouped links, trust line. */
 .site-footer {
   display: grid;

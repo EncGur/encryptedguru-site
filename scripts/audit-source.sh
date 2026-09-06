@@ -13,6 +13,7 @@ projects/gmcp/index.html
 go/plasma-one/index.html
 recommendations/index.html
 thesis/index.html
+playbook/index.html
 styles.css
 main.js
 robots.txt
@@ -62,6 +63,11 @@ grep -q 'https://www.encryptedguru.com/aave/' sitemap.xml || {
 
 grep -q 'https://www.encryptedguru.com/thesis/</loc>' sitemap.xml || {
   echo "sitemap.xml missing Thesis page" >&2
+  exit 1
+}
+
+grep -q 'https://www.encryptedguru.com/playbook/</loc>' sitemap.xml || {
+  echo "sitemap.xml missing Capital Operating System page" >&2
   exit 1
 }
 

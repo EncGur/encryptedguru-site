@@ -27,8 +27,9 @@ tmp_legacy_logo="$(mktemp)"
 tmp_boundary_headers="$(mktemp)"
 tmp_edge_runtime="$(mktemp)"
 tmp_thesis="$(mktemp)"
+tmp_playbook="$(mktemp)"
 tmp_infrastructure="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_contact" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_infrastructure"' EXIT
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_contact" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_playbook" "$tmp_infrastructure"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -124,8 +125,37 @@ if [ "$strict" -eq 1 ]; then
     echo "live Thesis page is not returning 200" >&2
     exit 1
   }
+  playbook_status="$(curl -sS -o "$tmp_playbook" -w '%{http_code}' --max-time 20 "https://$www/playbook/")"
+  test "$playbook_status" = "200" || {
+    echo "live Capital Operating System page is not returning 200" >&2
+    exit 1
+  }
+  grep -q '<h1>Make the next' "$tmp_playbook" || {
+    echo "live Capital Operating System page missing expected heading" >&2
+    exit 1
+  }
+  grep -q 'id="model"' "$tmp_playbook" || {
+    echo "live Capital Operating System page missing the boundary model" >&2
+    exit 1
+  }
+  grep -q 'id="record"' "$tmp_playbook" || {
+    echo "live Capital Operating System page missing the decision record" >&2
+    exit 1
+  }
+  grep -q 'datetime="2026-09-07"' "$tmp_playbook" || {
+    echo "live Capital Operating System page missing its editorial review date" >&2
+    exit 1
+  }
+  grep -q 'aria-label="Playbook" aria-current="page"' "$tmp_playbook" || {
+    echo "live Capital Operating System page missing its current More-navigation state" >&2
+    exit 1
+  }
   grep -q 'https://www.encryptedguru.com/thesis/</loc>' "$tmp_sitemap" || {
     echo "live sitemap missing Thesis page" >&2
+    exit 1
+  }
+  grep -q 'https://www.encryptedguru.com/playbook/</loc>' "$tmp_sitemap" || {
+    echo "live sitemap missing Capital Operating System page" >&2
     exit 1
   }
   grep -q 'Sovereign Capital Intelligence' "$tmp_home" || {

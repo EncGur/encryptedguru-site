@@ -31,7 +31,7 @@ ok "dist/aave-hero-720.webp exists" test -f dist/aave-hero-720.webp
 
 # Every internal href on every page that carries the primary navigation must
 # resolve to a real file inside dist/.
-pages="index.html 404.html monero/index.html plasma/index.html aave/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html thesis/index.html"
+pages="index.html 404.html monero/index.html plasma/index.html aave/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html playbook/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html thesis/index.html"
 
 for page in $pages; do
   if [ ! -f "$page" ]; then
@@ -75,6 +75,7 @@ ok "sitemap.xml has GMCP project URL" grep -q 'https://www.encryptedguru.com/pro
 ok "sitemap.xml has Plasma URL" grep -q 'https://www.encryptedguru.com/plasma/</loc>' sitemap.xml
 ok "sitemap.xml has Aave URL" grep -q 'https://www.encryptedguru.com/aave/</loc>' sitemap.xml
 ok "sitemap.xml has Recommendations URL" grep -q 'https://www.encryptedguru.com/recommendations/</loc>' sitemap.xml
+ok "sitemap.xml has Capital Operating System URL" grep -q 'https://www.encryptedguru.com/playbook/</loc>' sitemap.xml
 
 # The new pages must carry the canonical tags matching the sitemap.
 ok "projects/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/' projects/index.html
@@ -119,6 +120,12 @@ ok "Homepage caps the ultrawide hero frame" sh -c "sed -n '/^\\.capital-hero {/,
 ok "No decorative canvas ships in the build" sh -c '! grep -rq "<canvas" dist && ! grep -q "ambient" main.js'
 ok "Main script opts out of Rocket Loader before src" grep -q '<script data-cfasync="false" defer src="/main.js' index.html
 ok "Thesis page has its anchored chapters" sh -c 'grep -q "id=\"capital-stack\"" thesis/index.html && grep -q "id=\"method\"" thesis/index.html'
+ok "Capital Operating System page exists" test -f playbook/index.html
+ok "Capital Operating System has its canonical tag" grep -q 'https://www.encryptedguru.com/playbook/' playbook/index.html
+ok "Capital Operating System defines the boundary model" grep -q 'id="model"' playbook/index.html
+ok "Capital Operating System defines the decision record" grep -q 'id="record"' playbook/index.html
+ok "Capital Operating System records its editorial review date" grep -q 'datetime="2026-09-07"' playbook/index.html
+ok "Capital Operating System links the current recommendations" grep -q 'href="/recommendations/"' playbook/index.html
 
 # Every page carrying the primary navigation must link to the Projects hub.
 for page in $pages; do
@@ -144,7 +151,7 @@ for page in $pages; do
 done
 
 # Public-boundary leak patterns must stay absent from the new pages.
-leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html plasma/index.html aave/index.html || true)"
+leaks="$(grep -nE '/Users/[A-Za-z0-9_.-]+/|id_ed25519|id_rsa|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA|OPENSSH|PRIVATE)|password[=:]|token[=:]|api[_-]?key[=:]|bearer [a-z0-9._-]+|\.env([=:. ]|$)' projects/index.html projects/gmcp/index.html plasma/index.html aave/index.html playbook/index.html || true)"
 if [ -n "$leaks" ]; then
   echo "FAIL: leak patterns found in new pages:" >&2
   echo "$leaks" >&2
