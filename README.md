@@ -2,7 +2,9 @@
 
 Independent research for sovereign capital: privacy, digital dollar rails,
 rational allocation, and lifelong learning. The public thesis is at `/thesis/`;
-Recommendations remains the first navigation entry.
+Recommendations remains the first navigation entry. The capital framework
+also treats Rabby as an EVM control surface around the stack, separate from
+personal referral links and protocol claims.
 
 The shared social image is rendered from `scripts/social-preview.svg` as
 `og-home.png` (1200 × 630). After editing the SVG, rasterize it with
@@ -75,6 +77,7 @@ http://127.0.0.1:4173/
 - `thesis/index.html`: the public Sovereign Capital thesis; the framework behind the research pages.
 - `DESIGN_AUDIT_2026-08-24.md`: historical design audit; superseded by `PROJECT_STATE.md`.
 - `aave/index.html`: source-backed Aave protocol, market, risk, and referral research note.
+- `infrastructure/index.html`: public architecture notes, including the Rabby wallet control boundary.
 - `recommendations/index.html`: public referral and editorial-disclosure policy.
 - `SECURITY_AUDIT_2026-06-14.md`: historical public-surface audit.
 - `RELEASE_CHECKLIST.md`: pre-release and post-release checks.

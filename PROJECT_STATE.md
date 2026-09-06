@@ -33,6 +33,31 @@ clear separation from private operational control.
   2026-09-06. External Fluid market rates, limits, terms, and eligibility
   remain time-sensitive and were not represented as fixed promises.
 
+## 2026-09-06 Rabby control-surface release
+
+- Added Rabby as the control-surface / execution layer around the capital
+  stack. Rabby is an official infrastructure entry for Ethereum and EVM wallet
+  connection and signing; it is not a personal referral and is not counted as
+  one of the five referral entries.
+- Home now shows the five-function map: Tether / Plasma / USDT0 / Fluid Lend /
+  Rabby. The homepage systems list also points to the Rabby signing-surface
+  note so the path from capital productivity back to authorized execution is
+  visible.
+- Recommendations adds a separate `Infrastructure / control surface` block
+  with the official `https://rabby.io/` entry. It states that transaction
+  simulation can improve reviewability but cannot remove self-custody, device,
+  phishing, contract, chain, bridge, protocol, or signature risk.
+- `/infrastructure/#wallet-control` and `/thesis/#control-surface` document the
+  same boundary from architecture and capital-framework perspectives. The
+  official integration documentation is linked as primary material.
+- Local source, build, structure, public-boundary, reproducible-package, and
+  syntax gates passed. Rendered local checks showed the five-row capital map,
+  the four referral cards in the first desktop row, and the Rabby control block
+  without layout breakage.
+- Pushed as commit `c5b5937`. Production content contains the homepage control
+  link, Recommendations Rabby block, Infrastructure wallet boundary, and
+  Thesis control-surface layer; strict live verification passed on 2026-09-06.
+
 ## 2026-09-06 follow-up hardening
 
 - Corrected the navigation truth model: Recommendations remains the most
@@ -101,8 +126,8 @@ clear separation from private operational control.
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- The current production release identity is commit `d70ea8f` (feat: add Fluid
-  stablecoin lending entry); production is served at
+- The current production release identity is commit `c5b5937` (feat: add Rabby
+  control surface); production is served at
   `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
@@ -117,6 +142,9 @@ clear separation from private operational control.
   Aave App are disclosed on the recommendation page; relevant research pages
   carry separate context where applicable. They are not product guarantees or
   financial advice.
+- Rabby is disclosed separately as an official infrastructure entry and is not
+  represented as a personal referral, yield source, custody guarantee, or
+  security guarantee.
 - Aave has a dedicated source-separated research page at `/aave/`, using the
   supplied purple portrait as its page visual and keeping the Aave App referral
   entry separate from protocol, market, token, and risk claims.
@@ -172,6 +200,9 @@ python3 tests/test-site-structure.py
   controls is still pending; only emulated viewports have been checked.
 - Provider eligibility, fees, geography, KYC, custody, withdrawals, rewards,
   and supported products are time-sensitive external facts.
+- Rabby's supported chains, wallet behavior, security warnings, transaction
+  simulation coverage, and third-party integrations can change; a simulation
+  is a review aid, not proof that a signed transaction is safe.
 - Research pages need periodic review when their status dates or external
   sources become stale.
 
