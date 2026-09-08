@@ -125,12 +125,14 @@ ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
 minimal_css_pages=0
 for page in $pages; do
-  if grep -q 'styles.css?v=20260908-minimal-v5' "$page"; then
+  if grep -q 'styles.css?v=20260908-minimal-v6' "$page"; then
     minimal_css_pages=$((minimal_css_pages + 1))
   fi
 done
 ok "All pages use the current minimalist CSS cache version" test "$minimal_css_pages" -eq 16
 ok "Recommendation buttons keep regular label sizing" sh -c '! grep -q "font-size: 0.8rem; padding-inline: 0.4rem" styles.css'
+ok "Minimal header uses no backdrop blur" sh -c "sed -n '/^\\.site-header,$/,/^}/p' styles.css | grep -q 'backdrop-filter: none;'"
+ok "Minimal menu surface has no drop shadow" sh -c '! grep -q "box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);" styles.css'
 ok "Minimal CSS has no dormant five-column grid variant" sh -c '! grep -qE "grid\.five|grid five" styles.css'
 ok "Minimal CSS has no legacy panel or shadow tokens" sh -c '! grep -qE "var\(--(panel|shadow)" styles.css'
 ok "Aave keeps its flat purple referral boundary" grep -q 'background: #c6a9ff;' styles.css

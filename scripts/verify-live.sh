@@ -131,7 +131,7 @@ if [ "$strict" -eq 1 ]; then
     echo "live Capital Operating System page is not returning 200" >&2
     exit 1
   }
-  visual_css_status="$(curl -sS -o "$tmp_visual_css" -w '%{http_code}' --max-time 20 "https://$www/styles.css?v=20260908-minimal-v5")"
+  visual_css_status="$(curl -sS -o "$tmp_visual_css" -w '%{http_code}' --max-time 20 "https://$www/styles.css?v=20260908-minimal-v6")"
   test "$visual_css_status" = "200" || {
     echo "live minimalist CSS asset is not returning 200" >&2
     exit 1
@@ -148,11 +148,19 @@ if [ "$strict" -eq 1 ]; then
     echo "live minimalist CSS asset is missing the single background field" >&2
     exit 1
   }
+  sed -n '/^\.site-header,$/,/^}/p' "$tmp_visual_css" | grep -q 'backdrop-filter: none;' || {
+    echo "live minimalist CSS asset is missing the flat header surface" >&2
+    exit 1
+  }
+  grep -q 'box-shadow: none;' "$tmp_visual_css" || {
+    echo "live minimalist CSS asset is missing the flat surface rule" >&2
+    exit 1
+  }
 
   assert_visual_css_version() {
     page_label="$1"
     page_file="$2"
-    grep -q 'styles.css?v=20260908-minimal-v5' "$page_file" || {
+    grep -q 'styles.css?v=20260908-minimal-v6' "$page_file" || {
       echo "live $page_label is not loading the minimalist CSS version" >&2
       exit 1
     }

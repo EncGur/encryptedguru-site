@@ -21,6 +21,16 @@ clear separation from private operational control.
   added a regression assertion for the retired fit-to-four-cards override.
   No content, route, referral URL, provider term, or external setting changed.
 
+## 2026-09-08 compositing reduction
+
+- Removed the last effective drop shadow from the More menu and disabled the
+  top-level backdrop blur in the final interface layer. The header and menu
+  now use opaque flat surfaces with borders as their separation mechanism.
+- Added local and strict-live assertions for the flat header/menu contract.
+  This reduces visual noise and browser compositing work without changing
+  navigation, content, referrals, or the red portrait brand mark.
+- Bumped every public HTML page to the `20260908-minimal-v6` CSS asset.
+
 ## 2026-09-08 minimalist interface pass
 
 - Applied a reduction-first visual system across all public pages: one deep
