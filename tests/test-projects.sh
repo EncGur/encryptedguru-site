@@ -125,11 +125,12 @@ ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
 minimal_css_pages=0
 for page in $pages; do
-  if grep -q 'styles.css?v=20260908-minimal-v2' "$page"; then
+  if grep -q 'styles.css?v=20260908-minimal-v3' "$page"; then
     minimal_css_pages=$((minimal_css_pages + 1))
   fi
 done
-ok "All pages use the minimalist CSS cache version" test "$minimal_css_pages" -eq 16
+ok "All pages use the current minimalist CSS cache version" test "$minimal_css_pages" -eq 16
+ok "Minimal CSS has no dormant five-column grid variant" sh -c '! grep -qE "grid\.five|grid five" styles.css'
 ok "Plasma invite explains the app-store fallback" grep -q 'App-store fallback' go/plasma-one/index.html
 ok "Contact has a no-JavaScript email fallback" grep -Fq 'contact [at] encryptedguru [dot] com' contact/index.html
 ok "Projects page scopes the public source claim" grep -q 'public entry has a corresponding page or source record' projects/index.html

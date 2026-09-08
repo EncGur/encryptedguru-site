@@ -52,6 +52,17 @@ clear separation from private operational control.
   declared page set with POSIX `grep`; the full local suite passes without that
   dependency. GitHub Actions is the final independent confirmation after push.
 
+## 2026-09-08 dead-state cleanup
+
+- Audited the CSS class inventory against every current public HTML page. The
+  only exact CSS class with no HTML consumer was the historical `.grid.five`
+  variant; its base, tablet, and mobile rules were removed.
+- Added a regression assertion so the stylesheet cannot quietly regain that
+  dormant five-column state, and bumped all public pages to the
+  `20260908-minimal-v3` asset after the CSS changed.
+- This is a structural reduction only. No content, route, referral URL,
+  provider term, or external setting changed.
+
 ## 2026-09-08 research-frame expansion
 
 - Applied one shared six-question decision frame to the Monero, Plasma, and
