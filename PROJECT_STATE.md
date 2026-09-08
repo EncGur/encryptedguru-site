@@ -1,6 +1,6 @@
 # EncryptedGuru current project state
 
-Updated: 2026-09-07
+Updated: 2026-09-08
 
 ## Goal
 
@@ -8,6 +8,24 @@ Build EncryptedGuru as an independent research system for sovereign capital:
 identity, control, liquidity, settlement rails, allocation, and lifelong learning.
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
+
+## 2026-09-08 research-frame expansion
+
+- Applied one shared six-question decision frame to the Monero, Plasma, and
+  Aave research pages: problem, layer, verified evidence, dependencies,
+  control, and exit/review.
+- The frame is deliberately page-specific. Monero maps private-money control;
+  Plasma separates network, product, token, and community signal; Aave follows
+  a position from market mechanics through health and exit conditions.
+- Cross-linked each frame to the Playbook decision record so the thesis,
+  practice layer, research notes, and Recommendations now form a readable
+  evidence path rather than isolated pages.
+- Added a calm editorial grid with mobile collapse and a new cache-busted CSS
+  version. No live rates, provider promises, transaction flows, analytics,
+  forms, or external dashboard settings were added or changed.
+- Local source, build, structure, public-boundary, reproducible-package, and
+  syntax gates pass. GitHub sync and strict production verification remain the
+  release gates for this expansion.
 
 ## 2026-09-07 Capital Operating System expansion
 

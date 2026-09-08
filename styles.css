@@ -2100,9 +2100,95 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 .playbook-ledger dt { color: var(--green-strong); font-size: 1.08rem; }
 .playbook-ledger dd { max-width: 64ch; }
 
+/* Decision frames: apply one six-question operating lens to each research layer. */
+.decision-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: start;
+}
+.decision-frame-intro {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+.decision-frame-intro h2 {
+  max-width: 16ch;
+}
+.decision-frame-intro > p:not(.eyebrow) {
+  max-width: 35ch;
+  margin: 0;
+  color: var(--soft);
+  line-height: 1.65;
+}
+.decision-frame-intro .text-link {
+  width: fit-content;
+  font-size: 0.86rem;
+}
+.decision-frame-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.decision-frame-item {
+  min-width: 0;
+  min-height: 11rem;
+  padding: 1rem 0 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.decision-frame-item:nth-child(odd) {
+  padding-right: clamp(1rem, 2.2vw, 2rem);
+  border-right: 1px solid var(--line);
+}
+.decision-frame-item:nth-child(even) {
+  padding-left: clamp(1rem, 2.2vw, 2rem);
+}
+.decision-frame-kicker {
+  display: block;
+  color: var(--green-strong);
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.decision-frame-item h3 {
+  margin: 0.75rem 0 0.55rem;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+}
+.decision-frame-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 @media (max-width: 520px) {
   .playbook-title h1 { font-size: clamp(2.35rem, 10.5vw, 3.6rem); }
   .playbook-model .tile { min-height: 200px; }
+}
+
+@media (max-width: 860px) {
+  .decision-frame {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .decision-frame-intro h2 {
+    max-width: 24ch;
+  }
+}
+
+@media (max-width: 520px) {
+  .decision-frame-grid {
+    grid-template-columns: 1fr;
+  }
+  .decision-frame-item,
+  .decision-frame-item:nth-child(odd),
+  .decision-frame-item:nth-child(even) {
+    min-height: 0;
+    padding: 1rem 0 1.2rem;
+    border-right: 0;
+  }
 }
 
 /* Footer: brand, grouped links, trust line. */

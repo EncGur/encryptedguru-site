@@ -34,6 +34,12 @@ The source repository is public and open source:
 - Live site: `https://www.encryptedguru.com/`
 - Security contact: `https://www.encryptedguru.com/.well-known/security.txt`
 
+Monero, Plasma, and Aave research pages share a six-question decision frame:
+problem, layer, verified evidence, dependencies, control, and exit/review. The
+frame is a reading aid that keeps protocol mechanics, provider terms, and
+personal referrals separate; it is not a prescribed allocation or a live-rate
+dashboard.
+
 ## Public / Private Boundary
 
 This repository is intentionally public. It contains the site source, the
@@ -77,6 +83,7 @@ http://127.0.0.1:4173/
 - `PROJECT_STATE.md`: current source, production, public-boundary, and open-risk state.
 - `thesis/index.html`: the public Sovereign Capital thesis; the framework behind the research pages.
 - `playbook/index.html`: the public Capital Operating System field guide; the repeatable practice layer between thesis and action.
+- `monero/index.html`, `plasma/index.html`, and `aave/index.html`: core research notes with the shared six-question decision frame applied to each protocol layer.
 - `DESIGN_AUDIT_2026-08-24.md`: historical design audit; superseded by `PROJECT_STATE.md`.
 - `aave/index.html`: source-backed Aave protocol, market, risk, and referral research note.
 - `infrastructure/index.html`: public architecture notes, including the Rabby wallet control boundary.

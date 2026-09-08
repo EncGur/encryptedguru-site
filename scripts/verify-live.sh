@@ -29,7 +29,8 @@ tmp_edge_runtime="$(mktemp)"
 tmp_thesis="$(mktemp)"
 tmp_playbook="$(mktemp)"
 tmp_infrastructure="$(mktemp)"
-trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_contact" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_playbook" "$tmp_infrastructure"' EXIT
+tmp_decision_css="$(mktemp)"
+trap 'rm -f "$tmp_headers" "$tmp_security" "$tmp_sitemap" "$tmp_home" "$tmp_monero" "$tmp_recommendations" "$tmp_plasma_page" "$tmp_aave" "$tmp_aave_route" "$tmp_plasma" "$tmp_plasma_invite_page" "$tmp_plasma_invite" "$tmp_contact" "$tmp_apex_plasma" "$tmp_legacy_logo" "$tmp_boundary_headers" "$tmp_edge_runtime" "$tmp_thesis" "$tmp_playbook" "$tmp_infrastructure" "$tmp_decision_css"' EXIT
 
 echo "== HTTP =="
 curl -sS -I -L --max-time 20 "https://$domain/" | tee "$tmp_headers" | sed -n '1,80p'
@@ -130,6 +131,15 @@ if [ "$strict" -eq 1 ]; then
     echo "live Capital Operating System page is not returning 200" >&2
     exit 1
   }
+  decision_css_status="$(curl -sS -o "$tmp_decision_css" -w '%{http_code}' --max-time 20 "https://$www/styles.css?v=20260908-decision-v1")"
+  test "$decision_css_status" = "200" || {
+    echo "live decision-frame CSS asset is not returning 200" >&2
+    exit 1
+  }
+  grep -q '^\.decision-frame {' "$tmp_decision_css" || {
+    echo "live decision-frame CSS asset is missing the shared layout" >&2
+    exit 1
+  }
   grep -q '<h1>Make the next' "$tmp_playbook" || {
     echo "live Capital Operating System page missing expected heading" >&2
     exit 1
@@ -144,6 +154,42 @@ if [ "$strict" -eq 1 ]; then
   }
   grep -q 'datetime="2026-09-07"' "$tmp_playbook" || {
     echo "live Capital Operating System page missing its editorial review date" >&2
+    exit 1
+  }
+  grep -q 'id="decision-frame"' "$tmp_monero" || {
+    echo "live Monero page missing the shared decision frame" >&2
+    exit 1
+  }
+  grep -q 'id="decision-frame"' "$tmp_plasma_page" || {
+    echo "live Plasma page missing the shared decision frame" >&2
+    exit 1
+  }
+  grep -q 'id="decision-frame"' "$tmp_aave" || {
+    echo "live Aave page missing the shared decision frame" >&2
+    exit 1
+  }
+  grep -q 'styles.css?v=20260908-decision-v1' "$tmp_monero" || {
+    echo "live Monero page is not loading the decision CSS version" >&2
+    exit 1
+  }
+  grep -q 'styles.css?v=20260908-decision-v1' "$tmp_plasma_page" || {
+    echo "live Plasma page is not loading the decision CSS version" >&2
+    exit 1
+  }
+  grep -q 'styles.css?v=20260908-decision-v1' "$tmp_aave" || {
+    echo "live Aave page is not loading the decision CSS version" >&2
+    exit 1
+  }
+  grep -q '06 / Exit + review' "$tmp_monero" || {
+    echo "live Monero page missing the exit and review question" >&2
+    exit 1
+  }
+  grep -q '06 / Exit + review' "$tmp_plasma_page" || {
+    echo "live Plasma page missing the exit and review question" >&2
+    exit 1
+  }
+  grep -q '06 / Exit + review' "$tmp_aave" || {
+    echo "live Aave page missing the exit and review question" >&2
     exit 1
   }
   grep -q 'aria-label="Playbook" aria-current="page"' "$tmp_playbook" || {

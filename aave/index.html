@@ -21,7 +21,7 @@
     <link rel="icon" href="/eg-mark.ico?v=3" sizes="any">
     <link rel="apple-touch-icon" href="/eg-mark-180.png?v=3">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/styles.css?v=20260906-visual-v4">
+    <link rel="stylesheet" href="/styles.css?v=20260908-decision-v1">
   </head>
   <body class="aave-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -78,6 +78,47 @@
             <a class="button primary" href="https://aave.com/docs">Read official Aave docs <span aria-hidden="true">↗</span></a>
             <a class="button secondary" href="https://aave.com/docs/resources/parameters">Open live parameters <span aria-hidden="true">↗</span></a>
           </div>
+        </div>
+      </section>
+
+      <section class="section decision-frame" id="decision-frame" aria-labelledby="aave-decision-frame">
+        <div class="decision-frame-intro">
+          <p class="eyebrow">Decision frame / before conviction</p>
+          <h2 id="aave-decision-frame">Follow the position before you price the yield.</h2>
+          <p>Aave becomes legible when the position is followed from supply to exit, with live risk parameters and wallet control kept separate from the interface.</p>
+          <a class="text-link" href="/playbook/#record">Open the capital decision record <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="decision-frame-grid">
+          <article class="decision-frame-item">
+            <span class="decision-frame-kicker">01 / Problem</span>
+            <h3>Onchain liquidity with conditions</h3>
+            <p>Aave coordinates supply and borrow markets. The decision is whether the position's liquidity, risk, costs, and exit path justify its variable output.</p>
+          </article>
+          <article class="decision-frame-item">
+            <span class="decision-frame-kicker">02 / Layer</span>
+            <h3>Protocol / app / governance</h3>
+            <p>Aave is the protocol, the Aave App is the interface, and AAVE is the governance token. A familiar app does not collapse those boundaries.</p>
+          </article>
+          <article class="decision-frame-item">
+            <span class="decision-frame-kicker">03 / Verified</span>
+            <h3>Mechanics, not live conditions</h3>
+            <p>Official docs describe supply, borrow, health factor, and risk modes. Rates, reserve parameters, addresses, liquidity, and app behavior still need current checks.</p>
+          </article>
+          <article class="decision-frame-item">
+            <span class="decision-frame-kicker">04 / Dependencies</span>
+            <h3>Contracts, oracle, market, network</h3>
+            <p>Smart contracts, price data, collateral liquidity, liquidation rules, chain deployments, bridges, RPCs, and wallet or frontend behavior shape the position.</p>
+          </article>
+          <article class="decision-frame-item">
+            <span class="decision-frame-kicker">05 / Control</span>
+            <h3>Keys, approvals, position</h3>
+            <p>You control the wallet key, approvals, and position actions. You do not control oracle output, governance changes, liquidation conditions, or market liquidity.</p>
+          </article>
+          <article class="decision-frame-item">
+            <span class="decision-frame-kicker">06 / Exit + review</span>
+            <h3>Repay, withdraw, re-check</h3>
+            <p>Before action, verify the exact reserve, health factor, available liquidity, rate, network, recipient, and repayment or withdrawal route. Re-check before each material change.</p>
+          </article>
         </div>
       </section>
 
