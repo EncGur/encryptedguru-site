@@ -9,6 +9,18 @@ identity, control, liquidity, settlement rails, allocation, and lifelong learnin
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
 
+## 2026-09-08 responsive control sizing
+
+- Consolidated the Recommendations desktop breakpoint into one rule so the
+  four-column entry layout has a single source of truth from 861px upward.
+- Removed the legacy 861–1000px button shrink that reduced recommendation
+  actions to 0.8rem text and overly narrow horizontal padding. The shared
+  control sizing now remains readable while the cards continue to collapse at
+  the existing mobile breakpoints.
+- Bumped every public HTML page to the `20260908-minimal-v5` CSS asset and
+  added a regression assertion for the retired fit-to-four-cards override.
+  No content, route, referral URL, provider term, or external setting changed.
+
 ## 2026-09-08 minimalist interface pass
 
 - Applied a reduction-first visual system across all public pages: one deep

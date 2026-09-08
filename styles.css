@@ -1203,13 +1203,7 @@ h3 {
   }
 }
 
-@media (min-width: 1181px) {
-  .recommendations-page .recommendation-entry-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 861px) and (max-width: 1180px) {
+@media (min-width: 861px) {
   .recommendations-page .recommendation-entry-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -1443,10 +1437,6 @@ h3 {
   .recommendation-card { padding: 1.5rem; }
   .thesis-content .thesis-mantra { padding-left: 1rem; }
 }
-@media (min-width: 861px) and (max-width: 1000px) {
-  .recommendation-card .button { font-size: 0.8rem; padding-inline: 0.4rem; }
-}
-
 /* Shared layout refinements: readable type, constrained navigation, and flat
    content surfaces. Topic-specific image treatments stay with their pages. */
 
