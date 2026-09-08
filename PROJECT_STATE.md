@@ -37,8 +37,9 @@ clear separation from private operational control.
   now has one background field and one shared frame contract rather than a
   historical cascade that only happened to resolve correctly.
 - Local source, build, structure, public-boundary, reproducible-package, and
-  syntax gates pass. The site-content release is committed as `54f75ec` and
-  pushed to `main`; strict production verification passed after propagation on
+  syntax gates pass. The site-content release is committed as `54f75ec`; the
+  follow-up token and stylesheet consolidation is committed as `f89087e` and
+  pushed to `main`. Strict production verification passed after propagation on
   2026-09-08 with the expanded whole-surface checks in
   `scripts/verify-live.sh --strict-post-deploy`.
 - Automated proof covers the returned HTML/CSS, routes, headers, boundaries,
