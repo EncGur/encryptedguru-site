@@ -125,7 +125,7 @@ ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
 minimal_css_pages=0
 for page in $pages; do
-  if grep -q 'styles.css?v=20260908-minimal-v7' "$page"; then
+  if grep -q 'styles.css?v=20260908-minimal-v8' "$page"; then
     minimal_css_pages=$((minimal_css_pages + 1))
   fi
 done
@@ -138,6 +138,10 @@ ok "Thesis navigation uses readable action type" grep -q '^\.thesis-toc a {.*fon
 ok "Homepage entry action uses readable action type" grep -q '^\.entry-feature-label {.*font-size: 0.875rem;' styles.css
 ok "Research card action uses readable action type" sh -c "sed -n '/^\\.card-link {/,/^}/p' styles.css | grep -q 'font-size: 0.875rem;'"
 ok "Playbook card action uses readable action type" grep -q '^\.playbook-model \.card-link .*font-size: 0.875rem;' styles.css
+ok "Metadata uses the shared 12px floor" grep -q -- '--meta-size: 0.75rem;' styles.css
+ok "Stylesheet has no sub-12px text declarations" sh -c '! grep -qE "font-size: 0\\.(6[0-9]|7[0-4])rem" styles.css'
+ok "Compact navigation keeps research links in More" sh -c "sed -n '/Keep the action surface readable/,/^}/p' styles.css | grep -q 'display: none;'"
+ok "Research title uses a shorter first-screen measure" grep -q 'min-height: clamp(440px, 56vh, 600px);' styles.css
 ok "Minimal CSS has no dormant five-column grid variant" sh -c '! grep -qE "grid\.five|grid five" styles.css'
 ok "Minimal CSS has no legacy panel or shadow tokens" sh -c '! grep -qE "var\(--(panel|shadow)" styles.css'
 ok "Aave keeps its flat purple referral boundary" grep -q 'background: #c6a9ff;' styles.css

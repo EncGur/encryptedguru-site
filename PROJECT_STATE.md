@@ -9,6 +9,23 @@ identity, control, liquidity, settlement rails, allocation, and lifelong learnin
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
 
+## 2026-09-08 density and responsive navigation
+
+- Introduced one shared `--meta-size` token at 0.75rem so secondary metadata
+  stays at or above the 12px readability floor across the map, page labels,
+  referral values, decision frames, and footer groups.
+- Raised compact navigation text to the 14px floor and moved the three topic
+  links into the native More menu at widths up to 1120px. The research routes
+  remain directly available, but the persistent navigation now presents only
+  the primary action, thesis, and library decision points.
+- Reduced first-screen and section spacing, and shortened the research title
+  image measure so the actual note and decision frame arrive sooner without
+  removing the supplied topic imagery.
+- Added source regressions for the type floor, responsive navigation contract,
+  and shorter research title measure. Bumped every public HTML page to the
+  `20260908-minimal-v8` CSS asset. No content claims, referral URLs, provider
+  terms, analytics, DNS, or external settings changed.
+
 ## 2026-09-08 responsive control sizing
 
 - Consolidated the Recommendations desktop breakpoint into one rule so the
