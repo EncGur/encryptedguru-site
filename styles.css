@@ -1009,7 +1009,7 @@ h3 {
   margin-top: auto;
   padding-top: 1.4rem;
   color: var(--green-strong);
-  font-size: 0.86rem;
+  font-size: 0.875rem;
   font-weight: 760;
 }
 
@@ -1287,7 +1287,7 @@ h3 {
 .entry-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 1.5rem; }
 .entry-heading .eyebrow { margin-bottom: 0.65rem; }
 .entry-heading h2 { font-size: clamp(1.65rem, 2.5vw, 2.4rem); }
-.entry-heading > a { flex-shrink: 0; font-size: 0.85rem; }
+.entry-heading > a { flex-shrink: 0; font-size: 0.875rem; }
 .entry-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; }
 .entry-strip > a { min-width: 0; display: grid; gap: 0.7rem; padding: 1.15rem; border: 1px solid var(--line); border-radius: 0.65rem; background: #141d16; transition: background 160ms ease, border-color 160ms ease; }
 .entry-strip > a:hover { background: #1d2c20; border-color: var(--green); }
@@ -1308,7 +1308,7 @@ h3 {
 .entry-feature-copy strong { display: flex; justify-content: space-between; gap: 1rem; color: var(--text); font-size: clamp(1.05rem, 1.7vw, 1.35rem); letter-spacing: -0.025em; }
 .entry-feature-copy strong span { color: var(--green-strong); font-size: 0.9em; }
 .entry-feature-copy small { max-width: 70ch; color: var(--soft); font-size: 0.82rem; line-height: 1.55; }
-.entry-feature-label { color: var(--green-strong); font-size: 0.78rem; font-weight: 760; white-space: nowrap; }
+.entry-feature-label { color: var(--green-strong); font-size: 0.875rem; font-weight: 760; white-space: nowrap; }
 .entry-index { font-size: 0.65rem; letter-spacing: 0.06em; color: var(--amber); }
 .entry-strip strong { display: flex; justify-content: space-between; font-size: 1.12rem; }
 .entry-strip strong span { font-size: 0.9rem; color: var(--green-strong); }
@@ -1341,7 +1341,7 @@ h3 {
 .referral-value > span { display: block; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.35rem; }
 .referral-value > div { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; border-block: 1px solid var(--line); min-height: 48px; }
 .referral-value code { color: var(--green-strong); font-size: 1rem; font-weight: 700; }
-.copy-control { font: inherit; font-size: 0.72rem; background: transparent; border: 0; padding: 0.5rem; min-height: 44px; color: var(--soft); cursor: pointer; flex-shrink: 0; }
+.copy-control { font: inherit; font-size: 0.875rem; background: transparent; border: 0; padding: 0.5rem; min-height: 44px; color: var(--soft); cursor: pointer; flex-shrink: 0; white-space: nowrap; }
 .copy-control:hover { color: var(--green-strong); text-decoration: underline; }
 .copy-status { min-height: 1.15rem; margin-top: 0.3rem; }
 .recommendation-infra-boundary { padding-block: clamp(3rem, 5vw, 5rem); border-block: 1px solid var(--line); }
@@ -1356,7 +1356,7 @@ h3 {
 .thesis-title .thesis-deck { font-size: clamp(1.05rem, 1.5vw, 1.25rem); max-width: 60ch; line-height: 1.6; }
 .thesis-layout { width: min(1180px, 90vw); margin: 3rem auto 0; display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); }
 .thesis-toc { position: sticky; top: 7rem; align-self: start; display: grid; padding-bottom: 1rem; }
-.thesis-toc a { display: block; color: var(--muted); font-size: 0.86rem; padding-block: 0.65rem; border-bottom: 1px solid var(--line); }
+.thesis-toc a { display: block; color: var(--muted); font-size: 0.875rem; padding-block: 0.65rem; border-bottom: 1px solid var(--line); }
 .thesis-toc a:hover { color: var(--green-strong); }
 .thesis-content { min-width: 0; max-width: 720px; }
 .thesis-content > section { border-bottom: 1px solid var(--line); padding-bottom: 3.5rem; margin-bottom: 3.5rem; }
@@ -1381,7 +1381,7 @@ h3 {
 .method-list dd { margin: 0.45rem 0 0; color: var(--muted); line-height: 1.65; }
 .thesis-content .thesis-signature { font-size: 1.15rem; color: var(--green-strong); }
 .thesis-signature span { font-size: 0.85rem; color: var(--muted); }
-.research-context { width: min(1180px, 90vw); margin: 1.5rem auto 0; color: var(--muted); font-size: 0.85rem; }
+.research-context { width: min(1180px, 90vw); margin: 1.5rem auto 0; color: var(--muted); font-size: 0.875rem; }
 .research-context a { color: var(--green-strong); text-decoration: underline; text-underline-offset: 0.2em; }
 
 @media (min-width: 1440px) { .thesis-layout, .research-context { width: min(1440px, 90vw); } }
@@ -1551,7 +1551,7 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 .playbook-model .tile { display: flex; flex-direction: column; }
 .playbook-model .tile h3 { margin: 0 0 0.85rem; font-size: 1.35rem; }
 .playbook-model .tile p { margin: 0; }
-.playbook-model .card-link { margin-top: auto; padding-top: 1.2rem; color: var(--green-strong); font-size: 0.78rem; line-height: 1.45; }
+.playbook-model .card-link { margin-top: auto; padding-top: 1.2rem; color: var(--green-strong); font-size: 0.875rem; line-height: 1.45; }
 .playbook-loop { max-width: 760px; margin-top: 0; }
 .playbook-loop li { padding-block: 1.05rem; }
 .playbook-loop h3 { font-size: 1.1rem; }
@@ -1582,7 +1582,7 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 }
 .decision-frame-intro .text-link {
   width: fit-content;
-  font-size: 0.86rem;
+  font-size: 0.875rem;
 }
 .decision-frame-grid {
   display: grid;

@@ -31,6 +31,17 @@ clear separation from private operational control.
   navigation, content, referrals, or the red portrait brand mark.
 - Bumped every public HTML page to the `20260908-minimal-v6` CSS asset.
 
+## 2026-09-08 interaction type floor
+
+- Raised recurring action text to the 14px readability floor: copy controls,
+  thesis navigation, research-card links, the homepage recommendation entry,
+  the Playbook entry links, and research context links.
+- Shortened the visible copy action to `Copy` while retaining its specific
+  accessible label, reducing referral-card width pressure without removing
+  context for assistive technology.
+- Added a source regression for the interactive type floor and bumped every
+  public HTML page to the `20260908-minimal-v7` CSS asset.
+
 ## 2026-09-08 minimalist interface pass
 
 - Applied a reduction-first visual system across all public pages: one deep
