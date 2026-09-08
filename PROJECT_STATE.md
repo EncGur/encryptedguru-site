@@ -30,8 +30,14 @@ clear separation from private operational control.
   layout rules. No content claims, referral URLs, analytics, forms, or external
   provider settings were changed.
 - Local source, build, structure, public-boundary, reproducible-package, and
-  syntax gates pass. GitHub sync and strict production verification remain the
-  release gates for this interface pass.
+  syntax gates pass. The site-content release is committed as `54f75ec` and
+  pushed to `main`; strict production verification passed after propagation on
+  2026-09-08 with the expanded whole-surface checks in
+  `scripts/verify-live.sh --strict-post-deploy`.
+- Automated proof covers the returned HTML/CSS, routes, headers, boundaries,
+  and asset version. Device-level visual acceptance remains a separate
+  follow-up surface because it cannot be established from a source or HTTP
+  check alone.
 
 ## 2026-09-08 research-frame expansion
 
