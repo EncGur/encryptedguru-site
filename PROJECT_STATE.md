@@ -24,8 +24,11 @@ clear separation from private operational control.
   version. No live rates, provider promises, transaction flows, analytics,
   forms, or external dashboard settings were added or changed.
 - Local source, build, structure, public-boundary, reproducible-package, and
-  syntax gates pass. GitHub sync and strict production verification remain the
-  release gates for this expansion.
+  syntax gates passed. The expansion was committed as `74468db` and pushed to
+  `main`; strict production verification passed after propagation on
+  2026-09-08 (Asia/Singapore), including all three decision-frame anchors and
+  the new CSS asset. No Cloudflare dashboard setting, DNS record, or external
+  provider terms were changed.
 
 ## 2026-09-07 Capital Operating System expansion
 
@@ -188,12 +191,12 @@ clear separation from private operational control.
 
 - Production source is the public `EncGur/encryptedguru-site` repository on the
   `main` branch.
-- The deployed site-content release is commit `2eff4c9` (feat: harden site
-  after global audit). `main` also contains a subsequent verification and
-  state-documentation correction. Core live HTML and assets matched the
-  deployed site-content release during the 2026-09-06 audit, while Cloudflare
-  edge transforms were observed on `contact` and `robots.txt`; the hosting
-  deployment identifier has not been independently recorded here.
+- The deployed site-content release is commit `74468db` (feat: align research
+  pages with decision framework). Core live HTML, the decision-frame CSS
+  version, route boundaries, and security headers passed strict verification on
+  2026-09-08 after propagation, while Cloudflare edge transforms remain
+  observed on `contact` and `robots.txt`; the hosting deployment identifier has
+  not been independently recorded here.
 - Production is served at `https://www.encryptedguru.com/`.
 - The apex redirects to the canonical `www` host.
 - The public source build is static and contains no forms, database, analytics,
