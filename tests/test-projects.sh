@@ -100,6 +100,8 @@ ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https
 ok "Recommendations page links the official Rabby control entry" grep -q 'href="https://rabby.io/"' recommendations/index.html
 ok "Homepage features the Fluid stablecoin-lending entry" grep -q 'href="/recommendations/#fluid"' index.html
 ok "Homepage labels Fluid as stablecoin lending" grep -q '01 / STABLECOIN LENDING' index.html
+ok "Homepage exposes the compact operating-principles rail" grep -q 'class="hero-signal-row"' index.html
+ok "Homepage keeps the source-first principle visible" grep -q 'Source first' index.html
 ok "Recommendations labels Fluid as stablecoin lending" grep -q '02 / STABLECOIN LENDING' recommendations/index.html
 ok "Homepage labels the capital map as a research framework" grep -q 'not a prescribed stack' index.html
 ok "Homepage scopes its first-party tracking claim" grep -q 'No first-party tracking' index.html
@@ -111,12 +113,17 @@ ok "Monero has the shared decision-frame anchor" grep -q 'id="decision-frame"' m
 ok "Monero has six decision-frame questions" test "$(grep -c 'decision-frame-item' monero/index.html)" -eq 6
 ok "Plasma has the shared decision-frame anchor" grep -q 'id="decision-frame"' plasma/index.html
 ok "Plasma has six decision-frame questions" test "$(grep -c 'decision-frame-item' plasma/index.html)" -eq 6
+ok "Plasma page exposes its disclosed entry in the title zone" grep -q 'href="/recommendations/#plasma-one"' plasma/index.html
+ok "Plasma page exposes the official network in the title zone" grep -q 'class="page-title-actions"' plasma/index.html
 ok "Aave has the shared decision-frame anchor" grep -q 'id="decision-frame"' aave/index.html
 ok "Aave has six decision-frame questions" test "$(grep -c 'decision-frame-item' aave/index.html)" -eq 6
 ok "Monero links the decision frame to the Playbook" grep -q 'href="/playbook/#record"' monero/index.html
 ok "Plasma links the decision frame to the Playbook" grep -q 'href="/playbook/#record"' plasma/index.html
 ok "Aave links the decision frame to the Playbook" grep -q 'href="/playbook/#record"' aave/index.html
 ok "Decision frame CSS is present" grep -q '^\.decision-frame {' styles.css
+ok "Homepage proof rail CSS is present" grep -q '^\.hero-signal-row {' styles.css
+ok "Plasma title action CSS is present" grep -q '^\.plasma-page \.page-title-actions {' styles.css
+ok "Research titles use the centered hero rhythm" sh -c "sed -n '/Keep the research title and its portrait/,/media (max-width: 520px)/p' styles.css | grep -q 'align-items: center;'"
 ok "Page-title review notes keep metadata sizing" grep -q '^\.page-title p\.review-note {' styles.css
 ok "Minimal CSS defines the shared editorial frame" grep -q -- '--frame: min(1280px, 90vw);' styles.css
 ok "Minimal CSS defines the single background field" grep -q 'background: var(--bg);' styles.css
@@ -125,7 +132,7 @@ ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
 minimal_css_pages=0
 for page in $pages; do
-  if grep -q 'styles.css?v=20260908-minimal-v11' "$page"; then
+  if grep -q 'styles.css?v=20260908-plasma-v12' "$page"; then
     minimal_css_pages=$((minimal_css_pages + 1))
   fi
 done

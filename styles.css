@@ -2095,3 +2095,113 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
     font-size: 0.875rem;
   }
 }
+
+/* Plasma-inspired hierarchy: a compact proof rail follows the primary action,
+   while research pages expose their next verifiable step in the first screen. */
+.hero-signal-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 2rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.hero-signal-row li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  min-width: 0;
+  padding-right: 1rem;
+}
+
+.hero-signal-row li + li {
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
+}
+
+.hero-signal-index {
+  color: var(--amber);
+  font-size: var(--meta-size);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.hero-signal-row strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.93rem;
+  line-height: 1.2;
+}
+
+.hero-signal-row small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.page-title .page-title-summary {
+  max-width: 62ch;
+  color: var(--soft);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+}
+
+.plasma-page .page-title-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 2rem;
+}
+
+.plasma-page .page-title-actions .button {
+  min-height: 48px;
+}
+
+/* Keep the research title and its portrait in the same reading zone on wide
+   screens. This borrows the reference site's centered hero rhythm without
+   changing the supplied EncryptedGuru imagery. */
+.plasma-title,
+.monero-title,
+.aave-title {
+  align-items: center;
+}
+
+.plasma-title .page-title-content,
+.monero-title .page-title-content,
+.aave-title .page-title-content {
+  padding-bottom: 0;
+}
+
+@media (max-width: 520px) {
+  .hero-signal-row {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding-top: 0.8rem;
+  }
+
+  .hero-signal-row li,
+  .hero-signal-row li + li {
+    padding: 0.8rem 0 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .hero-signal-row li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .plasma-page .page-title-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plasma-page .page-title-actions .button {
+    width: 100%;
+  }
+}

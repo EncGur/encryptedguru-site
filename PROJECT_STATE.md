@@ -9,6 +9,28 @@ identity, control, liquidity, settlement rails, allocation, and lifelong learnin
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
 
+## 2026-09-08 Plasma-inspired hierarchy and first-screen action
+
+- Reviewed the current Plasma homepage as a visual reference. Its useful
+  transferable pattern is a single primary action followed by a compact proof
+  rail and then progressively deeper product or infrastructure context. The
+  implementation keeps EncryptedGuru's dark editorial system, red portrait,
+  source-first language, and no-homepage-photo decision; it does not copy
+  Plasma brand assets or product claims.
+- Added a three-item proof rail below the homepage actions: source first,
+  layers separate, and exit visible. These are concise expressions of the
+  existing research method, not new product guarantees.
+- Added first-screen Plasma page actions for the disclosed Plasma One entry and
+  the official network overview. Removed the duplicate official-link button
+  pair from the Current reading block so the page has one clear action zone.
+- Centered the shared Monero, Plasma, and Aave title content against their
+  portraits on wide screens, removing the bottom-aligned blank zone while
+  preserving the existing mobile single-column behavior.
+- Bumped every public HTML page and the live verification contract to the
+  `20260908-plasma-v12` CSS asset. Referral URLs, research claims, provider
+  terms, security controls, analytics posture, DNS, and external settings are
+  unchanged.
+
 ## 2026-09-08 density and responsive navigation
 
 - Introduced one shared `--meta-size` token at 0.75rem so secondary metadata
