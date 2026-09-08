@@ -1940,6 +1940,16 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
   line-height: 1.6;
 }
 
+/* Let grid children shrink to the shared frame instead of using their
+   intrinsic text or control width as a mobile minimum. */
+.page-title > *,
+.capital-hero > *,
+.grid > *,
+.thesis-layout > *,
+.decision-frame > * {
+  min-width: 0;
+}
+
 .site-footer a {
   padding-block: 0.2rem;
 }
@@ -2018,11 +2028,52 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
   }
 
   .sovereign-home h1 {
-    font-size: clamp(2.8rem, 12.5vw, 4.5rem);
+    font-size: clamp(2.45rem, 11vw, 3.25rem);
+  }
+
+  .capital-intro,
+  .page-title-content,
+  .page-title-visual,
+  .recommendation-entry-grid,
+  .recommendation-card {
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    flex: 0 1 auto;
   }
 
   .site-footer {
     width: calc(100% - 2rem);
+  }
+}
+
+/* At tablet-width desktop layouts, keep the research title in the first
+   reading zone instead of bottom-aligning it against a tall portrait. */
+@media (min-width: 861px) and (max-width: 1120px) {
+  .plasma-title,
+  .monero-title,
+  .aave-title {
+    align-items: center;
+    min-height: clamp(420px, 52vh, 560px);
+  }
+
+  .plasma-title .page-title-visual,
+  .monero-title .page-title-visual,
+  .aave-title .page-title-visual {
+    min-height: clamp(360px, 52vh, 560px);
+  }
+
+  .plasma-title .page-title-content,
+  .monero-title .page-title-content,
+  .aave-title .page-title-content {
+    padding-bottom: 0;
   }
 }
 

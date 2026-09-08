@@ -26,6 +26,26 @@ clear separation from private operational control.
   `20260908-minimal-v9` CSS asset. No content claims, referral URLs, provider
   terms, analytics, DNS, or external settings changed.
 
+## 2026-09-08 visual acceptance and mobile overflow correction
+
+- Real viewport review at approximately 964px found that the Monero, Plasma,
+  and Aave research titles were bottom-aligned against tall portraits, leaving
+  an avoidable blank zone before the primary reading content. A bounded
+  861–1120px rule now centers those title blocks and shortens the portrait
+  measure; the local Monero, Plasma, and Aave renders returned their subjects
+  to the first reading zone.
+- A separate 390px viewport review exposed horizontal overflow that was hidden
+  rather than solved: intrinsic grid children, long research copy, referral
+  cards, and the two homepage hero controls could exceed the frame. Grid items
+  now have an explicit zero minimum, and narrow homepage actions stack at full
+  width. This preserves the desktop hierarchy while making the mobile layout
+  fit the viewport.
+- Local visual rechecks covered the homepage, Recommendations, and Aave after
+  the responsive correction. Added source regressions for the tablet title rule,
+  shrinkable mobile grid items, and stacked mobile hero actions. Bumped every
+  public HTML page to the `20260908-minimal-v11` CSS asset. No content claims,
+  referral URLs, provider terms, analytics, DNS, or external settings changed.
+
 ## 2026-09-08 cascade debt reduction
 
 - Removed pre-minimal declarations that were unconditionally superseded by the
