@@ -76,6 +76,16 @@ clear separation from private operational control.
   bumped all public pages to the `20260908-minimal-v4` asset. No content,
   route, referral URL, provider term, or external setting changed.
 
+## 2026-09-08 browser canvas alignment
+
+- Aligned the browser and PWA shell colors with the single site canvas value:
+  ordinary pages, the 404 surface, and the manifest now use `#0b100d`.
+- Kept Aave's `#100c19` theme color as the one topic-specific purple
+  exception, matching its research-image treatment.
+- Added regression checks for ordinary-page metadata and PWA colors. This
+  changes no page content, route, referral URL, provider term, or external
+  setting.
+
 ## 2026-09-08 research-frame expansion
 
 - Applied one shared six-question decision frame to the Monero, Plasma, and

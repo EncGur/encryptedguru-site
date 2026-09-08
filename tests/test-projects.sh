@@ -133,6 +133,9 @@ ok "All pages use the current minimalist CSS cache version" test "$minimal_css_p
 ok "Minimal CSS has no dormant five-column grid variant" sh -c '! grep -qE "grid\.five|grid five" styles.css'
 ok "Minimal CSS has no legacy panel or shadow tokens" sh -c '! grep -qE "var\(--(panel|shadow)" styles.css'
 ok "Aave keeps its flat purple referral boundary" grep -q 'background: #c6a9ff;' styles.css
+ok "Ordinary pages use the shared browser canvas color" sh -c '! grep -qiE "theme-color.*#(050706|090b09|0b0d0b)" index.html 404.html monero/index.html plasma/index.html aave/index.html docs/index.html labs/index.html labs/dsx-air/index.html infrastructure/index.html playbook/index.html contact/index.html projects/index.html projects/gmcp/index.html recommendations/index.html go/plasma-one/index.html thesis/index.html'
+ok "PWA colors use the shared browser canvas color" grep -q '"theme_color": "#0b100d"' site.webmanifest
+ok "PWA background uses the shared browser canvas color" grep -q '"background_color": "#0b100d"' site.webmanifest
 ok "Plasma invite explains the app-store fallback" grep -q 'App-store fallback' go/plasma-one/index.html
 ok "Contact has a no-JavaScript email fallback" grep -Fq 'contact [at] encryptedguru [dot] com' contact/index.html
 ok "Projects page scopes the public source claim" grep -q 'public entry has a corresponding page or source record' projects/index.html
