@@ -123,7 +123,13 @@ ok "Minimal CSS defines the single background field" grep -q 'background: var(--
 ok "Minimal CSS declares one token source" test "$(grep -c '^:root {' styles.css)" -eq 1
 ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^body {/,/^}/p' styles.css | grep -q 'background: var(--bg);'"
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
-ok "All pages use the minimalist CSS cache version" test "$(rg -l 'styles.css\?v=20260908-minimal-v2' --glob '*.html' --glob '!dist/**' | wc -l | tr -d ' ')" -eq 16
+minimal_css_pages=0
+for page in $pages; do
+  if grep -q 'styles.css?v=20260908-minimal-v2' "$page"; then
+    minimal_css_pages=$((minimal_css_pages + 1))
+  fi
+done
+ok "All pages use the minimalist CSS cache version" test "$minimal_css_pages" -eq 16
 ok "Plasma invite explains the app-store fallback" grep -q 'App-store fallback' go/plasma-one/index.html
 ok "Contact has a no-JavaScript email fallback" grep -Fq 'contact [at] encryptedguru [dot] com' contact/index.html
 ok "Projects page scopes the public source claim" grep -q 'public entry has a corresponding page or source record' projects/index.html

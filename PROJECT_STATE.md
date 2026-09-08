@@ -46,6 +46,11 @@ clear separation from private operational control.
   and asset version. Device-level visual acceptance remains a separate
   follow-up surface because it cannot be established from a source or HTTP
   check alone.
+- A CI portability regression was found after this release: the GitHub-hosted
+  runner does not provide `rg`, while the cache-version assertion in
+  `tests/test-projects.sh` had started using it. The assertion now iterates the
+  declared page set with POSIX `grep`; the full local suite passes without that
+  dependency. GitHub Actions is the final independent confirmation after push.
 
 ## 2026-09-08 research-frame expansion
 
