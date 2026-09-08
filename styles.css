@@ -1,22 +1,23 @@
 :root {
   color-scheme: dark;
-  --bg: #0a0e0b;
-  --surface: #10170f;
-  --surface-2: #141d16;
-  --surface-focus: #182518;
-  --panel: rgba(21, 31, 23, 0.82);
-  --panel-strong: rgba(27, 39, 28, 0.96);
-  --panel-focus: rgba(31, 49, 31, 0.94);
-  --line: rgba(231, 242, 223, 0.11);
-  --line-strong: rgba(231, 242, 223, 0.2);
-  --text: #f3f5ee;
-  --muted: #a3ab9f;
-  --soft: #d8dfd1;
-  --green: #a8e66b;
-  --green-strong: #d9f6a5;
-  --green-ink: #0b120c;
-  --amber: #e3b06f;
-  --shadow: rgba(0, 0, 0, 0.38);
+  --frame: min(1280px, 90vw);
+  --bg: #0b100d;
+  --surface: #111711;
+  --surface-2: #151d16;
+  --surface-focus: #1a261b;
+  --panel: #111711;
+  --panel-strong: #151d16;
+  --panel-focus: #1a261b;
+  --line: rgba(220, 232, 215, 0.14);
+  --line-strong: rgba(220, 232, 215, 0.24);
+  --text: #f2f5ef;
+  --muted: #a5aea2;
+  --soft: #d9e0d5;
+  --green: #b9f477;
+  --green-strong: #d9f7aa;
+  --green-ink: #09100a;
+  --amber: #d9ac71;
+  --shadow: transparent;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -46,10 +47,7 @@ body {
   margin: 0;
   color: var(--text);
   line-height: 1.5;
-  background:
-    radial-gradient(circle at 6% 0%, rgba(155, 214, 107, 0.08), transparent 32rem),
-    radial-gradient(circle at 94% 8%, rgba(210, 165, 116, 0.045), transparent 34rem),
-    linear-gradient(180deg, #0b130d 0%, #0a110c 52%, #080d09 100%);
+  background: var(--bg);
   overflow-x: hidden;
 }
 
@@ -91,27 +89,12 @@ a {
   backdrop-filter: blur(22px) saturate(115%);
 }
 
-.home-page .site-header {
-  position: absolute;
-  width: 100%;
-  border-bottom-color: rgba(246, 244, 235, 0.2);
-  background: linear-gradient(180deg, rgba(7, 9, 7, 0.78), rgba(7, 9, 7, 0.18));
-}
-
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
   font-weight: 760;
   letter-spacing: -0.02em;
-}
-
-.brand-logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 0 2px rgba(210, 244, 155, 0.3), 0 0 0 6px rgba(210, 244, 155, 0.08);
 }
 
 .brand-mark {
@@ -124,11 +107,6 @@ a {
   background: url("/eg-mark-180.png?v=3") center / cover no-repeat;
   box-shadow: 0 0 0 2px rgba(255, 123, 74, 0.28), 0 0 0 6px rgba(255, 74, 45, 0.1);
   overflow: hidden;
-}
-
-.brand-mark::before,
-.brand-mark::after {
-  display: none;
 }
 
 .nav {
@@ -223,50 +201,6 @@ a {
   white-space: nowrap;
 }
 
-.hero {
-  display: grid;
-  min-height: calc(100vh - 78px);
-  padding: 10vh 5vw;
-  align-items: center;
-}
-
-.home-page .hero {
-  position: relative;
-  grid-template-columns: minmax(0, 1fr);
-  min-height: 100svh;
-  padding-top: 9rem;
-  padding-bottom: 4.5rem;
-  overflow: hidden;
-  align-items: center;
-  isolation: isolate;
-}
-
-.home-page .hero::before {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(circle at 18% 45%, rgba(155, 214, 107, 0.17), transparent 28rem),
-    radial-gradient(circle at 84% 18%, rgba(210, 165, 116, 0.08), transparent 24rem);
-  content: "";
-}
-
-.home-page .hero::after {
-  position: absolute;
-  right: 5vw;
-  bottom: 2.25rem;
-  left: 5vw;
-  z-index: -1;
-  border-bottom: 1px solid rgba(246, 244, 235, 0.2);
-  content: "";
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  width: min(1040px, 100%);
-}
-
 .eyebrow {
   margin: 0 0 1rem;
   color: var(--green-strong);
@@ -311,14 +245,6 @@ h3 {
   text-wrap: balance;
 }
 
-.hero-copy {
-  max-width: 680px;
-  margin: 1.5rem 0 0;
-  color: var(--soft);
-  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
-  line-height: 1.35;
-}
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -361,43 +287,6 @@ h3 {
   color: #10120e;
   background: var(--green-strong);
   border-color: var(--green-strong);
-}
-
-.hero-status {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  width: min(940px, 100%);
-  margin: 3rem 0 0;
-  padding: 1px;
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  background: var(--line);
-  overflow: hidden;
-}
-
-.hero-status div {
-  min-width: 0;
-  padding: 1rem;
-  background: rgba(12, 14, 12, 0.62);
-  backdrop-filter: blur(14px);
-}
-
-.hero-status dt,
-.hero-status dd {
-  margin: 0;
-}
-
-.hero-status dt {
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.hero-status dd {
-  margin-top: 0.35rem;
-  color: var(--text);
-  font-weight: 720;
-  overflow-wrap: anywhere;
 }
 
 .section {
@@ -937,23 +826,6 @@ h3 {
     gap: 0.9rem;
   }
 
-  .hero {
-    min-height: auto;
-    padding-top: 7rem;
-    padding-bottom: 6rem;
-  }
-
-  .home-page .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding-top: 10rem;
-    padding-bottom: 5rem;
-  }
-
-  .home-page .hero::after {
-    bottom: 1.5rem;
-  }
-
   .plasma-title,
   .monero-title,
   .aave-title {
@@ -980,8 +852,7 @@ h3 {
   .grid.five,
   .grid.three,
   .split,
-  .referral-card,
-  .hero-status {
+  .referral-card {
     grid-template-columns: 1fr;
   }
 
@@ -1044,11 +915,6 @@ h3 {
   .page-title {
     width: min(1440px, 90vw);
   }
-
-  .home-page .hero {
-    width: min(1440px, 100vw);
-    margin-inline: auto;
-  }
 }
 
 .recommendations-page .page-title {
@@ -1064,19 +930,6 @@ h3 {
   margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
 }
 
-@media (max-width: 360px) {
-  h1 {
-    overflow-wrap: anywhere;
-  }
-
-  .plasma-title .page-title-visual,
-  .monero-title .page-title-visual,
-  .aave-title .page-title-visual {
-    min-height: 350px;
-    border-radius: 1.4rem;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1089,243 +942,10 @@ h3 {
 
 }
 
-/* Homepage detail layer: signal, entry paths, and proof rhythm. */
-
-.home-page .hero {
-  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.44fr);
-  gap: clamp(2rem, 8vw, 9rem);
-  min-height: min(900px, 100svh);
-  padding-top: clamp(8rem, 15vh, 11rem);
-  padding-bottom: clamp(4rem, 9vh, 7rem);
-  align-items: end;
-}
-
-.home-page .hero::before {
-  background:
-    radial-gradient(circle at 8% 35%, rgba(168, 230, 107, 0.13), transparent 27rem),
-    radial-gradient(circle at 78% 25%, rgba(227, 176, 111, 0.07), transparent 24rem),
-    linear-gradient(112deg, rgba(10, 14, 10, 0.32), transparent 52%);
-}
-
-
-.hero-inner {
-  max-width: 880px;
-}
-
-.hero-kicker {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 1.4rem;
-  color: var(--soft);
-  font-size: 0.72rem;
-  font-weight: 760;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-.hero-kicker-divider {
-  color: var(--amber);
-}
-
-.status-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 5px rgba(168, 230, 107, 0.12), 0 0 18px rgba(168, 230, 107, 0.55);
-}
-
-.home-page h1 {
-  max-width: 10ch;
-  font-size: clamp(4.3rem, 9.5vw, 9.8rem);
-  line-height: 0.86;
-}
-
-.hero-accent {
-  color: var(--green-strong);
-}
-
-.home-page .hero-copy {
-  max-width: 690px;
-  margin-top: 1.8rem;
-  color: var(--soft);
-  font-size: clamp(1.08rem, 1.7vw, 1.42rem);
-  line-height: 1.48;
-}
-
-.home-page .hero-actions {
-  margin-top: 2rem;
-}
-
-.hero-index {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.65rem 1.2rem;
-  margin-top: clamp(2.4rem, 6vh, 4rem);
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.83rem;
-}
-
-.hero-index-label {
-  color: var(--text);
-  font-weight: 760;
-  letter-spacing: 0.04em;
-}
-
-.hero-index a {
-  color: var(--soft);
-  border-bottom: 1px solid transparent;
-  transition: color 180ms ease, border-color 180ms ease;
-}
-
-.hero-index a:hover {
-  color: var(--green-strong);
-  border-color: var(--green);
-}
-
-.hero-index a span {
-  margin-left: 0.25rem;
-  color: var(--amber);
-}
-
-.hero-signal {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: clamp(360px, 48vh, 500px);
-  padding: 1.1rem;
-  border: 1px solid rgba(217, 246, 165, 0.24);
-  border-radius: 1.6rem;
-  background:
-    linear-gradient(145deg, rgba(35, 48, 31, 0.72), rgba(10, 14, 10, 0.72)),
-    repeating-linear-gradient(0deg, transparent 0 38px, rgba(217, 246, 165, 0.045) 39px 40px);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34), inset 0 0 60px rgba(168, 230, 107, 0.04);
-  overflow: hidden;
-}
-
-.hero-signal::after {
-  position: absolute;
-  inset: 0.7rem;
-  border: 1px solid rgba(239, 245, 230, 0.09);
-  border-radius: 1.1rem;
-  pointer-events: none;
-  content: "";
-}
-
-.signal-header,
-.signal-readout {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.signal-header {
-  color: var(--green-strong);
-}
-
-.signal-header span:last-child {
-  color: var(--amber);
-}
-
-.signal-orbit {
-  position: relative;
-  align-self: center;
-  width: min(15rem, 72%);
-  aspect-ratio: 1;
-  border: 1px solid rgba(217, 246, 165, 0.36);
-  border-radius: 50%;
-  box-shadow: 0 0 0 2.2rem rgba(168, 230, 107, 0.025), 0 0 0 5.2rem rgba(168, 230, 107, 0.018);
-}
-
-.signal-orbit::before,
-.signal-orbit::after {
-  position: absolute;
-  inset: 16%;
-  border: 1px solid rgba(217, 246, 165, 0.26);
-  border-radius: 50%;
-  content: "";
-}
-
-.signal-orbit::after {
-  inset: 33%;
-  border-color: rgba(227, 176, 111, 0.55);
-}
-
-.signal-orbit span {
-  position: absolute;
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background: var(--green-strong);
-  box-shadow: 0 0 14px rgba(217, 246, 165, 0.9);
-}
-
-.signal-orbit span:nth-child(1) { top: 14%; left: 28%; }
-.signal-orbit span:nth-child(2) { right: 14%; bottom: 28%; background: var(--amber); box-shadow: 0 0 14px rgba(227, 176, 111, 0.8); }
-.signal-orbit span:nth-child(3) { bottom: 19%; left: 21%; }
-
-.signal-readout {
-  display: grid;
-  justify-content: initial;
-  gap: 0.4rem;
-  padding: 0.8rem 0 1.1rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.signal-readout strong {
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
-  text-transform: none;
-}
-
-.signal-readout span {
-  color: var(--muted);
-  font-size: 0.77rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-
-.signal-lines {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: end;
-  gap: 0.35rem;
-  height: 2.4rem;
-}
-
-.signal-lines i {
-  display: block;
-  width: 0.35rem;
-  height: 40%;
-  border-radius: 999px 999px 0 0;
-  background: var(--green);
-  opacity: 0.58;
-}
-
-.signal-lines i:nth-child(2) { height: 72%; }
-.signal-lines i:nth-child(3) { height: 52%; background: var(--amber); }
-.signal-lines i:nth-child(4) { height: 94%; }
-.signal-lines i:nth-child(5) { height: 66%; }
-
 .section-intro {
   padding-top: 6.5rem;
 }
 
-.recommendation-highlight,
 .recommendation-jump {
   display: flex;
   align-items: center;
@@ -1338,18 +958,15 @@ h3 {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(217, 246, 165, 0.08);
 }
 
-.recommendation-highlight-copy,
 .recommendation-jump > div {
   max-width: 700px;
 }
 
-.recommendation-highlight h2,
 .recommendation-jump h2 {
   max-width: 17ch;
   margin: 0.25rem 0 0.8rem;
 }
 
-.recommendation-highlight p:last-child,
 .recommendation-jump p:last-child {
   max-width: 62ch;
   margin: 0;
@@ -1357,7 +974,6 @@ h3 {
   line-height: 1.55;
 }
 
-.recommendation-highlight .button,
 .recommendation-jump .button {
   flex: 0 0 auto;
 }
@@ -1565,19 +1181,6 @@ h3 {
 }
 
 @media (max-width: 860px) {
-  .home-page .hero {
-    grid-template-columns: 1fr;
-    gap: 2.7rem;
-    min-height: auto;
-    padding-top: 9rem;
-  }
-
-  .hero-signal {
-    width: min(100%, 520px);
-    min-height: 330px;
-    margin-left: auto;
-  }
-
   .path-grid,
   .boundary-grid {
     grid-template-columns: 1fr;
@@ -1600,7 +1203,6 @@ h3 {
     flex-direction: column;
   }
 
-  .recommendation-highlight,
   .recommendation-jump {
     align-items: flex-start;
     flex-direction: column;
@@ -1621,18 +1223,6 @@ h3 {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.55rem;
-  }
-
-  .home-page h1 {
-    font-size: clamp(3.5rem, 16vw, 5.5rem);
-  }
-
-  .hero-kicker-divider {
-    display: none;
-  }
-
-  .hero-signal {
-    min-height: 300px;
   }
 
   .hero-actions .button {
@@ -1682,23 +1272,7 @@ h3 {
   }
 }
 
-/* These final wide-screen values intentionally follow the homepage detail
-   layer above so the constrained frame also gets a compact editorial rhythm. */
-@media (min-width: 1440px) {
-  .home-page .hero {
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-
-  .home-page h1 {
-    font-size: clamp(4.3rem, 8vw, 8.2rem);
-  }
-}
-
 /* Sovereign capital: shared navigation, readable research, and direct entries. */
-body {
-  background: radial-gradient(ellipse at 12% 0%, #19261a 0%, transparent 42rem), #0b100d;
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -1710,22 +1284,12 @@ body {
 }
 
 .brand { flex-shrink: 0; }
-.site-header { gap: 1rem; }
-.sovereign-home .site-header {
-  position: sticky;
-  background: rgba(11, 16, 13, 0.94);
-  border-bottom-color: var(--line);
-}
 .nav-more:has(a:not(.mobile-research)[aria-current="page"]) summary { color: var(--text); }
 .nav-more summary span { transition: transform 180ms ease; }
 .nav-more[open] summary span { transform: rotate(45deg); }
-.nav-more-menu a { border-radius: 0.4rem; }
 .nav-more-menu .mobile-research { display: none; }
 .nav-more-menu { max-height: 65vh; overflow-y: auto; }
-.site-footer { font-size: 0.84rem; line-height: 2; }
-.site-footer a { display: inline-block; padding-block: 0.35rem; }
 .button { text-align: center; line-height: 1.35; padding-block: 0.75rem; }
-.button.primary:hover { background: var(--green-strong); border-color: var(--green-strong); }
 [id] { scroll-margin-top: 7rem; }
 
 .capital-hero {
@@ -1924,21 +1488,8 @@ body {
   .recommendation-card .button { font-size: 0.8rem; padding-inline: 0.4rem; }
 }
 
-/* ------------------------------------------------------------------
-   Visual v3 — calm field, floating navigation, lighter display type,
-   one accent, flat surfaces. Borrowed devices: a single green horizon
-   glow and detached pill navigation (usdt0.to), lighter display weights
-   with tight tracking and generous measure (plasma.org), and a
-   brand-coloured primary action with hairline-separated content
-   (tether.to). Everything below overrides earlier layers on purpose.
-   ------------------------------------------------------------------ */
-
-html { background: var(--bg); overflow-x: clip; }
-body {
-  background:
-    radial-gradient(70% 42% at 50% -8%, rgba(168, 230, 107, 0.11), transparent 70%),
-    var(--bg);
-}
+/* Shared layout refinements: readable type, constrained navigation, and flat
+   content surfaces. Topic-specific image treatments stay with their pages. */
 
 /* Type: lighter display weights, tighter tracking, calmer rhythm. */
 h1 { font-weight: 620; letter-spacing: -0.05em; line-height: 0.96; }
@@ -2020,33 +1571,6 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 .capital-map { border-color: var(--line-strong); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04); }
 .section { border-top-color: var(--line); }
 
-/* Homepage hero: one horizon glow, a faint dot field, staged entrance. */
-.capital-hero {
-  position: relative;
-  isolation: isolate;
-  padding-block: clamp(4rem, 7vw, 7.5rem) clamp(3rem, 5vw, 5rem);
-}
-.capital-hero::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -10rem 0 auto;
-  height: 34rem;
-  background: radial-gradient(48% 62% at 26% 42%, rgba(168, 230, 107, 0.17), transparent 72%);
-  pointer-events: none;
-}
-.capital-hero::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-image: radial-gradient(rgba(231, 242, 223, 0.13) 1px, transparent 1.3px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(60% 70% at 40% 45%, #000 10%, transparent 72%);
-  mask-image: radial-gradient(60% 70% at 40% 45%, #000 10%, transparent 72%);
-  opacity: 0.55;
-  pointer-events: none;
-}
 .sovereign-home h1 { font-size: clamp(3.4rem, 6.4vw, 6.8rem); font-weight: 600; letter-spacing: -0.052em; line-height: 0.98; }
 .capital-intro { font-size: clamp(1.08rem, 1.45vw, 1.28rem); line-height: 1.55; }
 .capital-hero .hero-actions { margin-top: 2rem; }
@@ -2055,20 +1579,6 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
 .capital-map h2 { font-weight: 600; }
 .home-entries { padding-block: 1.5rem 3rem; }
 .entry-strip strong { font-weight: 620; }
-
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes rise {
-    /* Keep primary content visible before and during the entrance motion. */
-    from { opacity: 1; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
-  }
-  .capital-hero-copy > * { animation: rise 680ms var(--ease-out) both; }
-  .capital-hero-copy > :nth-child(2) { animation-delay: 60ms; }
-  .capital-hero-copy > :nth-child(3) { animation-delay: 120ms; }
-  .capital-hero-copy > :nth-child(4) { animation-delay: 180ms; }
-  .capital-hero-copy > :nth-child(5) { animation-delay: 240ms; }
-  .capital-map { animation: rise 760ms var(--ease-out) 220ms both; }
-}
 
 /* Research and thesis pages: calmer titles, numerals as typography. */
 .page-title h1 { font-weight: 600; }
@@ -2231,7 +1741,6 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
   }
   .nav a, .nav-more summary { padding-inline: 0.7rem; }
   .capital-hero { padding-block: 3.5rem 2.5rem; }
-  .capital-hero::before { inset: -6rem 0 auto; height: 26rem; background: radial-gradient(70% 55% at 30% 40%, rgba(168, 230, 107, 0.16), transparent 72%); }
   .site-footer { grid-template-columns: 1fr; gap: 2rem; }
   .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-note { flex-direction: column; }
@@ -2241,61 +1750,15 @@ h3 { font-weight: 620; letter-spacing: -0.02em; }
   .nav a.nav-recommendations { margin-right: 0.2rem; }
 }
 
-/* v3 polish: footer brand lockup, physical press feedback, engraved display type. */
+/* Small interaction details that remain useful after visual reduction. */
 .footer-brand .brand { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0; }
 .button:active { transform: scale(0.97); transition-duration: 80ms; }
 .entry-strip > a:active, .path-card:active, .map-row:active { transform: scale(0.99); }
-.sovereign-home h1,
-.thesis-title h1,
-.page-title h1 {
-  background: linear-gradient(180deg, #ffffff 0%, #d5ddcd 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-.capital-hero h1 span {
-  background: linear-gradient(180deg, var(--green-strong) 0%, var(--green) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
 @media (prefers-reduced-motion: no-preference) {
   .button, .entry-strip > a, .path-card, .tile { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
 }
 
-/* Visual v4 — reduction first: one frame, one accent, no ornamental depth. */
-:root {
-  --frame: min(1280px, 90vw);
-  --bg: #0b100d;
-  --surface: #111711;
-  --surface-2: #151d16;
-  --surface-focus: #1a261b;
-  --panel: #111711;
-  --panel-strong: #151d16;
-  --panel-focus: #1a261b;
-  --line: rgba(220, 232, 215, 0.14);
-  --line-strong: rgba(220, 232, 215, 0.24);
-  --text: #f2f5ef;
-  --muted: #a5aea2;
-  --soft: #d9e0d5;
-  --green: #b9f477;
-  --green-strong: #d9f7aa;
-  --green-ink: #09100a;
-  --amber: #d9ac71;
-  --shadow: transparent;
-}
-
-html,
-body {
-  background: var(--bg);
-}
-
-body {
-  color: var(--text);
-  background: var(--bg);
-}
+/* Minimal interface v1 — one frame, one accent, no ornamental depth. */
 
 .site-header,
 .sovereign-home .site-header,
@@ -2546,11 +2009,6 @@ body {
   padding-block: clamp(4.5rem, 8vw, 7rem) clamp(3rem, 5vw, 4.5rem);
 }
 
-.capital-hero::before,
-.capital-hero::after {
-  display: none;
-}
-
 .sovereign-home h1 {
   font-size: clamp(3.25rem, 6vw, 6.2rem);
   line-height: 1;
@@ -2617,7 +2075,6 @@ body {
   color: var(--green-strong);
 }
 
-.recommendation-highlight,
 .recommendation-jump {
   padding: 2rem 1.5rem;
   border: 1px solid var(--line-strong);
@@ -2627,8 +2084,7 @@ body {
   box-shadow: none;
 }
 
-.recommendation-jump h2,
-.recommendation-highlight h2 {
+.recommendation-jump h2 {
   max-width: 22ch;
 }
 

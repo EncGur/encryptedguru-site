@@ -9,8 +9,10 @@ personal referral links and protocol claims.
 
 The interface follows a reduction-first visual system: one dark field, one
 green action accent, a single editorial content frame, hairline boundaries,
-and flat surfaces. Images are reserved for the supplied brand and research
-subject visuals; decoration does not compete with the decision path.
+and flat surfaces. These values are declared once in `styles.css`; topic
+images retain only the overlays needed for legibility and theme distinction.
+Images are reserved for the supplied brand and research subject visuals;
+decoration does not compete with the decision path.
 
 The shared social image is rendered from `scripts/social-preview.svg` as
 `og-home.png` (1200 × 630). After editing the SVG, rasterize it with

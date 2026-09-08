@@ -22,13 +22,20 @@ clear separation from private operational control.
   capital map, recommendation entries, research frames, public-boundary blocks,
   and footer. Raised ordinary tile and research-frame copy to a readable 1rem
   while keeping only secondary metadata compact.
+- Removed unreferenced legacy hero, signal, status-panel, and recommendation-
+  highlight rule trees from the stylesheet so the reduction is a durable
+  component constraint rather than a visual override over dormant layouts.
 - Fixed a page-title cascade issue where the final editorial review note could
   inherit the large hero-deck size. Review notes now stay explicitly scoped as
   metadata on Recommendations and the Playbook.
-- Bumped every public HTML page to the new `20260908-minimal-v1` CSS asset so
+- Bumped every public HTML page to the new `20260908-minimal-v2` CSS asset so
   the visual system is consistent and edge caches cannot mix old and new
   layout rules. No content claims, referral URLs, analytics, forms, or external
   provider settings were changed.
+- Consolidated the final palette and canvas background into the root token
+  source, removing duplicate late-stage token/body definitions. The stylesheet
+  now has one background field and one shared frame contract rather than a
+  historical cascade that only happened to resolve correctly.
 - Local source, build, structure, public-boundary, reproducible-package, and
   syntax gates pass. The site-content release is committed as `54f75ec` and
   pushed to `main`; strict production verification passed after propagation on
