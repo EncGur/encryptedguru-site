@@ -63,6 +63,19 @@ clear separation from private operational control.
 - This is a structural reduction only. No content, route, referral URL,
   provider term, or external setting changed.
 
+## 2026-09-08 cascade consolidation
+
+- Removed visual declarations that were already overridden by the final flat
+  interface layer: legacy panel/shadow tokens, surface gradients, and hidden
+  lift effects on tiles, path cards, referral surfaces, the capital map, and
+  the homepage entry feature.
+- Kept only gradients that serve a real reading function over research images;
+  the current source now expresses the same flat-surface rule directly rather
+  than relying on a late override to cancel ornamental depth.
+- Added a regression assertion for the retired panel/shadow token family and
+  bumped all public pages to the `20260908-minimal-v4` asset. No content,
+  route, referral URL, provider term, or external setting changed.
+
 ## 2026-09-08 research-frame expansion
 
 - Applied one shared six-question decision frame to the Monero, Plasma, and
