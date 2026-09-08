@@ -125,7 +125,7 @@ ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
 minimal_css_pages=0
 for page in $pages; do
-  if grep -q 'styles.css?v=20260908-minimal-v8' "$page"; then
+  if grep -q 'styles.css?v=20260908-minimal-v9' "$page"; then
     minimal_css_pages=$((minimal_css_pages + 1))
   fi
 done

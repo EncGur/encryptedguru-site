@@ -72,26 +72,15 @@ a {
 
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  min-height: 78px;
-  padding: 0 5vw;
-  border-bottom: 1px solid var(--line);
-  background: rgba(8, 14, 9, 0.82);
-  backdrop-filter: blur(22px) saturate(115%);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  font-weight: 760;
-  letter-spacing: -0.02em;
 }
 
 .brand-mark {
@@ -109,17 +98,12 @@ a {
 .nav {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
   color: var(--muted);
-  font-size: 0.9rem;
 }
 
 .nav a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0.55rem 0.72rem;
-  border-radius: 999px;
   border-bottom: 1px solid transparent;
   white-space: nowrap;
   transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -154,9 +138,6 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 44px;
-  padding: 0.55rem 0.72rem;
-  border-radius: 999px;
   color: var(--muted);
   cursor: pointer;
   list-style: none;
@@ -185,13 +166,8 @@ a {
   right: 0;
   z-index: 20;
   display: grid;
-  min-width: 12rem;
   padding: 0.4rem;
   border: 1px solid var(--line);
-  border-radius: 0.9rem;
-  background: rgba(18, 23, 17, 0.96);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
-  backdrop-filter: blur(18px);
 }
 
 .nav-more-menu a {
@@ -201,9 +177,6 @@ a {
 .eyebrow {
   margin: 0 0 1rem;
   color: var(--green-strong);
-  font-size: var(--meta-size);
-  font-weight: 700;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -217,10 +190,6 @@ p {
 h1 {
   max-width: 11ch;
   margin: 0;
-  font-size: clamp(4rem, 10vw, 9.5rem);
-  line-height: 0.86;
-  font-weight: 730;
-  letter-spacing: -0.075em;
   overflow-wrap: normal;
   text-wrap: balance;
 }
@@ -228,17 +197,12 @@ h1 {
 h2 {
   max-width: 920px;
   margin: 0;
-  font-size: clamp(1.95rem, 3.35vw, 3.6rem);
-  line-height: 1;
-  font-weight: 720;
-  letter-spacing: -0.055em;
   text-wrap: balance;
 }
 
 h3 {
   margin: 0 0 0.75rem;
   font-size: 1.08rem;
-  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -253,43 +217,12 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 1.35rem;
   gap: 0.6rem;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  font-weight: 700;
-  transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-}
-
-.button:active {
-  transform: translateY(0);
-}
-
-.button.primary {
-  color: #10120e;
-  background: var(--text);
-  border-color: var(--text);
-}
-
-.button.secondary {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.button.secondary:hover {
-  color: #10120e;
-  background: var(--green-strong);
-  border-color: var(--green-strong);
 }
 
 .section {
-  width: min(1180px, 90vw);
   margin: 0 auto;
-  padding: clamp(5rem, 7vw, 7rem) 0;
   border-top: 1px solid var(--line);
   scroll-margin-top: 6rem;
 }
@@ -299,10 +232,8 @@ h3 {
 }
 
 .page-title {
-  width: min(1180px, 90vw);
   margin: 0 auto;
   position: relative;
-  padding: 9rem 0 5rem;
 }
 
 .page-title-meta {
@@ -310,13 +241,8 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
-  font-size: var(--meta-size);
-  font-weight: 800;
-  letter-spacing: 0.14em;
   line-height: 1.3;
   text-transform: uppercase;
 }
@@ -344,7 +270,6 @@ h3 {
   grid-template-columns: minmax(0, 0.94fr) minmax(300px, 0.66fr);
   gap: clamp(2rem, 6vw, 6rem);
   align-items: end;
-  min-height: clamp(560px, 70vh, 760px);
 }
 
 .plasma-title .page-title-content,
@@ -358,19 +283,11 @@ h3 {
 .aave-title .page-title-visual {
   border-color: rgba(198, 169, 255, 0.34);
   background: #171128;
-  box-shadow: 0 28px 100px rgba(35, 15, 70, 0.34);
 }
 
 .aave-title .page-title-visual img {
   object-position: center 28%;
   filter: saturate(0.98) contrast(1.08);
-}
-
-.aave-title .page-title-visual-overlay {
-  background:
-    linear-gradient(180deg, rgba(14, 8, 28, 0.04), rgba(14, 8, 28, 0.62)),
-    linear-gradient(135deg, rgba(169, 124, 255, 0.14), transparent 48%);
-  mix-blend-mode: normal;
 }
 
 .aave-title .page-title-visual-caption {
@@ -397,7 +314,6 @@ h3 {
   border: 1px solid rgba(246, 244, 235, 0.2);
   border-radius: 1.5rem;
   background: #1b201a;
-  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.42);
 }
 
 .page-title-visual picture {
@@ -415,17 +331,12 @@ h3 {
   object-fit: cover;
   object-position: center 24%;
   filter: saturate(0.72) contrast(1.05);
-  transform: scale(1.03);
 }
 
 .page-title-visual-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(12, 14, 12, 0.03), rgba(12, 14, 12, 0.58)),
-    linear-gradient(135deg, rgba(155, 214, 107, 0.16), transparent 44%);
-  mix-blend-mode: screen;
 }
 
 .page-title-visual-caption {
@@ -493,15 +404,8 @@ h3 {
 }
 
 .tile {
-  min-height: 220px;
-  padding: 1.4rem;
   border: 1px solid var(--line);
-  border-radius: 0.95rem;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-
-.tile:hover {
-  border-color: var(--line-strong);
 }
 
 .tile.compact {
@@ -512,20 +416,10 @@ h3 {
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 0.9rem;
-}
-
-.recommendation-card .tile-kicker {
-  margin-bottom: 2.2rem;
 }
 
 .recommendation-card p {
   margin: 0;
-}
-
-.recommendation-card .button {
-  width: fit-content;
-  margin-top: auto;
 }
 
 .recommendation-card small {
@@ -537,13 +431,10 @@ h3 {
 
 .tile p {
   margin: 0;
-  color: var(--muted);
-  line-height: 1.55;
 }
 
 .tile-kicker {
   display: block;
-  margin-bottom: 2.4rem;
   color: var(--amber);
   font-size: var(--meta-size);
   font-weight: 800;
@@ -790,16 +681,12 @@ h3 {
 
 @media (max-width: 860px) {
   .site-header {
-    position: relative;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
   }
 
   .nav {
     flex-wrap: wrap;
-    gap: 0.9rem;
   }
 
   .plasma-title,
@@ -807,7 +694,6 @@ h3 {
   .aave-title {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    min-height: auto;
     padding-top: 8rem;
   }
 
@@ -817,11 +703,6 @@ h3 {
     width: min(100%, 620px);
     min-height: 420px;
     margin-left: auto;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 11vw, 4rem);
-    line-height: 0.95;
   }
 
   .grid.four,
@@ -841,36 +722,6 @@ h3 {
     gap: 0.35rem;
   }
 
-  .tile {
-    min-height: 180px;
-  }
-
-  .section {
-    padding: 4rem 0;
-  }
-
-  .site-footer {
-    flex-direction: column;
-  }
-}
-
-@media (min-width: 861px) and (max-width: 1120px) {
-  .site-header {
-    gap: 1rem;
-    padding-inline: 3vw;
-  }
-
-  .nav {
-    gap: 0;
-    font-size: 0.875rem;
-  }
-
-  .nav a,
-  .nav-more summary {
-    min-height: 42px;
-    padding-inline: 0.4rem;
-  }
-
 }
 
 @media (min-width: 861px) {
@@ -878,24 +729,6 @@ h3 {
     position: sticky;
     top: 6.8rem;
   }
-}
-
-/* Large-screen and action-first refinement. Keep text measures disciplined
-   while giving the page frame enough width to avoid a floating center island. */
-@media (min-width: 1440px) {
-  .section,
-  .page-title {
-    width: min(1440px, 90vw);
-  }
-}
-
-.recommendations-page .page-title {
-  padding-top: clamp(4rem, 5vw, 5rem);
-  padding-bottom: clamp(2rem, 3vw, 3rem);
-}
-
-.recommendations-page .page-title + .section {
-  padding-top: clamp(3rem, 4vw, 4rem);
 }
 
 .recommendations-page .page-title + .section .section-header {

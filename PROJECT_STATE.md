@@ -23,8 +23,24 @@ clear separation from private operational control.
   removing the supplied topic imagery.
 - Added source regressions for the type floor, responsive navigation contract,
   and shorter research title measure. Bumped every public HTML page to the
-  `20260908-minimal-v8` CSS asset. No content claims, referral URLs, provider
+  `20260908-minimal-v9` CSS asset. No content claims, referral URLs, provider
   terms, analytics, DNS, or external settings changed.
+
+## 2026-09-08 cascade debt reduction
+
+- Removed pre-minimal declarations that were unconditionally superseded by the
+  final flat interface contract: obsolete header and control sizing, duplicate
+  page-title spacing, image compositing, visual shadows, tile hover lifts, and
+  retired desktop/mobile breakpoint overrides.
+- Retained the rules that still carry structure or meaning, including the
+  responsive research-image stack, compact tile minimum, content measures,
+  focus behavior, and topic-specific Aave treatment. This is a stylesheet
+  simplification, not a visual-content rewrite.
+- Added no new public claims or external actions. Referral URLs, provider
+  disclosures, research copy, brand assets, routes, and external settings are
+  unchanged. Bumped every public HTML page to the
+  `20260908-minimal-v9` CSS asset so edge caches cannot mix the cascade before
+  and after cleanup.
 
 ## 2026-09-08 responsive control sizing
 
