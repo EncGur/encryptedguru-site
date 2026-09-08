@@ -9,6 +9,30 @@ identity, control, liquidity, settlement rails, allocation, and lifelong learnin
 Maintain a small, inspectable public boundary with source-linked claims and
 clear separation from private operational control.
 
+## 2026-09-08 minimalist interface pass
+
+- Applied a reduction-first visual system across all public pages: one deep
+  background, one green action accent, a shared 1280px editorial frame,
+  hairline boundaries, restrained corner radii, flat surfaces, and no
+  decorative shadows or hero dot fields.
+- Preserved the deliberate exceptions that carry meaning: the red portrait
+  brand mark, the supplied research-page imagery, the purple Aave accent, and
+  the filled Recommendations action when it is the current route.
+- Reduced competing visual hierarchy in the header, buttons, cards, home
+  capital map, recommendation entries, research frames, public-boundary blocks,
+  and footer. Raised ordinary tile and research-frame copy to a readable 1rem
+  while keeping only secondary metadata compact.
+- Fixed a page-title cascade issue where the final editorial review note could
+  inherit the large hero-deck size. Review notes now stay explicitly scoped as
+  metadata on Recommendations and the Playbook.
+- Bumped every public HTML page to the new `20260908-minimal-v1` CSS asset so
+  the visual system is consistent and edge caches cannot mix old and new
+  layout rules. No content claims, referral URLs, analytics, forms, or external
+  provider settings were changed.
+- Local source, build, structure, public-boundary, reproducible-package, and
+  syntax gates pass. GitHub sync and strict production verification remain the
+  release gates for this interface pass.
+
 ## 2026-09-08 research-frame expansion
 
 - Applied one shared six-question decision frame to the Monero, Plasma, and

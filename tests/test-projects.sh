@@ -117,7 +117,11 @@ ok "Monero links the decision frame to the Playbook" grep -q 'href="/playbook/#r
 ok "Plasma links the decision frame to the Playbook" grep -q 'href="/playbook/#record"' plasma/index.html
 ok "Aave links the decision frame to the Playbook" grep -q 'href="/playbook/#record"' aave/index.html
 ok "Decision frame CSS is present" grep -q '^\.decision-frame {' styles.css
-ok "Research pages use the decision CSS cache version" sh -c 'grep -q "styles.css?v=20260908-decision-v1" monero/index.html && grep -q "styles.css?v=20260908-decision-v1" plasma/index.html && grep -q "styles.css?v=20260908-decision-v1" aave/index.html'
+ok "Page-title review notes keep metadata sizing" grep -q '^\.page-title p\.review-note {' styles.css
+ok "Minimal CSS defines the shared editorial frame" grep -q -- '--frame: min(1280px, 90vw);' styles.css
+ok "Minimal CSS defines the single background field" grep -q 'background: var(--bg);' styles.css
+ok "Minimal CSS removes homepage dot-field decoration" grep -q '^\.capital-hero::before,' styles.css
+ok "All pages use the minimalist CSS cache version" test "$(rg -l 'styles.css\?v=20260908-minimal-v1' --glob '*.html' --glob '!dist/**' | wc -l | tr -d ' ')" -eq 16
 ok "Plasma invite explains the app-store fallback" grep -q 'App-store fallback' go/plasma-one/index.html
 ok "Contact has a no-JavaScript email fallback" grep -Fq 'contact [at] encryptedguru [dot] com' contact/index.html
 ok "Projects page scopes the public source claim" grep -q 'public entry has a corresponding page or source record' projects/index.html

@@ -7,6 +7,11 @@ Recommendations remains the first navigation entry. The capital framework
 also treats Rabby as an EVM control surface around the stack, separate from
 personal referral links and protocol claims.
 
+The interface follows a reduction-first visual system: one dark field, one
+green action accent, a single editorial content frame, hairline boundaries,
+and flat surfaces. Images are reserved for the supplied brand and research
+subject visuals; decoration does not compete with the decision path.
+
 The shared social image is rendered from `scripts/social-preview.svg` as
 `og-home.png` (1200 × 630). After editing the SVG, rasterize it with
 `sips -s format png scripts/social-preview.svg --out og-home.png` on macOS
