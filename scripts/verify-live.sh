@@ -131,7 +131,7 @@ if [ "$strict" -eq 1 ]; then
     echo "live Capital Operating System page is not returning 200" >&2
     exit 1
   }
-  visual_css_status="$(curl -sS -o "$tmp_visual_css" -w '%{http_code}' --max-time 20 "https://$www/styles.css?v=20260908-plasma-v12")"
+  visual_css_status="$(curl -sS -o "$tmp_visual_css" -w '%{http_code}' --max-time 20 "https://$www/styles.css?v=20260930-monthly-v13")"
   test "$visual_css_status" = "200" || {
     echo "live minimalist CSS asset is not returning 200" >&2
     exit 1
@@ -160,7 +160,7 @@ if [ "$strict" -eq 1 ]; then
   assert_visual_css_version() {
     page_label="$1"
     page_file="$2"
-    grep -q 'styles.css?v=20260908-plasma-v12' "$page_file" || {
+    grep -q 'styles.css?v=20260930-monthly-v13' "$page_file" || {
       echo "live $page_label is not loading the minimalist CSS version" >&2
       exit 1
     }
@@ -294,8 +294,72 @@ if [ "$strict" -eq 1 ]; then
     echo "live Contact page is missing its current More-navigation state" >&2
     exit 1
   }
-  grep -q 'datetime="2026-09-06"' "$tmp_recommendations" || {
+  grep -q 'datetime="2026-09-30"' "$tmp_recommendations" || {
     echo "live Recommendations page is missing its scoped review date" >&2
+    exit 1
+  }
+  test "$(grep -o '<article class="tile recommendation-card' "$tmp_recommendations" | wc -l | tr -d ' ')" = "4" || {
+    echo "live Recommendations page does not have four account referral cards" >&2
+    exit 1
+  }
+  grep -q '<section class="section recommendation-jump" id="fluid"' "$tmp_recommendations" || {
+    echo "live Recommendations page does not separate Fluid from account referrals" >&2
+    exit 1
+  }
+  grep -q 'datetime="2026-09-30"' "$tmp_aave" || {
+    echo "live Aave page is missing its scoped review date" >&2
+    exit 1
+  }
+  grep -q 'datetime="2026-09-30"' "$tmp_monero" || {
+    echo "live Monero page is missing its scoped review date" >&2
+    exit 1
+  }
+  grep -q 'datetime="2026-09-30"' "$tmp_plasma_page" || {
+    echo "live Plasma page is missing its scoped review date" >&2
+    exit 1
+  }
+  grep -q 'id="account-architecture"' "$tmp_aave" || {
+    echo "live Aave page is missing its account-architecture section" >&2
+    exit 1
+  }
+  grep -q 'id="assistant-authorization"' "$tmp_aave" || {
+    echo "live Aave page is missing its assistant authorization boundary" >&2
+    exit 1
+  }
+  grep -q 'id="market-expansion"' "$tmp_aave" || {
+    echo "live Aave page is missing its market-expansion boundary" >&2
+    exit 1
+  }
+  grep -q 'Coinbase tokenized equities on Aave V4' "$tmp_aave" || {
+    echo "live Aave page is missing the new tokenized-equity evidence link" >&2
+    exit 1
+  }
+  grep -q 'segregated accounts in the issuer' "$tmp_aave" || {
+    echo "live Aave page is missing the underlying-share custody boundary" >&2
+    exit 1
+  }
+  grep -q '2026-09-30' "$tmp_thesis" || {
+    echo "live Thesis page is missing its current source-review date" >&2
+    exit 1
+  }
+  grep -q 'Tether International, S.A. de C.V.' "$tmp_thesis" || {
+    echo "live Thesis page is missing the named-entity scope of Tether's audit" >&2
+    exit 1
+  }
+  grep -q 'Stellar announcement' "$tmp_thesis" || {
+    echo "live Thesis page is missing the dated USDT0 integration signal" >&2
+    exit 1
+  }
+  grep -q 'Tether.s freeze announcement' "$tmp_thesis" || {
+    echo "live Thesis page is missing the issuer-control evidence" >&2
+    exit 1
+  }
+  grep -q 'Ethereum–TRON update' "$tmp_thesis" || {
+    echo "live Thesis page is missing the latest USDT0 route update" >&2
+    exit 1
+  }
+  grep -q 'Fluid Lite USD' "$tmp_thesis" || {
+    echo "live Thesis page is missing the distinct Fluid fixed-rate product boundary" >&2
     exit 1
   }
   grep -q 'STABLECOIN LENDING' "$tmp_recommendations" || {

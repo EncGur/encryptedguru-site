@@ -21,7 +21,7 @@
     <link rel="icon" href="/eg-mark.ico?v=3" sizes="any">
     <link rel="apple-touch-icon" href="/eg-mark-180.png?v=3">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/styles.css?v=20260908-plasma-v12">
+    <link rel="stylesheet" href="/styles.css?v=20260930-monthly-v13">
   </head>
   <body class="aave-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -68,12 +68,12 @@
         <div class="source-note">
           <dl>
             <div><dt>Protocol</dt><dd>Aave, a decentralized non-custodial liquidity protocol</dd></div>
-            <div><dt>Market</dt><dd>Network-specific pools with reserve and risk parameters</dd></div>
+            <div><dt>Market</dt><dd>V3 reserves or V4 Liquidity Hubs and Spokes; each deployment has its own parameters</dd></div>
             <div><dt>Position</dt><dd>Supplied collateral, debt, interest, and health factor</dd></div>
             <div><dt>Reading rule</dt><dd>Live parameters and exact contract addresses before action</dd></div>
           </dl>
           <p>This is research and systems documentation, not financial, lending, tax, or investment advice. Rates, assets, networks, parameters, interfaces, and third-party services can change.</p>
-          <p class="review-note"><strong>Documentation review:</strong> <time datetime="2026-09-06">06 Sep 2026</time>. The page boundary is current as of this review; live market parameters, rates, and app behavior must be rechecked at action time.</p>
+          <p class="review-note"><strong>Documentation review:</strong> <time datetime="2026-09-30">30 Sep 2026</time>. V3/V4 deployments, tokenized-equity collateral, and the newly documented Aave App account model were reviewed; live market parameters, rates, eligibility, and app behavior must be rechecked at action time.</p>
           <div class="hero-actions">
             <a class="button primary" href="https://aave.com/docs">Read official Aave docs <span aria-hidden="true">↗</span></a>
             <a class="button secondary" href="https://aave.com/docs/resources/parameters">Open live parameters <span aria-hidden="true">↗</span></a>
@@ -102,12 +102,12 @@
           <article class="decision-frame-item">
             <span class="decision-frame-kicker">03 / Verified</span>
             <h3>Mechanics, not live conditions</h3>
-            <p>Official docs describe supply, borrow, health factor, and risk modes. Rates, reserve parameters, addresses, liquidity, and app behavior still need current checks.</p>
+            <p>Official material now spans V3 reserves and V4 Hubs and Spokes. Rates, reserve or spoke parameters, addresses, liquidity, and app behavior still need current checks.</p>
           </article>
           <article class="decision-frame-item">
             <span class="decision-frame-kicker">04 / Dependencies</span>
             <h3>Contracts, oracle, market, network</h3>
-            <p>Smart contracts, price data, collateral liquidity, liquidation rules, chain deployments, bridges, RPCs, and wallet or frontend behavior shape the position.</p>
+            <p>Smart contracts, V3 reserves or V4 hubs and spokes, price data, collateral liquidity, liquidation rules, chain deployments, bridges, asset issuers, legal eligibility, RPCs, and wallet or frontend behavior shape the position.</p>
           </article>
           <article class="decision-frame-item">
             <span class="decision-frame-kicker">05 / Control</span>
@@ -169,7 +169,7 @@
           <div>
             <span>01</span>
             <strong>Contracts and reserves</strong>
-            <p>Each market is a set of smart contracts with governance-approved reserve configuration. The exact deployment, asset, network, and current parameter matter more than a familiar interface.</p>
+            <p>V3 markets expose reserve-level configuration; V4 organizes shared liquidity in Hubs connected to Spokes with their own assets and risk parameters. The exact version, deployment, asset, network, and current parameter matter more than a familiar interface.</p>
           </div>
           <div>
             <span>02</span>
@@ -186,6 +186,63 @@
             <strong>Network and interface</strong>
             <p>Chain deployments, bridges, wallets, RPC providers, frontends, and account abstractions add separate failure and custody boundaries. “Aave” does not erase the risk of the route used to reach it.</p>
           </div>
+        </div>
+      </section>
+
+      <section class="section article" id="market-expansion">
+        <p class="eyebrow">Market expansion / asset boundaries</p>
+        <h2>One protocol name now spans very different collateral and chain risks.</h2>
+        <p>Aave's official documentation lists a live V4 instance on Arc, while Aave Labs has separately announced tokenized-equity collateral on V4 Base. These are distinct deployments and asset models, not a single interchangeable market.</p>
+        <div class="grid two">
+          <article class="tile compact">
+            <h3>Arc / V4 market</h3>
+            <p>Aave's documentation changelog records the Arc instance as activated on 16 Sep 2026, with a Core Hub and Main and Forex Spokes listing USDC, EURC, cirBTC, and WETH. Verify current caps, parameters, governance controls, and network assumptions in the live market rather than carrying them across from Ethereum or Avalanche.</p>
+            <a class="text-link" href="https://aave.com/docs/resources/changelog" target="_blank" rel="noopener noreferrer">Check Aave's deployment changelog <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="tile compact">
+            <h3>Base / tokenized equity collateral</h3>
+            <p>Aave Labs says seven Coinbase tokenized U.S. technology stocks can be posted as collateral to borrow USDC in a dedicated V4 Equities Hub. The announcement describes certificates issued by Coinbase Onchain SPV, with underlying shares held by Alpaca Securities in segregated accounts in the issuer's name; availability is limited to eligible non-U.S. persons and jurisdictions. This is not the same as a wallet holding unrestricted, directly transferable shares.</p>
+            <p>The announcement also describes Chainlink 24/5 equity feeds that retain the last published price while U.S. markets are closed, and reserve pauses for corporate actions. Continuous onchain access therefore does not mean continuously refreshed equity pricing or uninterrupted position changes.</p>
+            <a class="text-link" href="https://aave.com/blog/coinbase-tokenized-stocks" target="_blank" rel="noopener noreferrer">Read Aave Labs' market description and disclosures <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="source-note"><strong>Evidence boundary:</strong> these are deployment and product descriptions published by Aave Labs/Aave documentation, not independent legal, issuer, custodian, oracle, or market-depth audits. Check the exact asset, jurisdiction, live oracle state, collateral factor, supply/borrow caps, and exit path before acting.</p>
+      </section>
+
+      <section class="section article" id="account-architecture">
+        <p class="eyebrow">Aave App / account architecture</p>
+        <h2>Recovery improves access and adds dependencies to the control path.</h2>
+        <p>Aave Labs describes the App as self-custodial. Its published design combines a device-created signer key, encrypted backup, and a smart contract account. That is a different trust path from connecting a wallet directly to the Aave protocol.</p>
+        <div class="grid three">
+          <article class="tile compact">
+            <h3>Signer and backup</h3>
+            <p>Aave says the EOA key is created on the user's device, encrypted with the user's password and email or phone credential, then stored in encrypted form by Aave's backend. Signing authority still depends on the key, while recovery and access also depend on authentication and backend availability.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Two recovery paths</h3>
+            <p>Device recovery requires a previously signed-in device. The optional biometric path uses CoinCover: Aave describes a face scan and encrypted key shares split between CoinCover and Aave, with an OTP step. Convenience therefore introduces identity, provider, and recovery-process dependencies.</p>
+          </article>
+          <article class="tile compact">
+            <h3>Smart account permissions</h3>
+            <p>The App uses Alchemy's Modular Account v2. Aave says the smart account can grant scoped permissions, including moving stablecoins into a vault after arrival; withdrawal destinations are pre-authorized. Check each permission and destination rather than treating “self-custody” as “no delegated action.”</p>
+          </article>
+        </div>
+        <p class="source-note"><strong>Evidence boundary:</strong> this summarizes Aave Labs' account-design article published 15 Sep 2026. It is not an independent cryptographic, privacy, or recovery audit; confirm the current flow and permissions in the App before use.</p>
+        <a class="text-link" href="https://aave.com/blog/how-aave-accounts-work" target="_blank" rel="noopener noreferrer">Read Aave Labs' account architecture explanation <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="section split" id="assistant-authorization" aria-labelledby="aave-assistant-title">
+        <div>
+          <p class="eyebrow">Assistant tooling / authorization</p>
+          <h2 id="aave-assistant-title">An assistant can prepare a transaction; your wallet still needs to authorize it.</h2>
+          <p>Aave Labs' official MCP server reads V3 and V4 data and prepares unsigned transactions. Its article says the user's wallet signs. That keeps signing with the user, but does not certify the assistant's interpretation, the transaction inputs, or the endpoint.</p>
+          <p>Review the exact network, account, contract, asset, amount, recipient, permissions, and expected position change in the wallet. A simulation is a useful preview, not a guarantee of execution or safety.</p>
+          <a class="text-link" href="https://aave.com/docs/mcp" target="_blank" rel="noopener noreferrer">Read the official MCP documentation <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="verification-list">
+          <div><span>01</span><strong>Read</strong><p>Confirm the live market, reserve or spoke, rates, caps, and position data.</p></div>
+          <div><span>02</span><strong>Prepare</strong><p>Inspect the unsigned transaction and simulate the expected effect where supported.</p></div>
+          <div><span>03</span><strong>Authorize</strong><p>Use the wallet as the final control surface; never sign from an unreviewed prompt alone.</p></div>
         </div>
       </section>
 
@@ -303,6 +360,34 @@
           <a href="https://aave.com/docs/aave-v3/overview">
             <span>Aave V3 overview</span>
             <small>Supply, borrowing, collateral, health factor, liquidation, and risk modes</small>
+          </a>
+          <a href="https://aave.com/blog/aave-v4-live-ethereum" target="_blank" rel="noopener noreferrer">
+            <span>Aave V4 on Ethereum</span>
+            <small>Official overview of Liquidity Hubs, Spokes, and the Aave Pro interface</small>
+          </a>
+          <a href="https://aave.com/blog/aave-v4-live-avalanche" target="_blank" rel="noopener noreferrer">
+            <span>Aave V4 on Avalanche</span>
+            <small>Official deployment update; network and market availability remain version-specific</small>
+          </a>
+          <a href="https://aave.com/docs/resources/changelog" target="_blank" rel="noopener noreferrer">
+            <span>Aave V4 deployment changelog</span>
+            <small>Official record of V4 Arc activation and other version-specific deployments</small>
+          </a>
+          <a href="https://aave.com/blog/coinbase-tokenized-stocks" target="_blank" rel="noopener noreferrer">
+            <span>Coinbase tokenized equities on Aave V4</span>
+            <small>Base Equities Hub collateral, oracle cadence, corporate actions, and eligibility limits</small>
+          </a>
+          <a href="https://aave.com/blog/how-aave-accounts-work" target="_blank" rel="noopener noreferrer">
+            <span>Aave App account architecture</span>
+            <small>Signer, encrypted backup, recovery options, and smart account permissions</small>
+          </a>
+          <a href="https://aave.com/blog/introducing-aave-mcp-server" target="_blank" rel="noopener noreferrer">
+            <span>Aave MCP server</span>
+            <small>Read data and prepare unsigned V3/V4 transactions for wallet review</small>
+          </a>
+          <a href="https://aave.com/docs/mcp" target="_blank" rel="noopener noreferrer">
+            <span>Aave MCP documentation</span>
+            <small>Current tool surface for live reads, previews, and transaction preparation</small>
           </a>
           <a href="https://aave.com/docs/aave-v3/concepts/liquidity-pool">
             <span>Liquidity pool mechanics</span>

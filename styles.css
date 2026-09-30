@@ -395,6 +395,10 @@ h3 {
   gap: clamp(0.85rem, 1.5vw, 1.25rem);
 }
 
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grid.four {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -706,6 +710,7 @@ h3 {
   }
 
   .grid.four,
+  .grid.two,
   .grid.three,
   .split,
   .referral-card {

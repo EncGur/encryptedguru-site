@@ -76,6 +76,7 @@ ok "sitemap.xml has Plasma URL" grep -q 'https://www.encryptedguru.com/plasma/</
 ok "sitemap.xml has Aave URL" grep -q 'https://www.encryptedguru.com/aave/</loc>' sitemap.xml
 ok "sitemap.xml has Recommendations URL" grep -q 'https://www.encryptedguru.com/recommendations/</loc>' sitemap.xml
 ok "sitemap.xml has Capital Operating System URL" grep -q 'https://www.encryptedguru.com/playbook/</loc>' sitemap.xml
+ok "sitemap dates all five updated public pages" sh -c 'for page in thesis monero plasma aave recommendations; do grep -F -A1 "https://www.encryptedguru.com/$page/</loc>" sitemap.xml | grep -q "<lastmod>2026-09-30</lastmod>" || exit 1; done'
 
 # The new pages must carry the canonical tags matching the sitemap.
 ok "projects/index.html canonical tag" grep -q 'https://www.encryptedguru.com/projects/' projects/index.html
@@ -94,21 +95,41 @@ ok "Plasma page links official developer docs" grep -q 'https://docs.plasma.org/
 ok "Plasma page links the observed X post" grep -q 'https://x.com/e4symp/status/2091829636108026276' plasma/index.html
 ok "Plasma page separates community signal" grep -q 'community distribution signal' plasma/index.html
 ok "Plasma page uses explicit invitation route" grep -q 'href="/go/plasma-one/"' plasma/index.html
-ok "Recommendations page has five referral entries" test "$(grep -c '<article class="tile recommendation-card' recommendations/index.html)" -eq 5
+ok "Recommendations page has four account referral entries" test "$(grep -c '<article class="tile recommendation-card' recommendations/index.html)" -eq 4
+ok "Recommendations lists account referrals in the intended first-row order" sh -c 'test "$(grep -nE "id=\"(plasma-one|bitfinex|binance|aave)\"" recommendations/index.html | sed -E "s/^[0-9]+:.*id=\"([^\"]+)\".*/\1/" | tr "\\n" " ")" = "plasma-one bitfinex binance aave "'
+ok "Fluid is separated from the four account referral cards" grep -q '<section class="section recommendation-jump" id="fluid"' recommendations/index.html
 ok "Recommendations page keeps the exact Fluid referral URL" grep -q 'href="https://fluid.io/9745/lending"' recommendations/index.html
 ok "Recommendations page keeps the exact Aave referral URL" grep -q 'href="https://aave.com/app/r/999F66"' recommendations/index.html
+ok "Recommendations page labels Fluid as a stablecoin lending route" grep -q 'Capital productivity / stablecoin lending' recommendations/index.html
+ok "Recommendations keeps variable-yield and exit-path boundaries" sh -c 'grep -q "variable rate model" recommendations/index.html && grep -q "withdrawal route" recommendations/index.html'
+ok "Recommendations distinguishes Fluid Lend from Fluid Lite" grep -q 'Fluid Lite is a separate vault product' recommendations/index.html
 ok "Recommendations page links the official Rabby control entry" grep -q 'href="https://rabby.io/"' recommendations/index.html
 ok "Homepage features the Fluid stablecoin-lending entry" grep -q 'href="/recommendations/#fluid"' index.html
 ok "Homepage labels Fluid as stablecoin lending" grep -q '01 / STABLECOIN LENDING' index.html
 ok "Homepage exposes the compact operating-principles rail" grep -q 'class="hero-signal-row"' index.html
 ok "Homepage keeps the source-first principle visible" grep -q 'Source first' index.html
-ok "Recommendations labels Fluid as stablecoin lending" grep -q '02 / STABLECOIN LENDING' recommendations/index.html
+ok "Recommendations desktop entry grid has four columns" grep -q 'grid-template-columns: repeat(4, minmax(0, 1fr));' styles.css
+ok "Recommendations tablet entry grid has two columns" grep -q 'grid-template-columns: repeat(2, minmax(0, 1fr));' styles.css
+ok "Recommendations mobile entry grid returns to one column" sh -c 'sed -n "/@media (max-width: 520px)/,/^}/p" styles.css | grep -q "grid-template-columns: 1fr;"'
 ok "Homepage labels the capital map as a research framework" grep -q 'not a prescribed stack' index.html
 ok "Homepage scopes its first-party tracking claim" grep -q 'No first-party tracking' index.html
-ok "Recommendations records an editorial review date" grep -q 'datetime="2026-09-06"' recommendations/index.html
-ok "Aave records a documentation review date" grep -q 'datetime="2026-09-06"' aave/index.html
-ok "Plasma records a documentation review date" grep -q 'datetime="2026-09-06"' plasma/index.html
-ok "Monero records a documentation review date" grep -q 'datetime="2026-09-06"' monero/index.html
+ok "Recommendations records the current editorial review date" grep -q 'datetime="2026-09-30"' recommendations/index.html
+ok "Aave records the current documentation review date" grep -q 'datetime="2026-09-30"' aave/index.html
+ok "Plasma records the current documentation review date" grep -q 'datetime="2026-09-30"' plasma/index.html
+ok "Monero records the current documentation review date" grep -q 'datetime="2026-09-30"' monero/index.html
+ok "Aave page distinguishes V3 reserves from V4 Hubs and Spokes" sh -c 'grep -q "V3 reserves" aave/index.html && grep -q "V4 Hubs" aave/index.html && grep -q "Spokes" aave/index.html'
+ok "Aave page includes the attributed app account architecture" sh -c 'grep -q "id=\"account-architecture\"" aave/index.html && grep -q "not an independent cryptographic" aave/index.html'
+ok "Aave page includes unsigned assistant transaction boundaries" sh -c 'grep -q "id=\"assistant-authorization\"" aave/index.html && grep -q "wallet signs" aave/index.html'
+ok "Aave records Arc and tokenized-equity deployment changes" sh -c 'grep -q "id=\"market-expansion\"" aave/index.html && grep -q "Equities Hub" aave/index.html && grep -q "eligible non-U.S. persons" aave/index.html'
+ok "Aave explains equity oracle cadence and issuer/custody dependency" sh -c 'grep -q "24/5 equity feeds" aave/index.html && grep -q "Coinbase Onchain SPV" aave/index.html && grep -q "Alpaca Securities" aave/index.html && grep -q "segregated accounts in the issuer" aave/index.html'
+ok "Aave market cards use a real two-column grid" sh -c 'grep -q "class=\"grid two\"" aave/index.html && grep -q "^\.grid\.two {" styles.css && grep -q "grid-template-columns: repeat(2, minmax(0, 1fr));" styles.css'
+ok "Two-column grids collapse with the mobile card layouts" sh -c 'sed -n "/^@media (max-width: 860px) {/,/^}/p" styles.css | grep -q "\.grid.two,"'
+ok "Thesis labels Tether's audit scope and caveat" sh -c 'grep -q "year ended 31 Dec 2025" thesis/index.html && grep -q "not a guarantee of current redemption" thesis/index.html'
+ok "Thesis explains issuer freeze control with Tether's attribution" sh -c 'grep -q "approximately \$550 million" thesis/index.html && grep -q "not an independent review of each case" thesis/index.html && grep -q "Tether.s freeze announcement" thesis/index.html'
+ok "Thesis distinguishes USDT0 reported volume from liquidity or security" sh -c 'grep -Fq "above \$100 billion" thesis/index.html && grep -q "do not establish outstanding liquidity" thesis/index.html'
+ok "Thesis labels USDT0 Ethereum-TRON capacity as a provider target" sh -c 'grep -q "target a maximum single transfer of \$20 million" thesis/index.html && grep -q "capacity targets" thesis/index.html'
+ok "Thesis distinguishes the Fluid Smart Vault route from direct lending" sh -c 'grep -q "Jupiter Lend v2" thesis/index.html && grep -q "ordinary direct Fluid Lend position" thesis/index.html'
+ok "Thesis distinguishes Fluid Lite USD from variable-rate Fluid Lend" sh -c 'grep -q "Fluid Lite USD as a fixed-rate vault" thesis/index.html && grep -q "different rate and underlying-asset model" recommendations/index.html'
 ok "Monero has the shared decision-frame anchor" grep -q 'id="decision-frame"' monero/index.html
 ok "Monero has six decision-frame questions" test "$(grep -c 'decision-frame-item' monero/index.html)" -eq 6
 ok "Plasma has the shared decision-frame anchor" grep -q 'id="decision-frame"' plasma/index.html
@@ -132,7 +153,7 @@ ok "Minimal CSS keeps the body on the shared background token" sh -c "sed -n '/^
 ok "Minimal CSS has no homepage decorative pseudo-elements" sh -c '! grep -qE "^\\.capital-hero::(before|after)" styles.css'
 minimal_css_pages=0
 for page in $pages; do
-  if grep -q 'styles.css?v=20260908-plasma-v12' "$page"; then
+  if grep -q 'styles.css?v=20260930-monthly-v13' "$page"; then
     minimal_css_pages=$((minimal_css_pages + 1))
   fi
 done

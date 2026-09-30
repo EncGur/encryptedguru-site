@@ -1,6 +1,50 @@
 # EncryptedGuru current project state
 
-Updated: 2026-09-08
+Updated: 2026-09-30
+
+## 2026-09-30 monthly evidence refresh
+
+- Updated the Thesis with a scoped account of Tether's announced audit of
+  Tether International, S.A. de C.V.'s 2025 financial statements, preserving
+  the issuer's $6.814B reserves-over-liabilities figure as a publisher claim
+  and explicitly separating it from current redemption or chain liquidity.
+  Added Tether's 28 Sep report of approximately $550M in 2026 USD₮ freezes as
+  issuer-attributed evidence of the token's censorship and legal-control
+  boundary, not an independent review of each enforcement case.
+- Updated USDT0's mobility model to distinguish its documented lock-and-mint
+  OFT route from the Legacy Mesh pool/hub routes. Added the provider-reported
+  $100B cumulative transfer-volume milestone and Stellar announcement as
+  dated activity/integration signals, not proof of outstanding liquidity,
+  unique users, revenue, or security. Also added the 23 Sep Ethereum–TRON
+  liquidity announcement as a target, not measured live capacity.
+- Refined the Fluid layer to separate the general Liquidity Layer from the
+  product-specific Jupiter Lend v2 Smart Vault route. The page explicitly
+  avoids implying that direct Fluid Lend deposits earn that product's trading
+  fees or share its conditions. Added Fluid Lite USD as a distinct fixed-rate
+  product with dated provider terms/underlyings, separate from the Fluid Lend
+  referral and without treating the rate label as removing asset risk.
+- Expanded Aave research to distinguish V3 reserves from V4 Hubs/Spokes, and
+  added the 16 Sep V4 Arc activation and 25 Sep tokenized-equity collateral on
+  Base. The section records issuer, custodian, jurisdiction, and 24/5 oracle
+  dependencies. Also added Aave Labs' published App signer, backup, recovery,
+  and smart-account permission model plus the MCP read/prepare/user-sign
+  boundary. These remain attributed product descriptions, not independent
+  security or legal audits.
+- Reworked Recommendations into four account/app referrals in one desktop
+  first row, with Fluid as a separate stablecoin-lending route. Preserved all
+  supplied referral URLs and Rabby as a non-referral execution/control layer.
+- Rechecked the linked official technical/release materials for Monero and the
+  official network, developer, tokenomics, and business links for Plasma; no
+  new Plasma claim was inferred from the dated community post. Review dates on
+  these research pages now reflect this documentation check, not live market
+  or deployment status.
+- Updated the sitemap last-modified dates for the five edited public pages.
+  Added a reusable two-column research grid for the Aave comparison cards,
+  collapsing to one column on narrow screens, and bumped the shared CSS cache
+  asset to `20260930-monthly-v13` across all public pages. No homepage design,
+  external referral destination, provider account, DNS, Cloudflare setting,
+  analytics, or transaction flow was changed. Full verification status will be
+  recorded after release checks.
 
 ## Goal
 
