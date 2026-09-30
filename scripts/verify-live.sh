@@ -362,7 +362,7 @@ if [ "$strict" -eq 1 ]; then
     echo "live Thesis page is missing the distinct Fluid fixed-rate product boundary" >&2
     exit 1
   }
-  grep -q 'STABLECOIN LENDING' "$tmp_recommendations" || {
+  grep -q 'Capital productivity / stablecoin lending' "$tmp_recommendations" || {
     echo "live Recommendations page is missing the stablecoin-lending label" >&2
     exit 1
   }

@@ -43,8 +43,18 @@ Updated: 2026-09-30
   collapsing to one column on narrow screens, and bumped the shared CSS cache
   asset to `20260930-monthly-v13` across all public pages. No homepage design,
   external referral destination, provider account, DNS, Cloudflare setting,
-  analytics, or transaction flow was changed. Full verification status will be
-  recorded after release checks.
+  analytics, or transaction flow was changed.
+- Published as `fda8452` to `origin/main`. GitHub Static audit run
+  `36679739083` passed all jobs. Production strict post-deploy verification
+  passed on 30 Sep 2026: canonical redirects, public pages, current CSS,
+  sitemap, referral boundaries, new research sections, security headers, and
+  private-path 404 boundaries were checked against the live site. The live
+  verifier's outdated Fluid-label assertion was updated to match the new
+  separately presented lending section.
+- CI passed with non-blocking runner notices: the pinned checkout action's
+  Node 20 target is being forced to Node 24, and `ubuntu-latest` is scheduled
+  to migrate to Ubuntu 26 on 19 Oct 2026. Reassess workflow compatibility in a
+  future maintenance pass.
 
 ## Goal
 
